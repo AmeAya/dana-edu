@@ -2,7 +2,13 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
-from .CustomUserManager import CustomUserManager
+from .managers import CustomUserManager
+from .functions import getNumberChoices, getLiteralChoices
+
+
+class Group(models.Model):
+    number = models.SmallIntegerField(null=False, blank=False, choices=getNumberChoices())
+    literal = models.CharField(null=False, blank=False, choices=getLiteralChoices(), max_length=1)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
