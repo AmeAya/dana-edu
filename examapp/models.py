@@ -6,9 +6,17 @@ from .managers import CustomUserManager
 from .functions import getNumberChoices, getLiteralChoices
 
 
+class School(models.Model):
+    name = models.CharField(null=False, blank=False, max_length=100)
+    address = models.TextField(null=False, blank=False)
+    staff = models.ManyToManyField('CustomUser', related_name='staff')
+    director = models.OneToOneField('CustomUser', on_delete=models.CASCADE, related_name='director')
+
+
 class Group(models.Model):
     number = models.SmallIntegerField(null=False, blank=False, choices=getNumberChoices())
     literal = models.CharField(null=False, blank=False, choices=getLiteralChoices(), max_length=1)
+    school = models.ForeignKey('School', on_delete=models.CASCADE)
 
 
 class CustomUser(AbstractBaseUser, PermissionsMixin):
@@ -16,6 +24,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     surname = models.CharField(max_length=150, null=True, blank=True)
     name = models.CharField(max_length=150, null=True, blank=True)
     patronymic = models.CharField(max_length=150, null=True, blank=True)
+    photo = models.ImageField(upload_to='users/', null=True, blank=True)
     phone = PhoneNumberField(null=False, blank=False, unique=True)
     birth_date = models.DateField(null=False, blank=False)
     is_staff = models.BooleanField(default=False)
@@ -23,6 +32,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(default=True)
     last_login = models.DateTimeField(null=True, blank=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE, null=True, blank=True)
 
     USERNAME_FIELD = 'iin'
     REQUIRED_FIELDS = []
@@ -31,3 +41,15 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return str(self.surname) + ' ' + str(self.name) + ' ' + str(self.iin)
+
+
+class Answer(models.Model):
+    text = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='answers/', null=True, blank=True)
+    is_correct = models.BooleanField(default=False, null=False, blank=False)
+
+
+class Question(models.Model):
+    text = models.TextField(null=True, blank=True)
+    image = models.ImageField(upload_to='questions/', null=True, blank=True)
+
