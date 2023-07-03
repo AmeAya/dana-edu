@@ -12,6 +12,12 @@ class Answer(models.Model):
     is_correct = models.BooleanField(default=False, null=False, blank=False)
 
 
+class Area(models.Model):
+    name = models.CharField(null=False, blank=False)
+    head = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    Region = models.ForeignKey('Region', on_delete=models.CASCADE)
+
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     iin = models.CharField(max_length=12, validators=[MinLengthValidator(12)], null=False, blank=False, unique=True)
     surname = models.CharField(max_length=150, null=True, blank=True)
@@ -42,10 +48,21 @@ class Group(models.Model):
     school = models.ForeignKey('School', on_delete=models.CASCADE)
 
 
+class Ministry(models.Model):
+    name = models.CharField(null=False, blank=False)
+    head = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+
+
 class Question(models.Model):
     text = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='questions/', null=True, blank=True)
     answers = models.ManyToManyField('Answer')
+
+
+class Region(models.Model):
+    name = models.CharField(null=False, blank=False)
+    head = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    ministry = models.ForeignKey('Ministry', on_delete=models.CASCADE)
 
 
 class School(models.Model):
