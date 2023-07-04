@@ -6,7 +6,7 @@ from datetime import datetime
 class CustomUserManager(BaseUserManager):
     def _create_user(self, iin, password, is_staff, is_superuser, **extra_fields):
         if not iin:
-            raise ValueError('Users must have an email address')
+            raise ValueError('Users must have an iin')
         user = self.model(
             iin=iin,
             birth_date=datetime.strptime(iin[:6], "%y%m%d").date(),
