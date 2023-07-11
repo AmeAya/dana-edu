@@ -3,6 +3,6 @@
     <h1>{{ user.iin }}</h1>
     <h3>{{ user.surname }} {{ user.name }} {{ user.patronymic }}</h3>
     {% for url in urls %}
-        <a href="{{ url.url }}">{{ url.text }}</a>
+        <a href="{% url url.url %}">{{ url.text }}</a>
     {% endfor %}
 {% endblock content %}

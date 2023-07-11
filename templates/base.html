@@ -1,8 +1,10 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Dana-edu</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now 'U' %}">
 </head>
 <body>
     {% block content %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% block content %}
+
+    <div class="wrapper">
+        <div id="sidebar">
+            {% for subject in subjects %}
+                <h3 id="{{ subject.pk }}" onclick="getQuestions(this.id)">{{ subject.name }}</h3>
+                <br>
+            {% endfor %}
+            <div class="menu">
+                <button onclick="location.href='{% url 'end_exam_url' %}';">End Exam</button>
+            </div>
+        </div>
+
+        <div id="content" class="content" align="center">
+
+        </div>
+
+        <div id="right_side_bar">
+
+        </div>
+    </div>
+    <script>
+        function sendAnswer(){
+            var radios = document.getElementsByName('exam_answers');
+            var selected_answers = [];
+            for(var i = 0; i < radios.length; i++){
+                if(radios[i].checked){
+                    selected_answers.push(radios[i].value);
+                }
+            }
+            var header = document.getElementById('question');
+            var formData = new FormData();
+            formData.append('answers', selected_answers);
+            formData.append('question', header.key);
+
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    if (Request.status == 200) {
+                        document.getElementById("question_" + header.key).style.background = "#00ff00";
+                    }
+                }
+            }
+
+            Request.open('POST', "{% url 'set_pupil_answers_url' %}", true);
+            Request.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            Request.send(formData);
+        };
+
+        function getQuestion(){
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    var newButton = document.createElement('button');
+                    newButton.id = 'confirm';
+                    newButton.innerHTML = 'Confirm';
+                    newButton.disabled = true;
+                    newButton.onclick = sendAnswer;
+
+                    var response = JSON.parse(Request.responseText);
+                    var content = document.getElementById('content');
+                    content.innerHTML = '';
+                    var header = document.createElement('h1');
+                    header.id = 'question';
+                    header.key = response['question'].id;
+                    header.innerHTML = response['question'].number + '. ' + response['question'].text;
+                    content.appendChild(header);
+
+                    for (var answer of response['answers']) {
+                        var label = document.createElement('label');
+                        label.setAttribute('for', answer.id);
+                        label.innerHTML = answer.text;
+
+                        var radio = document.createElement('input');
+                        if (response['question'].points == 1) {
+                            radio.type = 'radio';
+                        } else {
+                            radio.type = 'checkbox';
+                        }
+                        radio.id = answer.id;
+                        radio.name = 'exam_answers';
+                        radio.value = answer.id;
+                        radio.addEventListener('change', function() {
+                            document.getElementById('confirm').disabled = false;
+                        })
+
+                        content.appendChild(radio);
+                        content.appendChild(label);
+                        content.appendChild(document.createElement('br'));
+                    }
+
+                    content.appendChild(document.createElement('br'));
+                    content.appendChild(newButton);
+                }
+            }
+
+            var url = "{% url 'get_exam_question_url' %}?pk=" + this.value;
+            Request.open('get', url, true);
+            Request.send(null);
+        };
+
+        function getQuestions(header_id){
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    var response = JSON.parse(Request.responseText);
+                    var rightSideBar = document.getElementById('right_side_bar');
+                    rightSideBar.innerHTML = '';
+                    for (var i = 0; i < response['questions'].length; i++) {
+                        var newButton = document.createElement('button');
+                        newButton.id = 'question_' + response['questions'][i].id;
+                        newButton.value = response['questions'][i].id;
+                        newButton.innerHTML = response['questions'][i].number;
+                        newButton.onclick = getQuestion;
+
+                        if (response['is_solved'][i] == true) {
+                            newButton.style.background = "#00ff00";
+                        }
+
+                        rightSideBar.appendChild(newButton);
+                    }
+                }
+            }
+
+            var url = "{% url 'question_by_subject_url' %}?subject_id=" + header_id;
+            Request.open('get', url, true);
+            Request.send(null);
+        };
+    </script>
+{% endblock content %}

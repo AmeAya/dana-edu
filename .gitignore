@@ -1,0 +1,5 @@
+.idea/
+.DS_Store
+core/__pycache__/
+examapp/__pycache__/
+examapp/migrations/__pycache__/

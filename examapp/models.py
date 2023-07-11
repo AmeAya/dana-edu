@@ -22,6 +22,12 @@ class Area(models.Model):
         return self.name
 
 
+class CurrentExam(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    variant = models.ForeignKey('Variant', on_delete=models.CASCADE)
+    subjects = models.ManyToManyField('Subject')
+
+
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     iin = models.CharField(max_length=12, validators=[MinLengthValidator(12)], unique=True)
     surname = models.CharField(max_length=150, null=True, blank=True)
@@ -51,7 +57,6 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         return str(self.surname) + ' ' + str(self.name) + ' ' + str(self.iin)
 
 
-# noinspection PyTypeChecker
 class ExamForGroup(models.Model):
     group = models.ForeignKey('Group', on_delete=models.CASCADE)
     variants = models.ManyToManyField('Variant')
@@ -60,6 +65,7 @@ class ExamForGroup(models.Model):
     ends_at = models.DateTimeField(null=True, blank=True)
 
     def save(self, *args, **kwargs):
+        # noinspection PyTypeChecker
         self.ends_at = self.starts_at + timedelta(minutes=self.duration)
         super().save(*args, **kwargs)
 
@@ -81,13 +87,23 @@ class Ministry(models.Model):
         return self.name
 
 
+class PupilAnswer(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    question = models.ForeignKey('Question', on_delete=models.CASCADE)
+    answers = models.ManyToManyField('Answer')
+
+
 class Question(models.Model):
     number = models.PositiveSmallIntegerField()
     text = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='questions/', null=True, blank=True)
+    points = models.PositiveSmallIntegerField(choices=[(1, '1'), (2, '2')])
     answers = models.ManyToManyField('Answer')
     subject = models.ForeignKey('Subject', on_delete=models.CASCADE)
     variant = models.ForeignKey('Variant', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return str(self.number) + '.' + str(self.text) + ' ' + str(self.subject.name)
 
 
 class Region(models.Model):
@@ -97,6 +113,19 @@ class Region(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Result(models.Model):
+    user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
+    variant = models.ForeignKey('Variant', on_delete=models.CASCADE)
+    subjects = models.ForeignKey('SubjectCombination', on_delete=models.CASCADE)
+    starts_at = models.DateTimeField(auto_now=True)
+    ends_at = models.DateTimeField(null=True, blank=True)
+    points = models.PositiveSmallIntegerField(default=0)
+    answers = models.ManyToManyField('PupilAnswer')
+
+    def __str__(self):
+        return self.user.surname + ' ' + self.user.name + ' ' + str(self.points)
 
 
 class School(models.Model):
@@ -111,9 +140,18 @@ class School(models.Model):
 
 class Subject(models.Model):
     name = models.CharField(max_length=100)
+    is_required = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
+
+
+class SubjectCombination(models.Model):
+    first_subject = models.ForeignKey('Subject', on_delete=models.CASCADE, related_name='first')
+    second_subject = models.ForeignKey('Subject', on_delete=models.CASCADE, related_name='second')
+
+    def __str__(self):
+        return self.first_subject.name + '-' + self.second_subject.name
 
 
 class Variant(models.Model):

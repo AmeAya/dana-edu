@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div align="center">
+        <h1>{{ message }}{{ variant.name }}</h1>
+        {% if variant %}
+            <form action="{% url 'get_subjects_url' %}" method="post">
+                {% csrf_token %}
+                <select id="subjects" name="subjects">
+                    {% for subject in subjects %}
+                        <option value="{{ subject.pk }}">{{ subject.first_subject.name }} - {{ subject.second_subject.name }}</option>
+                    {% endfor %}
+                </select>
+                <input type="submit" onclick="clicked()" value="Start Test">
+            </form>
+        {% else %}
+            <a href="{% url 'cabinet_url' %}">My Cabinet</a>
+        {% endif %}
+    </div>
+    <script>
+        function clicked() {
+            var sel = document.getElementById('subjects');
+            return confirm(sel.options[sel.selectedIndex].text);
+        }
+    </script>
+{% endblock content %}
