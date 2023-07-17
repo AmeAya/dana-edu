@@ -63,6 +63,7 @@ class ExamForGroup(models.Model):
     duration = models.FloatField(default=240)
     starts_at = models.DateTimeField()
     ends_at = models.DateTimeField(null=True, blank=True)
+    ended_users = models.ManyToManyField('CustomUser', blank=True)
 
     def save(self, *args, **kwargs):
         # noinspection PyTypeChecker
@@ -91,6 +92,8 @@ class PupilAnswer(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     question = models.ForeignKey('Question', on_delete=models.CASCADE)
     answers = models.ManyToManyField('Answer')
+    points = models.PositiveSmallIntegerField(default=0)
+    is_in_action = models.BooleanField(default=True)
 
 
 class Question(models.Model):
@@ -118,11 +121,12 @@ class Region(models.Model):
 class Result(models.Model):
     user = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
     variant = models.ForeignKey('Variant', on_delete=models.CASCADE)
-    subjects = models.ForeignKey('SubjectCombination', on_delete=models.CASCADE)
+    subjects = models.ManyToManyField('Subject')
     starts_at = models.DateTimeField(auto_now=True)
     ends_at = models.DateTimeField(null=True, blank=True)
     points = models.PositiveSmallIntegerField(default=0)
-    answers = models.ManyToManyField('PupilAnswer')
+    questions = models.ManyToManyField('Question', blank=True)
+    answers = models.ManyToManyField('PupilAnswer', blank=True)
 
     def __str__(self):
         return self.user.surname + ' ' + self.user.name + ' ' + str(self.points)

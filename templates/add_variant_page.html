@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="" method="post">
+        {% csrf_token %}
+        <label for="variant_name">Create New Variant</label>
+        <input type="text" id="variant_name" name="variant_name">
+        <select name="choice">
+            {% for choice in choices %}
+                <option value="{{ choice }}">{{ choice }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Create New">
+    </form>
+{% endblock content %}

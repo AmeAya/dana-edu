@@ -34,7 +34,8 @@ def getRandomVariant(all_variants, user):
     if user_results:
         variants = set(all_variants)
         for result in user_results:
-            variants.remove(result.variant)
+            if result.variant in variants:
+                variants.remove(result.variant)
     if variants:
         return choice(list(variants))
     return choice(all_variants)
@@ -54,3 +55,27 @@ def changeUserCurrentExamSubjects(user, chosen_subjects_id):
     for subject in getExamSubjects(chosen_subjects_id):
         current_exam.subjects.add(subject)
     current_exam.save()
+
+
+def getQuestionPoints(question, answers) -> int:
+    if not answers:
+        return 0
+    correct_answers = 0
+    for answer in question.answers.all():
+        if answer.is_correct:
+            correct_answers += 1
+    pupil_correct_answers = 0
+    pupil_wrong_answers = 0
+    for answer in answers:
+        if answer.is_correct:
+            pupil_correct_answers += 1
+        else:
+            pupil_wrong_answers += 1
+    if pupil_wrong_answers >= 2 or pupil_correct_answers == 0:
+        return 0
+    if pupil_wrong_answers == 1 and correct_answers == pupil_correct_answers + 1:
+        return 1
+    if pupil_wrong_answers == 0 and correct_answers == pupil_correct_answers:
+        return question.points
+    if pupil_wrong_answers == 0 and correct_answers > pupil_correct_answers:
+        return 1

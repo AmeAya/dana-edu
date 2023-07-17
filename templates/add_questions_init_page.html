@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form action="{% url 'add_questions_init_url' %}" method="post">
+        {% csrf_token %}
+        <label for="variant">Select Existing Variant:</label>
+        <select id="variant" name="variant">
+            {% for variant in variants %}
+                <option value="{{ variant.pk }}">{{ variant.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Select Variant">
+    </form>
+    <br>
+    <button onclick="location.href='{% url 'add_variant_url' %}'">Create New</button>
+{% endblock content %}

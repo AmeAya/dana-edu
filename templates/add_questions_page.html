@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div align="center">
+        <h1>Variant: {{ variant.name }}</h1>
+        <form action="{% url 'add_questions_url' question_number %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            {% csrf_token %}
+
+            <input type="hidden" id="variant" name="variant" value="{{ variant.pk }}">
+
+            <input type="hidden" id="answers_count" name="answers_count">
+
+            <label for="question_number">Input Number:</label>
+            <input type="number" id="question_number" name="question_number" min="1" max="50" style="width: 2.5%" required>
+            <br>
+
+            <label for="question_points">Input Points:</label>
+            <select id="question_points" name="question_points">
+                {% for point in points %}
+                    <option style="width: auto;" value="{{ point }}">{{ point }}</option>
+                {% endfor %}
+            </select>
+            <br>
+
+            <label for="subject">Select Subjects:</label>
+            <select id="subject" name="subject">
+                {% for subject in subjects %}
+                    <option style="width: auto;" value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+            <br>
+
+            <label for="question_text">Question Text:</label>
+            <input type="text" id="question_text" name="question_text" style="width: 50%">
+            <br>
+
+            <label for="question_image">Question Image:</label>
+            <input type="file" id="question_image" name="question_image">
+            <br>
+            <hr>
+            <div id="answers_div">
+
+            </div>
+            <br>
+            <button type="button" onclick="addNewAnswer()">Add New Answer</button>
+            <br>
+            <hr>
+            <input type="submit" value="Create Question" style="font-size: 200%">
+        </form>
+    </div>
+    <script>
+        var i = 1;
+
+        window.onload = (event) => {
+            document.getElementById('question_number').value = '{{ question_number }}';
+            var main_div = document.getElementById('answers_div');
+            for (i = 1; i < 6; i++) {
+                var div = document.createElement('div');
+                div.style.border = "1px solid black";
+                div.style.borderRadius = "10px";
+                div.style.display = "inline-block";
+                div.style.minWidth = "70%";
+                div.style.marginBottom = "10px";
+                div.style.boxShadow = "10px 5px 5px grey";
+
+                var label = document.createElement('label');
+                label.innerHTML = 'Answer Text ' + i + ': ';
+                label.htmlFor = 'answer_text_' + i;
+                div.appendChild(label);
+
+                var input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'answer_text_' + i;
+                input.name = 'answer_text_' + i;
+                input.style = 'width: 75%';
+                div.appendChild(input);
+
+                div.appendChild(document.createElement('br'));
+
+                var label = document.createElement('label');
+                label.innerHTML = 'Answer Image ' + i + ': ';
+                label.htmlFor = 'answer_image_' + i;
+                div.appendChild(label);
+
+                var input = document.createElement('input');
+                input.type = 'file';
+                input.id = 'answer_image_' + i;
+                input.name = 'answer_image_' + i;
+                div.appendChild(input);
+
+                div.appendChild(document.createElement('br'));
+
+                var label = document.createElement('label');
+                label.innerHTML = 'is_correct: ';
+                label.htmlFor = 'is_correct_answer_' + i;
+                div.appendChild(label);
+
+                var input = document.createElement('input');
+                input.type = 'checkbox';
+                input.id = 'is_correct_answer_' + i;
+                input.name = 'is_correct_answer_' + i;
+                div.appendChild(input);
+
+                div.appendChild(document.createElement('br'));
+
+                main_div.appendChild(document.createElement('br'));
+                main_div.appendChild(div);
+            }
+
+            document.getElementById('answers_count').value = i;
+        };
+
+        function addNewAnswer() {
+            var main_div = document.getElementById('answers_div');
+
+            var div = document.createElement('div');
+            div.style.border = "1px solid black";
+            div.style.borderRadius = "10px";
+            div.style.display = "inline-block";
+            div.style.minWidth = "70%";
+            div.style.marginBottom = "10px";
+            div.style.boxShadow = "10px 5px 5px grey";
+
+            var label = document.createElement('label');
+            label.innerHTML = 'Answer Text' + i + ': ';
+            label.htmlFor = 'answer_text' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('input');
+            input.type = 'text';
+            input.id = 'answer_text_' + i;
+            input.name = 'answer_text_' + i;
+            input.style = 'width: 75%';
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            var label = document.createElement('label');
+            label.innerHTML = 'Answer Image ' + i + ': ';
+            label.htmlFor = 'answer_image_' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.id = 'answer_image_' + i;
+            input.name = 'answer_image_' + i;
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            var label = document.createElement('label');
+            label.innerHTML = 'is_correct: ';
+            label.htmlFor = 'is_correct_answer_' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.id = 'is_correct_answer_' + i;
+            input.name = 'is_correct_answer_' + i;
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            main_div.appendChild(document.createElement('br'));
+            main_div.appendChild(div);
+
+            i++;
+            document.getElementById('answers_count').value = i;
+        }
+    </script>
+{% endblock content %}

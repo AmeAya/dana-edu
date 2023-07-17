@@ -66,13 +66,32 @@
                     var header = document.createElement('h1');
                     header.id = 'question';
                     header.key = response['question'].id;
-                    header.innerHTML = response['question'].number + '. ' + response['question'].text;
-                    content.appendChild(header);
+                    header.innerHTML = response['question'].number + '. ';
+                    header.style.color = '#0ABAB5';
+                    if (response['question'].text !== null) {
+                        header.innerHTML += response['question'].text;
+                        content.appendChild(header);
+                    }
+                    if (response['question'].image !== null) {
+                        var img = document.createElement('img');
+                        img.src = response['question'].image;
+                        img.style.width = '50vw';
+                        content.appendChild(img);
+                        content.appendChild(document.createElement('br'));
+                    }
 
                     for (var answer of response['answers']) {
                         var label = document.createElement('label');
                         label.setAttribute('for', answer.id);
-                        label.innerHTML = answer.text;
+                        label.innerHTML = '';
+                        if (answer.text !== null) {
+                            label.innerHTML += answer.text;
+                            label.innerHTML += '<br>';
+                        }
+                        if (answer.image !== null) {
+                            var img = '<img style="width: 10vw" src="' + answer.image + '">';
+                            label.innerHTML += img;
+                        }
 
                         var radio = document.createElement('input');
                         if (response['question'].points == 1) {
@@ -103,6 +122,9 @@
         };
 
         function getQuestions(header_id){
+            var header = document.getElementById(header_id);
+
+            header.style.textDecoration = 'underline';
             var Request = new XMLHttpRequest();
 
             Request.onreadystatechange = function() {

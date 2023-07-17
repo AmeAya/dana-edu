@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from django.utils import timezone, dateformat
-from .functions import getRandomVariant, changeUserCurrentExamSubjects
+from .functions import getRandomVariant, changeUserCurrentExamSubjects, getQuestionPoints
 from .serializers import QuestionSerializer, AnswerSerializer
 
 
@@ -15,6 +15,9 @@ def userCabinetView(request):
     urls = []
     if request.user.type == 'PU':
         urls.append({'text': 'Init Exam', 'url': 'exam_init_url'})
+        urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
+    if request.user.type == 'MO':
+        urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
     context = {'urls': urls}
     return render(request, 'cabinet_page.html', context)
 
@@ -27,6 +30,9 @@ def examInitView(request):
     if group_exam:
         if group_exam.ends_at < timezone.now():
             context = {'message': 'Your exam already ends at ' + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s')}
+            return render(request, 'exam_init_page.html', context)
+        if request.user in group_exam.ended_users.all():
+            context = {'message': 'You already done your exam!'}
             return render(request, 'exam_init_page.html', context)
     else:
         context = {'message': 'You don`t have Exams!'}
@@ -81,7 +87,7 @@ class GetQuestionsBySubjectApiView(APIView):
         questions = Question.objects.filter(subject=subject).filter(variant=variant).order_by('number')
         is_solved = []
         for question in questions:
-            if PupilAnswer.objects.filter(user=request.user).filter(question=question):
+            if PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True):
                 is_solved.append(True)
             else:
                 is_solved.append(False)
@@ -95,7 +101,7 @@ class SetPupilAnswers(APIView):
 
     def post(self, request, *args, **kwargs):
         question = Question.objects.get(pk=request.POST.get('question'))
-        pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question)
+        pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True)
         answers = Answer.objects.filter(pk__in=request.POST.get('answers').split(','))
         if not pupil_answer:
             pupil_answer = PupilAnswer(user=request.user, question=question)
@@ -110,6 +116,150 @@ class SetPupilAnswers(APIView):
 
 @login_required(login_url='login_url')
 def endExamView(request):
-    for answer in PupilAnswer.objects.filter(user=request.user):
-        answer.delete()
-    return render(request, '', )
+    current_exam = CurrentExam.objects.get(user=request.user)
+    starts_at = ExamForGroup.objects.filter(group=request.user.group).latest('pk').starts_at
+    result = Result(user=request.user, variant=current_exam.variant, starts_at=starts_at, ends_at=timezone.now())
+    pupil_answers = PupilAnswer.objects.filter(user=request.user).filter(is_in_action=True)
+    result.points = 0
+    result.save()
+    for question in Question.objects.filter(variant=current_exam.variant):
+        result.questions.add(question)
+    for subject in current_exam.subjects.all():
+        result.subjects.add(subject)
+    result.save()
+
+    for pupil_answer in pupil_answers:
+        result.subjects.add(pupil_answer.question.subject)
+        pupil_answer.points = getQuestionPoints(pupil_answer.question, pupil_answer.answers.all())
+        result.answers.add(pupil_answer)
+        result.points += pupil_answer.points
+        result.save()
+        pupil_answer.is_in_action = False
+        pupil_answer.save()
+
+    current_exam.delete()
+
+    exam_group = ExamForGroup.objects.filter(group=request.user.group).latest('pk')
+    exam_group.ended_users.add(request.user)
+    exam_group.save()
+
+    return redirect('exam_results_url')
+
+
+@login_required(login_url='login_url')
+def examResultsView(request):
+    results = Result.objects.filter(user=request.user).order_by('-starts_at')
+    context = {'results': results}
+    return render(request, 'exam_results_page.html', context)
+
+
+@login_required(login_url='login_url')
+def examResultView(request, pk):
+    result = Result.objects.get(pk=pk)
+    pupil_answers = result.answers.all()
+    if result.user != request.user:
+        return redirect('exam_results_url')
+    results = []
+    for subject in result.subjects.all():
+        results.append({'subject': subject, 'questions': []})
+    for question in result.questions.all():
+        correct_answers = []
+        for answer in question.answers.all():
+            if answer.is_correct:
+                correct_answers.append(answer)
+        this_question = {'question': question, 'answers': correct_answers, 'pupil_answers': [], 'points': 0}
+        for pupil_answer in pupil_answers:
+            if pupil_answer.question == question:
+                this_question['pupil_answers'] = pupil_answer.answers.all()
+                this_question['points'] = pupil_answer.points
+                break
+        if this_question['points'] == 1:
+            this_question['points'] = '1 point'
+        else:
+            this_question['points'] = str(this_question['points']) + ' points'
+        for subject in results:
+            if subject['subject'] == question.subject:
+                subject['questions'].append(this_question)
+    context = {
+        'results': results,
+        'variant': result.variant,
+        'points': result.points,
+        'starts_at': result.starts_at.strftime('%Y-%m-%d %H:%M')
+    }
+    return render(request, 'exam_result_page.html', context)
+
+
+@login_required(login_url='login_url')
+def addQuestionsView(request, question_number):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'GET':
+        if 'variant' in request.session:
+            context = {
+                'variant': Variant.objects.get(pk=request.session['variant']),
+                'subjects': Subject.objects.all(),
+                'points': [1, 2],
+                'question_number': question_number
+            }
+            return render(request, 'add_questions_page.html', context)
+        else:
+            return redirect('add_questions_init_url')
+    else:
+        variant = Variant.objects.get(pk=request.POST.get('variant'))
+        question_number = int(request.POST.get('question_number'))
+        question_points = request.POST.get('question_points')
+        subject = Subject.objects.get(pk=request.POST.get('subject'))
+        question = Question(number=question_number, points=question_points, subject=subject, variant=variant)
+        question_text = request.POST.get('question_text')
+        if question_text:
+            question.text = question_text
+        if 'question_image' in request.FILES:
+            question_image = request.FILES['question_image']
+            question.image = question_image
+        question.save()
+        for i in range(1, int(request.POST.get('answers_count'))):
+            is_correct = False
+            is_empty = True
+            if request.POST.get('is_correct_answer_' + str(i)):
+                is_correct = True
+            answer = Answer(is_correct=is_correct)
+            answer_text = request.POST.get('answer_text_' + str(i))
+            if 'answer_image_' + str(i) in request.FILES:
+                answer_image = request.FILES['answer_image_' + str(i)]
+                answer.image = answer_image
+                is_empty = False
+            if answer_text:
+                answer.text = answer_text
+                is_empty = False
+            if not is_empty:
+                answer.save()
+                question.answers.add(answer)
+        return redirect('add_questions_url', question_number=question_number+1)
+
+
+@login_required(login_url='login_url')
+def createVariantView(request):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'GET':
+        from .functions import getExamTypesChoices
+        choices = []
+        for choice in getExamTypesChoices():
+            choices.append(choice[0])
+        context = {'choices': choices}
+        return render(request, 'add_variant_page.html', context)
+    else:
+        Variant(name=request.POST.get('variant_name'), exam_type=request.POST.get('choice')).save()
+        return redirect('add_questions_init_url')
+
+
+@login_required(login_url='login_url')
+def addQuestionsInitView(request):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'GET':
+        context = {'variants': Variant.objects.all()}
+        return render(request, 'add_questions_init_page.html', context)
+    else:
+        request.session['variant'] = request.POST.get('variant')
+        return redirect('add_questions_url', question_number=1)
