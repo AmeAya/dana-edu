@@ -31,3 +31,19 @@ input, select{
 p, label, h1, h2, h3, h4, h5, h6, button, input, select{
     font-family: 'Open Sans', sans-serif;
 }
+
+td, th {
+    border: 1px solid grey;
+    text-align: left;
+    padding: 8px;
+}
+
+table {
+    font-family: 'Open Sans', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th {
+    background-color: #dddddd;
+}

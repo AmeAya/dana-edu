@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from rest_framework.views import APIView
@@ -18,6 +19,7 @@ def userCabinetView(request):
         urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
     if request.user.type == 'MO':
         urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
+        urls.append({'text': 'Set Exam For Groups', 'url': 'set_exam_for_groups_url'})
     context = {'urls': urls}
     return render(request, 'cabinet_page.html', context)
 
@@ -263,3 +265,26 @@ def addQuestionsInitView(request):
     else:
         request.session['variant'] = request.POST.get('variant')
         return redirect('add_questions_url', question_number=1)
+
+
+@login_required(login_url='login_url')
+def setExamForGroup(request):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'GET':
+        context = {'groups': Group.objects.all(),
+                   'variants': Variant.objects.all(),
+                   'exam_for_groups': ExamForGroup.objects.all().order_by('-pk')}
+        return render(request, 'set_exam_for_groups_page.html', context)
+    else:
+        group = Group.objects.get(pk=int(request.POST.get('group')))
+        start_time = request.POST.get('start_time')
+        start_time = datetime.strptime(start_time, '%Y-%m-%dT%H:%M')
+        duration = int(request.POST.get('duration'))
+        exam_for_groups = ExamForGroup(group=group, duration=duration, starts_at=start_time)
+        exam_for_groups.save()
+        variants = request.POST.getlist('variants')
+        for variant in variants:
+            exam_for_groups.variants.add(Variant.objects.get(pk=int(variant)))
+        exam_for_groups.save()
+        return redirect('set_exam_for_groups_url')
