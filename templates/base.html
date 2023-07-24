@@ -7,7 +7,29 @@
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now 'U' %}">
 </head>
 <body>
-    {% block content %}
-    {% endblock content %}
+    <div class="wrapper">
+        <div id="sidebar">
+            <a href="{% url 'home_url' %}">
+                <img id="sidebar_logo" src="{% static 'images/sidebar-logo.png' %}">
+            </a>
+            <ul>
+            {% for url in urls %}
+                <li><a class="nav-link" href="{% url url.url %}">{{ url.text }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div id="content" class="content" align="center">
+            {% block content %}
+            {% endblock content %}
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll(".nav-link").forEach((link) => {
+            if (link.href === window.location.href) {
+                link.classList.add("active");
+                link.setAttribute("aria-current", "page");
+            }
+        });
+    </script>
 </body>
 </html>

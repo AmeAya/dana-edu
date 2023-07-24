@@ -79,3 +79,20 @@ def getQuestionPoints(question, answers) -> int:
         return question.points
     if pupil_wrong_answers == 0 and correct_answers > pupil_correct_answers:
         return 1
+
+
+def getUserUrls(user) -> []:
+    urls = [{'text': 'My Cabinet', 'url': 'cabinet_url'}]
+    if user.type == 'PU':
+        urls.append({'text': 'Init Exam', 'url': 'exam_init_url'})
+        urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
+    if user.type == 'MO':
+        urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
+        urls.append({'text': 'Set Exam For Groups', 'url': 'set_exam_for_groups_url'})
+    urls.append({'text': 'Log Out', 'url': 'logout_url'})
+    return urls
+
+
+def getBaseUrls() -> []:
+    urls = [{'text': 'Log In', 'url': 'login_url'}]
+    return urls

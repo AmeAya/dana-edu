@@ -17,7 +17,7 @@ urlpatterns = [
     path('exam_results', examResultsView, name='exam_results_url'),
     path('get_exam_question', GetExamQuestionApiView.as_view(), name='get_exam_question_url'),
     path('get_questions_by_subject', GetQuestionsBySubjectApiView.as_view(), name='question_by_subject_url'),
-    path('home', TemplateView.as_view(template_name='home_page.html'), name='home_url'),
+    path('home', homeView, name='home_url'),
     path('login', LoginView.as_view(template_name='login_page.html', redirect_authenticated_user=True,
                                     authentication_form=CustomUserLoginForm), name='login_url'),
     path('logout', LogoutView.as_view(), name='logout_url'),

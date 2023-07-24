@@ -7,20 +7,17 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from django.utils import timezone, dateformat
-from .functions import getRandomVariant, changeUserCurrentExamSubjects, getQuestionPoints
+from .functions import getRandomVariant
+from .functions import changeUserCurrentExamSubjects
+from .functions import getQuestionPoints
+from .functions import getUserUrls
+from .functions import getBaseUrls
 from .serializers import QuestionSerializer, AnswerSerializer
 
 
 @login_required(login_url='login_url')
 def userCabinetView(request):
-    urls = []
-    if request.user.type == 'PU':
-        urls.append({'text': 'Init Exam', 'url': 'exam_init_url'})
-        urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
-    if request.user.type == 'MO':
-        urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
-        urls.append({'text': 'Set Exam For Groups', 'url': 'set_exam_for_groups_url'})
-    context = {'urls': urls}
+    context = {'urls': getUserUrls(request.user)}
     return render(request, 'cabinet_page.html', context)
 
 
@@ -151,7 +148,7 @@ def endExamView(request):
 @login_required(login_url='login_url')
 def examResultsView(request):
     results = Result.objects.filter(user=request.user).order_by('-starts_at')
-    context = {'results': results}
+    context = {'results': results, 'urls': getUserUrls(request.user)}
     return render(request, 'exam_results_page.html', context)
 
 
@@ -186,7 +183,8 @@ def examResultView(request, pk):
         'results': results,
         'variant': result.variant,
         'points': result.points,
-        'starts_at': result.starts_at.strftime('%Y-%m-%d %H:%M')
+        'starts_at': result.starts_at.strftime('%Y-%m-%d %H:%M'),
+        'urls': getUserUrls(request.user)
     }
     return render(request, 'exam_result_page.html', context)
 
@@ -248,7 +246,7 @@ def createVariantView(request):
         choices = []
         for choice in getExamTypesChoices():
             choices.append(choice[0])
-        context = {'choices': choices}
+        context = {'choices': choices, 'urls': getUserUrls(request.user)}
         return render(request, 'add_variant_page.html', context)
     else:
         Variant(name=request.POST.get('variant_name'), exam_type=request.POST.get('choice')).save()
@@ -260,7 +258,7 @@ def addQuestionsInitView(request):
     if request.user.type != 'MO':
         return redirect('home_url')
     if request.method == 'GET':
-        context = {'variants': Variant.objects.all()}
+        context = {'variants': Variant.objects.all(), 'urls': getUserUrls(request.user)}
         return render(request, 'add_questions_init_page.html', context)
     else:
         request.session['variant'] = request.POST.get('variant')
@@ -274,7 +272,8 @@ def setExamForGroup(request):
     if request.method == 'GET':
         context = {'groups': Group.objects.all(),
                    'variants': Variant.objects.all(),
-                   'exam_for_groups': ExamForGroup.objects.all().order_by('-pk')}
+                   'exam_for_groups': ExamForGroup.objects.all().order_by('-pk'),
+                   'urls': getUserUrls(request.user)}
         return render(request, 'set_exam_for_groups_page.html', context)
     else:
         group = Group.objects.get(pk=int(request.POST.get('group')))
@@ -288,3 +287,13 @@ def setExamForGroup(request):
             exam_for_groups.variants.add(Variant.objects.get(pk=int(variant)))
         exam_for_groups.save()
         return redirect('set_exam_for_groups_url')
+
+
+def homeView(request):
+    if request.user.is_authenticated:
+        urls = getUserUrls(request.user)
+        context = {'urls': getUserUrls(request.user)}
+    else:
+        context = {'urls': getBaseUrls()}
+    return render(request, 'home_page.html', context)
+
