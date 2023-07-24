@@ -3,3 +3,6 @@
 core/__pycache__/
 examapp/__pycache__/
 examapp/migrations/__pycache__/
+db.sqlite3
+Pipfile
+Pipfile.lock
