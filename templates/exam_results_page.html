@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
     {% for result in results %}
-        <h2>{{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} points</h2>
-        <button onclick="location.href='{% url 'exam_result_url' result.id %}'">Check</button>
+        <h2>
+            {{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} points
+            <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">Check</button>
+        </h2>
+        <hr>
     {% endfor %}
 {% endblock content %}

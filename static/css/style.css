@@ -36,9 +36,10 @@
     text-decoration: none;
     padding: 10px 20px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
-#sidebar li a:hover:not(.active) {
+#sidebar li a:hover:not(.active){
     background-color: #ffffff;
     color: #0ABAB5;
 }
@@ -59,11 +60,8 @@
 
 #content{
     flex: 6;
-}
-
-#right_side_bar{
-    background: #D3D3D3;
-    flex: 1;
+    overflow-y: scroll;
+    height: 100vh;
 }
 
 input, select{
@@ -72,6 +70,10 @@ input, select{
 }
 
 p, label, h1, h2, h3, h4, h5, h6, button, input, select{
+    font-family: 'Open Sans', sans-serif;
+}
+
+body{
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -93,4 +95,51 @@ th {
 
 #content{
     margin: 10px;
+}
+
+#right_side_bar{
+    background: #0ABAB5;
+    flex: 1;
+    border-radius: 10px;
+    min-height: 95vh;
+    color: #ffffff;
+    margin: 0 0 5px;
+    padding: 10px 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.question_button{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background: #0ABAB5;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    margin: 4px;
+    width: 34px;
+    height: 34px;
+}
+
+.question_button:hover:not(.active){
+    background-color: #ffffff;
+    color: #0ABAB5;
+}
+
+.question_button_active{
+    background-color: #ffffff;
+    color: #0ABAB5;
+}
+
+.btn{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background: #0ABAB5;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 2px solid #0ABAB5;
+}
+
+.btn:hover:not(.active){
+    background-color: #ffffff;
+    color: #0ABAB5;
 }

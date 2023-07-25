@@ -28,25 +28,40 @@ def examInitView(request):
     group_exam = ExamForGroup.objects.filter(group=request.user.group).latest('pk')
     if group_exam:
         if group_exam.ends_at < timezone.now():
-            context = {'message': 'Your exam already ends at ' + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s')}
+            context = {
+                'message': 'Your exam already ends at ' + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
+                'urls': getUserUrls(request.user)
+            }
             return render(request, 'exam_init_page.html', context)
         if request.user in group_exam.ended_users.all():
-            context = {'message': 'You already done your exam!'}
+            context = {
+                'message': 'You already done your exam!',
+                'urls': getUserUrls(request.user)
+            }
             return render(request, 'exam_init_page.html', context)
     else:
-        context = {'message': 'You don`t have Exams!'}
+        context = {
+            'message': 'You don`t have Exams!',
+            'urls': getUserUrls(request.user)
+        }
         return render(request, 'exam_init_page.html', context)
     current_exam = CurrentExam.objects.filter(user=request.user)
     if current_exam:
-        context = {'message': 'Your variant is ',
-                   'variant': current_exam.latest('pk').variant,
-                   'subjects': SubjectCombination.objects.all()}
+        context = {
+            'message': 'Your variant is ',
+            'variant': current_exam.latest('pk').variant,
+            'subjects': SubjectCombination.objects.all(),
+            'urls': getUserUrls(request.user)
+        }
         return render(request, 'exam_init_page.html', context)
     current_variant = getRandomVariant(group_exam.variants.all(), request.user)
     CurrentExam(user=request.user, variant=current_variant).save()
-    context = {'message': 'Your variant is ',
-               'variant': current_variant,
-               'subjects': SubjectCombination.objects.all()}
+    context = {
+        'message': 'Your variant is ',
+        'variant': current_variant,
+        'subjects': SubjectCombination.objects.all(),
+        'urls': getUserUrls(request.user)
+    }
     return render(request, 'exam_init_page.html', context)
 
 

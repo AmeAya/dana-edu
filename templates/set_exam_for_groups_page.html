@@ -13,11 +13,11 @@
             <br>
 
             <label for="start_time">Start Time: </label>
-            <input type="datetime-local" id="start_time" name="start_time">
+            <input type="datetime-local" id="start_time" name="start_time" required>
             <br>
 
             <label for="duration">Duration (minutes): </label>
-            <input type="number" id="duration" name="duration" style="width:3%">
+            <input type="number" id="duration" name="duration" style="width:3%" required>
             <br>
 
             <h2 style="margin-bottom: 0px;">Select Variants:</h2>
@@ -57,7 +57,7 @@
             let div = document.getElementById('variants');
             div.style.border = "1px solid black";
             div.style.borderRadius = "10px";
-            div.style.display = "inline-block";
+            div.style.display = "inline-block";w
             div.style.marginBottom = "10px";
             div.style.boxShadow = "10px 5px 5px grey";
         }

@@ -1,15 +1,24 @@
-{% extends 'base.html' %}
-{% block content %}
-
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dana-edu</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}?{% now 'U' %}">
+</head>
+<body>
     <div class="wrapper">
         <div id="sidebar">
-            {% for subject in subjects %}
-                <h3 id="{{ subject.pk }}" onclick="getQuestions(this.id)">{{ subject.name }}</h3>
-                <br>
-            {% endfor %}
-            <div class="menu">
-                <button onclick="location.href='{% url 'end_exam_url' %}';">End Exam</button>
-            </div>
+            <ul>
+                {% for subject in subjects %}
+                    <li>
+                        <a class="nav-link" id="{{ subject.pk }}" onclick="getQuestions(this.id)">{{ subject.name }}</a>
+                    </li>
+                {% endfor %}
+                <li>
+                    <a class="nav-link" href="{% url 'end_exam_url' %}" onclick="return confirm('Are you sure?')">End Exam</a>
+                </li>
+            </ul>
         </div>
 
         <div id="content" class="content" align="center">
@@ -51,6 +60,14 @@
 
         function getQuestion(){
             var Request = new XMLHttpRequest();
+
+            for(var button of document.getElementsByClassName('question_button')){
+                button.classList.remove('question_button_active');
+            }
+
+            var button = document.getElementById(this.id);
+            button.classList.add('question_button_active');
+
 
             Request.onreadystatechange = function() {
                 if (Request.readyState == 4) {
@@ -124,7 +141,12 @@
         function getQuestions(header_id){
             var header = document.getElementById(header_id);
 
-            header.style.textDecoration = 'underline';
+            for (var nav_link of document.getElementsByClassName('nav-link')){
+                nav_link.classList.remove('active');
+            }
+
+            header.classList.add('active');
+
             var Request = new XMLHttpRequest();
 
             Request.onreadystatechange = function() {
@@ -135,12 +157,13 @@
                     for (var i = 0; i < response['questions'].length; i++) {
                         var newButton = document.createElement('button');
                         newButton.id = 'question_' + response['questions'][i].id;
+                        newButton.classList.add('question_button');
                         newButton.value = response['questions'][i].id;
                         newButton.innerHTML = response['questions'][i].number;
                         newButton.onclick = getQuestion;
 
                         if (response['is_solved'][i] == true) {
-                            newButton.style.background = "#00ff00";
+                            newButton.style.background = "#00008B";
                         }
 
                         rightSideBar.appendChild(newButton);
@@ -153,4 +176,5 @@
             Request.send(null);
         };
     </script>
-{% endblock content %}
+</body>
+</html>
