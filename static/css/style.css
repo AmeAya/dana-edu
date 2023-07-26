@@ -172,6 +172,9 @@ h1{
 #login-form{
     border-radius: 10px;
     background: #0ABAB5;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
     position: absolute;
     left: 40%;
     top: 30%;
@@ -191,7 +194,7 @@ h1{
     background-color: #DCDCDC;
 }
 
-.pupil_result {
+.pupil_result{
     background: #0ABAB5;
     color: #ffffff;
     border-radius: 10px;
