@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="font-size: 18px;">
+        <form id="form" class="form" action="{% url 'get_stats_url' %}" method="post">
+            {% csrf_token %}
+
+            <p>
+                <label for="region">Select Region:</label>
+                <select onchange="getAreas()" id="region">
+                    <option disabled selected value></option>
+                    {% for region in regions %}
+                        <option value="{{ region.id }}">{{ region.name }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+
+            <p>
+                <label for="area">Select Area:</label>
+                <select id="area" disabled="disabled">
+
+                </select>
+            </p>
+
+            <p>
+                <label for="school">Select School:</label>
+                <select id="school" disabled="disabled" name="school">
+
+                </select>
+            </p>
+        </form>
+
+        <input form="form" class="btn" type="submit" value="Show Stats">
+    </div>
+    <script>
+        function getSchools(){
+            var area_id = document.getElementById('area').value;
+            var formData = new FormData();
+            formData.append('area_id', area_id);
+
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    if (Request.status == 200) {
+                        var response = JSON.parse(Request.responseText);
+
+                        var select = document.getElementById('school');
+                        select.disabled = '';
+
+                        for (var school of response['schools']){
+                            var option = document.createElement('option');
+                            option.value = school.id;
+                            option.innerHTML = school.name;
+
+                            select.appendChild(option);
+                        }
+                    }
+                }
+            }
+
+            Request.open('POST', "{% url 'get_school_by_area_url' %}", true);
+            Request.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            Request.send(formData);
+        }
+
+        function getAreas(){
+            var region_id = document.getElementById('region').value;
+            var formData = new FormData();
+            formData.append('region_id', region_id);
+
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    if (Request.status == 200) {
+                        var response = JSON.parse(Request.responseText);
+                        var select = document.getElementById('area');
+                        select.disabled = '';
+                        select.onchange = getSchools;
+
+                        var option = document.createElement('option');
+                        option.disabled = 'disabled';
+                        option.selected = 'selected';
+
+                        select.appendChild(option);
+
+                        for (var area of response['areas']){
+                            var option = document.createElement('option');
+                            option.value = area.id;
+                            option.innerHTML = area.name;
+
+                            select.appendChild(option);
+                        }
+                    }
+                }
+            }
+
+            Request.open('POST', "{% url 'get_area_by_region_url' %}", true);
+            Request.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+            Request.send(formData);
+        }
+    </script>
+{% endblock content %}

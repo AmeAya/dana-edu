@@ -102,6 +102,7 @@
                         label.setAttribute('for', answer.id);
                         label.innerHTML = '';
                         if (answer.text !== null) {
+                            label.classList.add('answers');
                             label.innerHTML += answer.text;
                             label.innerHTML += '<br>';
                         }
@@ -163,7 +164,7 @@
                         newButton.onclick = getQuestion;
 
                         if (response['is_solved'][i] == true) {
-                            newButton.style.background = "#00008B";
+                            newButton.style.background = "#DCDCDC";
                         }
 
                         rightSideBar.appendChild(newButton);

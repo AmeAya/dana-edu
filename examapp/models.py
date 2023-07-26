@@ -16,7 +16,7 @@ class Answer(models.Model):
 class Area(models.Model):
     name = models.CharField(max_length=100)
     head = models.ForeignKey('CustomUser', on_delete=models.CASCADE)
-    Region = models.ForeignKey('Region', on_delete=models.CASCADE)
+    region = models.ForeignKey('Region', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name
@@ -137,6 +137,7 @@ class School(models.Model):
     address = models.TextField()
     staff = models.ManyToManyField('CustomUser', related_name='staff')
     director = models.OneToOneField('CustomUser', on_delete=models.CASCADE, related_name='director')
+    area = models.ForeignKey('Area', on_delete=models.CASCADE)
 
     def __str__(self):
         return self.name

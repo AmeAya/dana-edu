@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div align="center">
+    <div align="center" style="font-size: 18px;">
         <h1 align="center">{{ variant }}</h1>
         <h2>{{ starts_at }}</h2>
         <h2>{{ points }} points</h2>
         {% for result in results %}
-            <hr style="height:5px; border-width:0; color:black; background-color:black">
-            <h3>{{ result.subject.name }}</h3>
-            <hr style="height:5px; border-width:0; color:black; background-color:black">
+            <div class="pupil_result">
+                <h2 align="left" style="padding-left: 10px;">{{ result.subject.name }}</h2>
+            </div>
             <div align="left">
             {% for question in result.questions %}
                 <hr>

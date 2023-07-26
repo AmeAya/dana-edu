@@ -87,6 +87,7 @@ def getUserUrls(user) -> []:
         urls.append({'text': 'Init Exam', 'url': 'exam_init_url'})
         urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
     if user.type == 'MO':
+        urls.append({'text': 'Get Stats', 'url': 'get_stats_url'})
         urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
         urls.append({'text': 'Set Exam For Groups', 'url': 'set_exam_for_groups_url'})
     urls.append({'text': 'Log Out', 'url': 'logout_url'})

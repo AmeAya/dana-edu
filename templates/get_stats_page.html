@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div style="font-size: 18px;">
+        {% for result_by_group in results_by_groups %}
+            {% for group, user_results in result_by_group.items %}
+                <h1>{{ group }}</h1>
+                {% for user_result in user_results %}
+                    {% with user_result|first as first_result %}
+                    <div class="pupil_result">
+                        <h2 align="left" style="padding-left: 10px;">{{ first_result.user }}</h2>
+                    </div>
+                    {% endwith %}
+                    {% for result in user_result %}
+                        <h3>
+                            {{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} points
+                            <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">Check</button>
+                        </h3>
+                    {% endfor %}
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+{% endblock content %}

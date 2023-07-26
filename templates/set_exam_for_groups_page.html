@@ -1,41 +1,45 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div align="center">
-        <form action="{% url 'set_exam_for_groups_url' %}" method="post">
+    <div align="center" style="font-size: 18px;">
+        <form class="form" action="{% url 'set_exam_for_groups_url' %}" method="post">
             {% csrf_token %}
 
-            <label for="group">Select Group: </label>
-            <select id="group" name="group">
-                {% for group in groups %}
-                    <option value="{{ group.id }}">{{ group.number }}{{ group.literal }}</option>
-                {% endfor %}
-            </select>
-            <br>
+            <p>
+                <label for="group">Select Group: </label>
+                <select id="group" name="group">
+                    {% for group in groups %}
+                        <option value="{{ group.id }}">{{ group.number }}{{ group.literal }}</option>
+                    {% endfor %}
+                </select>
+            </p>
 
-            <label for="start_time">Start Time: </label>
-            <input type="datetime-local" id="start_time" name="start_time" required>
-            <br>
+            <p>
+                <label for="start_time">Start Time: </label>
+                <input type="datetime-local" id="start_time" name="start_time" required>
+            </p>
 
-            <label for="duration">Duration (minutes): </label>
-            <input type="number" id="duration" name="duration" style="width:3%" required>
-            <br>
+            <p>
+                <label for="duration">Duration (minutes): </label>
+                <input type="number" id="duration" name="duration" style="width:30%" required>
+            </p>
 
             <h2 style="margin-bottom: 0px;">Select Variants:</h2>
             <div id="variants">
-                <div style="margin-left:10px; margin-right:10px; width:auto;">
+                <div style=" white-space:nowrap; margin-left:10px; margin-right:10px; width:auto;">
                     {% for variant in variants %}
-                        <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
-                        <label for="{{ variant.id }}">{{ variant.name }}</label>
-                        <br>
+                        <p>
+                            <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
+                            <label for="{{ variant.id }}">{{ variant.name }}</label>
+                        </p>
                     {% endfor %}
                 </div>
             </div>
             <br>
 
-            <input type="submit" value="Set Exam" style="font-size: 120%">
+            <input class="btn" type="submit" value="Set Exam" style="font-size: 120%">
         </form>
         <hr>
-        <table>
+        <table class="groups_exams">
             <tr>
                 <th>Group</th>
                 <th>Starts at</th>

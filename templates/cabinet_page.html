@@ -1,5 +1,23 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>{{ user.iin }}</h1>
-    <h3>{{ user.surname }} {{ user.name }} {{ user.patronymic }}</h3>
+    <div align="left">
+        <table style="border: none;">
+            <tr>
+                <td align="right"><h1>IIN: </h1></td>
+                <td><h1 style="margin-left: 20px;">{{ user.iin }}</h1></td>
+            </tr>
+            <tr>
+                <td align="right"><h3>FIO:</h3></td>
+                <td><h3 style="margin-left: 20px;">{{ user.surname }} {{ user.name }} {{ user.patronymic }}</h3></td>
+            </tr>
+            <tr>
+                <td align="right"><h3>School:</h3></td>
+                <td><h3 style="margin-left: 20px;">{{ user.group.school }}</h3></td>
+            </tr>
+            <tr>
+                <td align="right"><h3>Class:</h3></td>
+                <td><h3 style="margin-left: 20px;">{{ user.group }}</h3></td>
+            </tr>
+        </table>
+    </div>
 {% endblock content %}

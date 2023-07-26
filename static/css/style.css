@@ -69,27 +69,27 @@ input, select{
     margin-top: 5px;
 }
 
-p, label, h1, h2, h3, h4, h5, h6, button, input, select{
-    font-family: 'Open Sans', sans-serif;
-}
-
 body{
     font-family: 'Open Sans', sans-serif;
 }
 
-td, th {
+h1{
+    color: #0ABAB5;
+}
+
+.groups_exams td, th{
     border: 1px solid grey;
     text-align: left;
     padding: 8px;
 }
 
-table {
+.groups_exams{
     font-family: 'Open Sans', sans-serif;
     border-collapse: collapse;
     width: 100%;
 }
 
-th {
+.groups_exams th{
     background-color: #dddddd;
 }
 
@@ -142,4 +142,57 @@ th {
 .btn:hover:not(.active){
     background-color: #ffffff;
     color: #0ABAB5;
+}
+
+.answers{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form{
+    display: table;
+    margin-top: 40px;
+}
+
+.form p{
+    display: table-row;
+}
+
+.form label{
+    display: table-cell;
+    text-align: right;
+    padding-right: 5px;
+    width: 50%;
+}
+
+.form input{
+    display: table-cell;
+}
+
+#login-form{
+    border-radius: 10px;
+    background: #0ABAB5;
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    width: 25%;
+    height: 30%;
+    text-align: center;
+}
+
+#login-submit{
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #0ABAB5;
+    width: 40%;
+}
+
+#login-submit:hover{
+    background-color: #DCDCDC;
+}
+
+.pupil_result {
+    background: #0ABAB5;
+    color: #ffffff;
+    border-radius: 10px;
 }

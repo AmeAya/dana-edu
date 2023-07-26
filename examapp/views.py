@@ -12,12 +12,13 @@ from .functions import changeUserCurrentExamSubjects
 from .functions import getQuestionPoints
 from .functions import getUserUrls
 from .functions import getBaseUrls
-from .serializers import QuestionSerializer, AnswerSerializer
+from .serializers import *
 
 
 @login_required(login_url='login_url')
 def userCabinetView(request):
     context = {'urls': getUserUrls(request.user)}
+
     return render(request, 'cabinet_page.html', context)
 
 
@@ -214,7 +215,8 @@ def addQuestionsView(request, question_number):
                 'variant': Variant.objects.get(pk=request.session['variant']),
                 'subjects': Subject.objects.all(),
                 'points': [1, 2],
-                'question_number': question_number
+                'question_number': question_number,
+                'urls': getUserUrls(request.user)
             }
             return render(request, 'add_questions_page.html', context)
         else:
@@ -312,3 +314,48 @@ def homeView(request):
         context = {'urls': getBaseUrls()}
     return render(request, 'home_page.html', context)
 
+
+@login_required(login_url='login_url')
+def getStatsView(request):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'GET':
+        context = {
+            'regions': Region.objects.all(),
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'get_stats_init_page.html', context)
+    else:
+        school = School.objects.get(id=request.POST.get('school'))
+        groups = Group.objects.filter(school=school)
+        results_by_groups = []
+        for group in groups:
+            results = []
+            for user in CustomUser.objects.filter(group=group):
+                results.append(Result.objects.filter(user=user))
+            results_by_groups.append({group: results})
+        context = {
+            'results_by_groups': results_by_groups,
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'get_stats_page.html', context)
+
+
+class GetAreaByRegion(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        region = Region.objects.get(id=request.POST.get('region_id'))
+        area = Area.objects.filter(region=region)
+        data = {'areas': AreaSerializer(area, many=True).data}
+        return Response(data, status=status.HTTP_200_OK)
+
+
+class GetSchoolByArea(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        area = Area.objects.get(id=request.POST.get('area_id'))
+        school = School.objects.filter(area=area)
+        data = {'schools': SchoolSerializer(school, many=True).data}
+        return Response(data, status=status.HTTP_200_OK)

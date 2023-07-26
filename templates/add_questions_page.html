@@ -30,7 +30,8 @@
             <br>
 
             <label for="question_text">Question Text:</label>
-            <input type="text" id="question_text" name="question_text" style="width: 50%">
+            <br>
+            <textarea rows="4" id="question_text" name="question_text" style="width: 50%"></textarea>
             <br>
 
             <label for="question_image">Question Image:</label>
@@ -41,10 +42,10 @@
 
             </div>
             <br>
-            <button type="button" onclick="addNewAnswer()">Add New Answer</button>
+            <button class="btn" type="button" onclick="addNewAnswer()">Add New Answer</button>
             <br>
             <hr>
-            <input type="submit" value="Create Question" style="font-size: 200%">
+            <input class="btn" type="submit" value="Create Question" style="font-size: 200%">
         </form>
     </div>
     <script>
@@ -55,23 +56,24 @@
             var main_div = document.getElementById('answers_div');
             for (i = 1; i < 6; i++) {
                 var div = document.createElement('div');
-                div.style.border = "1px solid black";
+
                 div.style.borderRadius = "10px";
                 div.style.display = "inline-block";
-                div.style.minWidth = "70%";
+                div.style.minWidth = "100%";
                 div.style.marginBottom = "10px";
-                div.style.boxShadow = "10px 5px 5px grey";
+                div.style.fontSize = '18px';
 
                 var label = document.createElement('label');
                 label.innerHTML = 'Answer Text ' + i + ': ';
                 label.htmlFor = 'answer_text_' + i;
                 div.appendChild(label);
 
-                var input = document.createElement('input');
-                input.type = 'text';
+                var input = document.createElement('textarea');
+                input.rows = 1;
+                input.style.marginTop = '15px';
                 input.id = 'answer_text_' + i;
                 input.name = 'answer_text_' + i;
-                input.style = 'width: 75%';
+                input.style.width = '75%';
                 div.appendChild(input);
 
                 div.appendChild(document.createElement('br'));
@@ -98,6 +100,7 @@
                 input.type = 'checkbox';
                 input.id = 'is_correct_answer_' + i;
                 input.name = 'is_correct_answer_' + i;
+                div.style.background = '#DCDCDC';
                 div.appendChild(input);
 
                 div.appendChild(document.createElement('br'));
@@ -113,23 +116,24 @@
             var main_div = document.getElementById('answers_div');
 
             var div = document.createElement('div');
-            div.style.border = "1px solid black";
             div.style.borderRadius = "10px";
             div.style.display = "inline-block";
-            div.style.minWidth = "70%";
+            div.style.minWidth = "100%";
             div.style.marginBottom = "10px";
-            div.style.boxShadow = "10px 5px 5px grey";
+            div.style.fontSize = '18px';
+            div.style.background = '#DCDCDC';
 
             var label = document.createElement('label');
-            label.innerHTML = 'Answer Text' + i + ': ';
+            label.innerHTML = 'Answer Text ' + i + ': ';
             label.htmlFor = 'answer_text' + i;
             div.appendChild(label);
 
-            var input = document.createElement('input');
-            input.type = 'text';
+            var input = document.createElement('textarea');
+            input.rows = 1;
+            input.style.marginTop = '15px';
             input.id = 'answer_text_' + i;
             input.name = 'answer_text_' + i;
-            input.style = 'width: 75%';
+            input.style.width = '75%';
             div.appendChild(input);
 
             div.appendChild(document.createElement('br'));
