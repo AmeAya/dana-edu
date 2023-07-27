@@ -78,7 +78,11 @@ def subjectSelectView(request):
 @login_required(login_url='login_url')
 def examView(request):
     subjects = CurrentExam.objects.filter(user=request.user).latest('pk').subjects
-    context = {'subjects': subjects.all()}
+    ends_at = ExamForGroup.objects.filter(group=request.user.group).latest('pk').ends_at
+    context = {
+        'subjects': subjects.all(),
+        'ends_at': ends_at
+    }
     return render(request, 'exam_page.html', context)
 
 
@@ -164,7 +168,9 @@ def endExamView(request):
 @login_required(login_url='login_url')
 def examResultsView(request):
     results = Result.objects.filter(user=request.user).order_by('-starts_at')
-    context = {'results': results, 'urls': getUserUrls(request.user)}
+
+    context = {'results': results,
+               'urls': getUserUrls(request.user)}
     return render(request, 'exam_results_page.html', context)
 
 

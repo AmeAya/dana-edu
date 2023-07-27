@@ -15,6 +15,9 @@
                         <a class="nav-link" id="{{ subject.pk }}" onclick="getQuestions(this.id)">{{ subject.name }}</a>
                     </li>
                 {% endfor %}
+
+            </ul>
+            <ul style="position: absolute; bottom: 0;">
                 <li>
                     <a class="nav-link" href="{% url 'end_exam_url' %}" onclick="return confirm('Are you sure?')">End Exam</a>
                 </li>
@@ -26,7 +29,12 @@
         </div>
 
         <div id="right_side_bar">
+            <div style="background: #ffffff; color: black; text-align: center; border-radius: 10px;">
+                <p id="timer" style="font-size: 22px;"></p>
+            </div>
+            <div id="right_questions_bar">
 
+            </div>
         </div>
     </div>
     <script>
@@ -153,7 +161,7 @@
             Request.onreadystatechange = function() {
                 if (Request.readyState == 4) {
                     var response = JSON.parse(Request.responseText);
-                    var rightSideBar = document.getElementById('right_side_bar');
+                    var rightSideBar = document.getElementById('right_questions_bar');
                     rightSideBar.innerHTML = '';
                     for (var i = 0; i < response['questions'].length; i++) {
                         var newButton = document.createElement('button');
@@ -176,6 +184,26 @@
             Request.open('get', url, true);
             Request.send(null);
         };
+
+        window.onload = (event) => {
+            var countDownDate = new Date('{{ ends_at|date:'M j, o H:i:s' }}').getTime();
+
+            var x = setInterval(function() {
+                var now = new Date().getTime();
+                var distance = countDownDate - now;
+
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("demo").innerHTML = "EXPIRED";
+                }
+            }, 1000);
+        }
     </script>
 </body>
 </html>

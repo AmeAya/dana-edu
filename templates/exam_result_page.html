@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
     <div align="center" style="font-size: 18px;">
-        <h1 align="center">{{ variant }}</h1>
+        <h1 align="center" style="margin-top: 5px;">{{ variant }}</h1>
         <h2>{{ starts_at }}</h2>
         <h2>{{ points }} points</h2>
         {% for result in results %}
-            <div class="pupil_result">
+            <div class="pupil_result" style="cursor: pointer;" onclick="changeHiddenDiv({{ result.subject.id }})">
                 <h2 align="left" style="padding-left: 10px;">{{ result.subject.name }}</h2>
             </div>
-            <div align="left">
+            <div id="{{ result.subject.id }}" align="left" style="display: none;">
             {% for question in result.questions %}
                 <hr>
                 <h1>{{ question.question.number }}. {{ question.question.text }} - {{ question.points }}</h1>
@@ -48,4 +48,15 @@
             </div>
         {% endfor %}
     </div>
+    <script>
+        function changeHiddenDiv(div_id){
+            var div = document.getElementById(div_id);
+            if (div.style.display == 'none'){
+                div.style.display = 'block';
+            }
+            else {
+                div.style.display = 'none'
+            }
+        }
+    </script>
 {% endblock content %}
