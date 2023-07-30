@@ -7,7 +7,7 @@ from .views import *
 
 urlpatterns = [
     path('add_questions_init', addQuestionsInitView, name='add_questions_init_url'),
-    path('add_questions/<int:question_number>', addQuestionsView, name='add_questions_url'),
+    path('add_questions', addQuestionsView, name='add_questions_url'),
     path('add_variant', createVariantView, name='add_variant_url'),
     path('cabinet', userCabinetView, name='cabinet_url'),
     path('exam', examView, name='exam_url'),

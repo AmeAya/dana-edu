@@ -2,7 +2,7 @@
 {% block content %}
     <div align="center">
         <h1>Variant: {{ variant.name }}</h1>
-        <form action="{% url 'add_questions_url' question_number %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+        <form action="{% url 'add_questions_url' %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {% csrf_token %}
 
             <input type="hidden" id="variant" name="variant" value="{{ variant.pk }}">
@@ -24,7 +24,11 @@
             <label for="subject">Select Subjects:</label>
             <select id="subject" name="subject">
                 {% for subject in subjects %}
-                    <option style="width: auto;" value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% if subject.id == selected_subject %}
+                        <option style="width: auto;" value="{{ subject.id }}" selected>{{ subject.name }}</option>
+                    {% else %}
+                        <option style="width: auto;" value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endif %}
                 {% endfor %}
             </select>
             <br>
