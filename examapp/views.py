@@ -243,7 +243,7 @@ def examResultView(request, pk):
 class GetAreaByRegion(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         region = Region.objects.get(id=request.POST.get('region_id'))
         area = Area.objects.filter(region=region)
         data = {'areas': AreaSerializer(area, many=True).data}
@@ -253,7 +253,7 @@ class GetAreaByRegion(APIView):
 class GetExamQuestionApiView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         question = Question.objects.get(pk=request.GET.get('pk'))
         answers = question.answers.all()
         data = {'question': QuestionSerializer(question).data,
@@ -264,7 +264,7 @@ class GetExamQuestionApiView(APIView):
 class GetQuestionsBySubjectApiView(APIView):
     permission_classes = [IsAuthenticated]
 
-    def get(self, request, *args, **kwargs):
+    def get(self, request):
         subject = Subject.objects.get(pk=request.query_params['subject_id'])
         variant = CurrentExam.objects.filter(user=request.user).latest('pk').variant
         questions = Question.objects.filter(subject=subject).filter(variant=variant).order_by('number')
@@ -282,7 +282,7 @@ class GetQuestionsBySubjectApiView(APIView):
 class GetSchoolByArea(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         area = Area.objects.get(id=request.POST.get('area_id'))
         school = School.objects.filter(area=area)
         data = {'schools': SchoolSerializer(school, many=True).data}
@@ -317,7 +317,6 @@ def getStatsView(request):
 
 def homeView(request):
     if request.user.is_authenticated:
-        urls = getUserUrls(request.user)
         context = {'urls': getUserUrls(request.user)}
     else:
         context = {'urls': getBaseUrls()}
@@ -351,7 +350,7 @@ def setExamForGroup(request):
 class SetPupilAnswers(APIView):
     permission_classes = [IsAuthenticated]
 
-    def post(self, request, *args, **kwargs):
+    def post(self, request):
         question = Question.objects.get(pk=request.POST.get('question'))
         pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True)
         answers = Answer.objects.filter(pk__in=request.POST.get('answers').split(','))
@@ -378,6 +377,4 @@ def subjectSelectView(request):
 @login_required(login_url='login_url')
 def userCabinetView(request):
     context = {'urls': getUserUrls(request.user)}
-
     return render(request, 'cabinet_page.html', context)
-

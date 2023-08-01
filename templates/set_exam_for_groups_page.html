@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div align="center" style="font-size: 18px;">
-        <form class="form" action="{% url 'set_exam_for_groups_url' %}" method="post">
+        <form id="group-form" class="form" action="{% url 'set_exam_for_groups_url' %}" method="post">
             {% csrf_token %}
 
             <p>
@@ -23,21 +23,22 @@
                 <input type="number" id="duration" name="duration" style="width:30%" required>
             </p>
 
-            <h2 style="margin-bottom: 0px;">Select Variants:</h2>
-            <div id="variants">
-                <div style=" white-space:nowrap; margin-left:10px; margin-right:10px; width:auto;">
-                    {% for variant in variants %}
-                        <p>
-                            <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
-                            <label for="{{ variant.id }}">{{ variant.name }}</label>
-                        </p>
-                    {% endfor %}
-                </div>
+            <div id="hidden-variants" hidden="hidden">
+                {% for variant in variants %}
+                    <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
+                {% endfor %}
             </div>
-            <br>
-
-            <input class="btn" type="submit" value="Set Exam" style="font-size: 120%">
         </form>
+
+        <h2 style="margin-bottom: 0px;">Select Variants:</h2>
+        <div id="variants" align="center">
+            {% for variant in variants %}
+                <button class="question_button" onclick="selectVariant({{ variant.id }})" style="width: auto; border: 1px solid #0ABAB5; border-radius: 8px;">{{ variant.name }}</button>
+            {% endfor %}
+        </div>
+
+        <input class="btn" form="group-form" type="submit" value="Set Exam" style="font-size: 120%">
+
         <hr>
         <table class="groups_exams">
             <tr>
@@ -57,13 +58,20 @@
         </table>
     </div>
     <script>
-        window.onload = (event) => {
-            let div = document.getElementById('variants');
-            div.style.border = "1px solid black";
-            div.style.borderRadius = "10px";
-            div.style.display = "inline-block";w
-            div.style.marginBottom = "10px";
-            div.style.boxShadow = "10px 5px 5px grey";
+        function selectVariant(variant_id){
+            let thisButton = event.srcElement;
+            let input = document.getElementById(variant_id);
+
+            if (input.checked == true){
+                input.checked = false;
+                thisButton.style.background = '#0ABAB5';
+                thisButton.style.color = '';
+            }
+            else {
+                input.checked = true;
+                thisButton.style.background = '#DCDCDC';
+                thisButton.style.color = '#0ABAB5';
+            }
         }
     </script>
 {% endblock content %}

@@ -121,8 +121,8 @@ h1{
 }
 
 .question_button:hover:not(.active){
-    background-color: #ffffff;
-    color: #0ABAB5;
+    background-color: #ffffff !important;
+    color: #0ABAB5 !important;
 }
 
 .question_button_active{
@@ -157,6 +157,7 @@ h1{
 
 .form p{
     display: table-row;
+    text-align: left;
 }
 
 .form label{
@@ -199,4 +200,13 @@ h1{
     background: #0ABAB5;
     color: #ffffff;
     border-radius: 10px;
+}
+
+#variants{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom = 10px;
+    box-shadow = 10px 5px 5px grey;
+    width: fit-content;
+    max-width: 70%;
 }
