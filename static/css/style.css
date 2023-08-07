@@ -210,3 +210,10 @@ h1{
     width: fit-content;
     max-width: 70%;
 }
+
+.user_photo{
+    height: 150px;
+    max-height: 100%;
+    max-width: 100%;
+    margin-left: 20px;
+}

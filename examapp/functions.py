@@ -97,3 +97,12 @@ def getUserUrls(user) -> []:
 def getBaseUrls() -> []:
     urls = [{'text': 'Log In', 'url': 'login_url'}]
     return urls
+
+
+def getUserAvg(user):
+    from .models import Result
+    avg = 0
+    results = Result.objects.filter(user=user)
+    for result in results:
+        avg += result.points
+    return round(avg / len(results), 2)

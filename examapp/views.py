@@ -7,11 +7,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import *
 from django.utils import timezone, dateformat
-from .functions import getRandomVariant
-from .functions import changeUserCurrentExamSubjects
-from .functions import getQuestionPoints
-from .functions import getUserUrls
-from .functions import getBaseUrls
+from .functions import *
 from .serializers import *
 
 
@@ -52,6 +48,7 @@ def addQuestionsView(request):
             question_image = request.FILES['question_image']
             question.image = question_image
         question.save()
+
         for i in range(1, int(request.POST.get('answers_count'))):
             is_correct = False
             is_empty = True
@@ -73,7 +70,7 @@ def addQuestionsView(request):
         if 'question_number' in request.session.keys():
             request.session['question_number'] += 1
         else:
-            request.session['question_number'] = 1
+            request.session['question_number'] = int(request.POST.get('question_number'))
         request.session['selected_subject'] = request.POST.get('subject')
 
         return redirect('add_questions_url')
@@ -377,4 +374,7 @@ def subjectSelectView(request):
 @login_required(login_url='login_url')
 def userCabinetView(request):
     context = {'urls': getUserUrls(request.user)}
+    avg = getUserAvg(request.user)
+    if avg:
+        context['avg'] = avg
     return render(request, 'cabinet_page.html', context)
