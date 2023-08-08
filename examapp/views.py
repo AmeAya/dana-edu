@@ -1,6 +1,7 @@
 from datetime import datetime
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse_lazy
 from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -318,6 +319,109 @@ def homeView(request):
     else:
         context = {'urls': getBaseUrls()}
     return render(request, 'home_page.html', context)
+
+
+@login_required(login_url='login_url')
+def questionDeleteView(request, question_id):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if request.method == 'POST':
+        question = Question.objects.get(id=question_id)
+        request.session['deleted'] = {
+            'variant': question.variant.pk,
+            'subject': question.subject.pk
+        }
+        question.delete()
+        return redirect('questions_update_url')
+
+
+@login_required(login_url='login_url')
+def questionUpdateView(request, question_id):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    question = Question.objects.get(id=question_id)
+    if request.method == 'GET':
+        subjects = Subject.objects.all()
+        answers = []
+        counter = 1
+        for answer in question.answers.all():
+            answers.append({'number': counter, 'answer': answer})
+            counter += 1
+        context = {
+            'question': question,
+            'points': [1, 2],
+            'subjects': subjects,
+            'answers': answers,
+            'answer_count': counter,
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'question_update_page.html', context)
+    else:
+        question = Question.objects.get(id=question_id)
+        question.number = int(request.POST.get('question_number'))
+        question.points = request.POST.get('question_points')
+        question.subject = Subject.objects.get(pk=request.POST.get('subject'))
+        question.text = request.POST.get('question_text')
+        if 'question_image' in request.FILES:
+            question_image = request.FILES['question_image']
+            question.image = question_image
+        question.save()
+
+        for i in range(1, int(request.POST.get('answers_count'))):
+            is_correct = False
+            is_empty = True
+            if request.POST.get('is_correct_answer_' + str(i)):
+                is_correct = True
+            if request.POST.get('answer_id_' + str(i)):
+                answer = Answer.objects.get(id=request.POST.get('answer_id_' + str(i)))
+            else:
+                answer = Answer(is_correct=is_correct)
+            answer_text = request.POST.get('answer_text_' + str(i))
+            if 'answer_image_' + str(i) in request.FILES:
+                answer_image = request.FILES['answer_image_' + str(i)]
+                answer.image = answer_image
+                is_empty = False
+            if answer_text:
+                answer.text = answer_text
+                is_empty = False
+            if not is_empty:
+                answer.save()
+                question.answers.add(answer)
+
+        return redirect('question_update_url', question_id)
+
+
+@login_required(login_url='login_url')
+def questionsUpdateInitView(request):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    if 'deleted' in request.session.keys():
+        variant = Variant.objects.get(id=request.session['deleted']['variant'])
+        subject = Subject.objects.get(id=request.session['deleted']['subject'])
+        questions = Question.objects.filter(variant=variant).filter(subject=subject)
+        context = {
+            'questions': questions,
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'questions_update_page.html', context)
+    if request.method == 'GET':
+        variants = Variant.objects.all()
+        subjects = Subject.objects.all()
+        context = {
+            'variants': variants,
+            'subjects': subjects,
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'questions_update_init_page.html', context)
+    else:
+        variant = Variant.objects.get(id=request.POST.get('variant'))
+        subject = Subject.objects.get(id=request.POST.get('subject'))
+        questions = Question.objects.filter(variant=variant).filter(subject=subject)
+        context = {
+            'questions': questions,
+            'urls': getUserUrls(request.user)
+        }
+        return render(request, 'questions_update_page.html', context)
 
 
 @login_required(login_url='login_url')

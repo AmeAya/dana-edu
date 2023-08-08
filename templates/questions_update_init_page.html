@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+    <form id="form" class="form" action="{% url 'questions_update_url' %}" method="post">
+        {% csrf_token %}
+        <p>
+            <label style="font-size: 20px;" for="variant">Select Variant:</label>
+            <select id="variant" name="variant">
+                {% for variant in variants %}
+                    <option style="font-size: 20px;" value="{{ variant.pk }}">{{ variant.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+        <p>
+            <label style="font-size: 20px;" for="subject">Select Variant:</label>
+            <select id="subject" name="subject">
+                {% for subject in subjects %}
+                    <option style="font-size: 20px;" value="{{ subject.pk }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </p>
+    </form>
+    <input form="form" class="btn" type="submit" value="Search Questions">
+{% endblock content %}

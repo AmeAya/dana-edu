@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% for question in questions %}
+        <div class="question_update">
+            <h2 style="padding-left: 10px; cursor: pointer;" onclick="location.href='{% url 'question_update_url' question.pk %}'">{{ question.number }}.{{ question.text }}</h2>
+        </div>
+    {% endfor %}
+{% endblock content %}

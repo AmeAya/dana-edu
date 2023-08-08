@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div align="center">
+        <form action="{% url 'question_update_url' question.pk %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+            {% csrf_token %}
+
+            <input type="hidden" value="{{ answer_count }}" id="answers_count" name="answers_count">
+
+            <label for="question_number">Input Number:</label>
+            <input value="{{ question.number }}" type="number" id="question_number" name="question_number" min="1" max="50" style="width: 2.5%" required>
+            <br>
+
+            <label for="question_points">Input Points:</label>
+            <select id="question_points" name="question_points">
+                {% for point in points %}
+                    {% if point == question.points %}
+                        <option style="width: auto;" value="{{ point }}" selected>{{ point }}</option>
+                    {% else %}
+                        <option style="width: auto;" value="{{ point }}">{{ point }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br>
+
+            <label for="subject">Select Subjects:</label>
+            <select id="subject" name="subject">
+                {% for subject in subjects %}
+                    {% if subject == question.subject %}
+                        <option style="width: auto;" value="{{ subject.id }}" selected>{{ subject.name }}</option>
+                    {% else %}
+                        <option style="width: auto;" value="{{ subject.id }}">{{ subject.name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+            <br>
+
+            <label for="question_text">Question Text:</label>
+            <br>
+            <textarea rows="4" id="question_text" name="question_text" style="width: 50%">{{ question.text }}</textarea>
+            <br>
+
+            <label for="question_image">Question Image:</label>
+            <input type="file" id="question_image" name="question_image">
+            <br>
+            <hr>
+            <div id="answers_div">
+                {% for answer in answers %}
+                    <div style="border-radius: 10px; display: inline-block; min-width: 100%; margin-bottom: 10px; font-size: 18px; background: rgb(220, 220, 220);">
+                        <input type="hidden" value="{{ answer.answer.id }}" id="answer_id_{{ answer.number }}" name="answer_id_{{ answer.number }}">
+                        <label for="answer_text_{{ answer.number }}">Answer Text {{ answer.number }}: </label>
+                        <textarea rows="1" id="answer_text_{{ answer.number }}" name="answer_text_{{ answer.number }}" style="margin-top: 15px; width: 75%;">
+                            {{ answer.answer.text }}
+                        </textarea>
+                        <br>
+                        <label for="answer_image_{{ answer.number }}">Answer Image {{ answer.number }}: </label>
+                        <input type="file" id="answer_image_{{ answer.number }}" name="answer_image_{{ answer.number }}">
+                        <br>
+                        <label for="is_correct_answer_{{ answer.number }}">is_correct: </label>
+                        {% if answer.answer.is_correct %}
+                            <input checked type="checkbox" id="is_correct_answer_{{ answer.number }}" name="is_correct_answer_{{ answer.number }}">
+                        {% else %}
+                            <input type="checkbox" id="is_correct_answer_{{ answer.number }}" name="is_correct_answer_{{ answer.number }}">
+                        {% endif %}
+                        <br>
+                    </div>
+                {% endfor %}
+            </div>
+            <br>
+            <button class="btn" type="button" onclick="addNewAnswer()">Add New Answer</button>
+            <br>
+            <hr>
+            <input class="btn" type="submit" value="Create Question" style="font-size: 200%">
+        </form>
+        <form action="{% url 'question_delete_url' question.pk %}" method="post">
+            {% csrf_token %}
+            <input class="delete-btn" onclick="return confirm('Are you sure?')" type="submit" value="Delete Question" style="font-size: 150%">
+        </form>
+    </div>
+    <script>
+        var i = {{ answer_count }};
+
+        function addNewAnswer() {
+            var main_div = document.getElementById('answers_div');
+
+            var div = document.createElement('div');
+            div.style.borderRadius = "10px";
+            div.style.display = "inline-block";
+            div.style.minWidth = "100%";
+            div.style.marginBottom = "10px";
+            div.style.fontSize = '18px';
+            div.style.background = '#DCDCDC';
+
+            var label = document.createElement('label');
+            label.innerHTML = 'Answer Text ' + i + ': ';
+            label.htmlFor = 'answer_text' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('textarea');
+            input.rows = 1;
+            input.style.marginTop = '15px';
+            input.id = 'answer_text_' + i;
+            input.name = 'answer_text_' + i;
+            input.style.width = '75%';
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            var label = document.createElement('label');
+            label.innerHTML = 'Answer Image ' + i + ': ';
+            label.htmlFor = 'answer_image_' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.id = 'answer_image_' + i;
+            input.name = 'answer_image_' + i;
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            var label = document.createElement('label');
+            label.innerHTML = 'is_correct: ';
+            label.htmlFor = 'is_correct_answer_' + i;
+            div.appendChild(label);
+
+            var input = document.createElement('input');
+            input.type = 'checkbox';
+            input.id = 'is_correct_answer_' + i;
+            input.name = 'is_correct_answer_' + i;
+            div.appendChild(input);
+
+            div.appendChild(document.createElement('br'));
+
+            main_div.appendChild(document.createElement('br'));
+            main_div.appendChild(div);
+
+            i++;
+            document.getElementById('answers_count').value = i;
+        }
+    </script>
+{% endblock content %}
