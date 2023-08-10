@@ -1,9 +1,8 @@
 core/settings.py
 db.sqlite3
-.idea/
-.DS_Store
 core/__pycache__/
 examapp/__pycache__/
 examapp/migrations/__pycache__/
-Pipfile
-Pipfile.lock
+.idea/
+.DS_Store
+
