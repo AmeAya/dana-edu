@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
+.wrapper{
+    display: flex;
+}
+
+#sidebar{
+    background: #0ABAB5;
+    flex: 1;
+    border-radius: 10px;
+    min-height: 95vh;
+    color: #ffffff;
+    margin: 0 0 5px;
+    padding: 10px 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#sidebar a{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+#sidebar ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+#sidebar li{
+    margin-bottom: 5px;
+}
+
+#sidebar li a{
+    display: block;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#sidebar li a:hover:not(.active){
+    background-color: #ffffff;
+    color: #0ABAB5;
+}
+
+#sidebar .active{
+    background-color: #ffffff;
+    color: #0ABAB5;
+}
+
+#sidebar_logo{
+    max-width: 80%;
+    max-height: 80%;
+    display:block;
+    margin:auto;
+    padding: 10px 10px;
+    margin-bottom: 50px;
+}
+
+#content{
+    flex: 6;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+input, select{
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+}
+
+h1{
+    color: #0ABAB5;
+}
+
+.groups_exams td, th{
+    border: 1px solid grey;
+    text-align: left;
+    padding: 8px;
+}
+
+.groups_exams{
+    font-family: 'Open Sans', sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.groups_exams th{
+    background-color: #dddddd;
+}
+
+#content{
+    margin: 10px;
+}
+
+#right_side_bar{
+    background: #0ABAB5;
+    flex: 1;
+    border-radius: 10px;
+    min-height: 95vh;
+    color: #ffffff;
+    margin: 0 0 5px;
+    padding: 10px 10px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.question_button{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background: #0ABAB5;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    margin: 4px;
+    width: 34px;
+    height: 34px;
+}
+
+.question_button:hover:not(.active){
+    background-color: #ffffff !important;
+    color: #0ABAB5 !important;
+}
+
+.question_button_active{
+    background-color: #ffffff;
+    color: #0ABAB5;
+}
+
+.btn{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background: #0ABAB5;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 2px solid #0ABAB5;
+}
+
+.btn:hover:not(.active){
+    background-color: #ffffff;
+    color: #0ABAB5;
+    cursor: pointer;
+}
+
+.delete-btn{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    background: red;
+    border-radius: 5px;
+    color: #ffffff;
+    border: 2px solid red;
+}
+
+.delete-btn:hover:not(.active){
+    background-color: #ffffff;
+    color: red;
+    cursor: pointer;
+}
+
+.answers{
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form{
+    display: table;
+    margin-top: 40px;
+}
+
+.form p{
+    display: table-row;
+    text-align: left;
+}
+
+.form label{
+    display: table-cell;
+    text-align: right;
+    padding-right: 5px;
+    width: 50%;
+}
+
+.form input{
+    display: table-cell;
+}
+
+#login-form{
+    border-radius: 10px;
+    background: #0ABAB5;
+    color: #ffffff;
+    font-size: 20px;
+    font-family: 'Open Sans', sans-serif;
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    width: 25%;
+    height: 30%;
+    text-align: center;
+}
+
+#login-submit{
+    margin-top: 20px;
+    background-color: #ffffff;
+    color: #0ABAB5;
+    width: 40%;
+}
+
+#login-submit:hover{
+    background-color: #DCDCDC;
+}
+
+.pupil_result{
+    background: #0ABAB5;
+    color: #ffffff;
+    border-radius: 10px;
+}
+
+#variants{
+    border: 1px solid black;
+    border-radius: 10px;
+    margin-bottom = 10px;
+    box-shadow = 10px 5px 5px grey;
+    width: fit-content;
+    max-width: 70%;
+}
+
+.user_photo{
+    height: 150px;
+    max-height: 100%;
+    max-width: 100%;
+    margin-left: 20px;
+}
+
+.question_update{
+    background: #0ABAB5;
+    color: #ffffff;
+    border-radius: 10px;
+    text-align: left;
+}

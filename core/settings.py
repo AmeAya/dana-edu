@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!
 # DEBUG = True
 # ALLOWED_HOSTS = ['danaedu.pythonanywhere.com']
 
-DEBUG = False
-ALLOWED_HOSTS = ['dana-edu.kz']
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 
@@ -123,7 +123,7 @@ USE_TZ = False
 
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = ['static/']
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static/')]
 
 MEDIA_URL = "media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

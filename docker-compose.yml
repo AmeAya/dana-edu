@@ -7,15 +7,15 @@ services:
     command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
-      - static_volume:/code/static
-      - media_volume:/code/media
+      - static_volume:/code/staticfiles
+      - media_volume:/media
   nginx:
     build: ./nginx
     ports:
       - 80:80
     volumes:
-      - static_volume:/code/static
-      - media_volume:/code/media
+      - static_volume:/code/staticfiles
+      - media_volume:/media
     depends_on:
       - web
 
