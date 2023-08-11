@@ -27,8 +27,8 @@ SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!
 # DEBUG = True
 # ALLOWED_HOSTS = ['danaedu.pythonanywhere.com']
 
-DEBUG = True
-ALLOWED_HOSTS = ['localhost']
+DEBUG = False
+ALLOWED_HOSTS = ['dana-edu.kz']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 
