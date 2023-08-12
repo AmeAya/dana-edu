@@ -27,10 +27,11 @@ SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!
 # DEBUG = True
 # ALLOWED_HOSTS = ['danaedu.pythonanywhere.com']
 
-DEBUG = False
-ALLOWED_HOSTS = ['dana-edu.kz']
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
+
 
 
 # Application definition
@@ -138,3 +139,6 @@ AUTH_USER_MODEL = 'examapp.CustomUser'
 LOGIN_REDIRECT_URL = 'home_url'
 LOGIN_URL = 'login_url'
 LOGOUT_REDIRECT_URL = 'login_url'
+
+CELERY_BROKER_URL = "redis://redis:6379"
+CELERY_RESULT_BACKEND = "redis://redis:6379"

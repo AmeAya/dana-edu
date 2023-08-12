@@ -4,7 +4,7 @@ services:
     build: .
     expose:
       - 8000
-    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000
+    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 1 --threads 2
     volumes:
       - .:/code
       - static_volume:/code/staticfiles
@@ -17,6 +17,20 @@ services:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
     depends_on:
+      - web
+  redis:
+    image: redis:alpine
+  celery:
+    restart: always
+    build:
+      context: .
+    command: celery -A core worker -l info
+    volumes:
+      - .:/code
+      - static_volume:/code/staticfiles
+      - media_volume:/code/media
+    depends_on:
+      - redis
       - web
 
 volumes:
