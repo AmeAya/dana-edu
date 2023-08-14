@@ -76,7 +76,6 @@
             var button = document.getElementById(this.id);
             button.classList.add('question_button_active');
 
-
             Request.onreadystatechange = function() {
                 if (Request.readyState == 4) {
                     var newButton = document.createElement('button');

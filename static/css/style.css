@@ -126,8 +126,8 @@ h1{
 }
 
 .question_button_active{
-    background-color: #ffffff;
-    color: #0ABAB5;
+    background-color: #ffffff !important;
+    color: #0ABAB5 !important;
 }
 
 .btn{
