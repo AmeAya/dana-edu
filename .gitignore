@@ -1,8 +1,5 @@
-core/settings.py
 db.sqlite3
-core/__pycache__/
-examapp/__pycache__/
-examapp/migrations/__pycache__/
-.idea/
+core/settings.py
 .DS_Store
-
+__pycache__
+.idea
