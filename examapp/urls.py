@@ -1,11 +1,12 @@
 from django.urls import path
 from django.contrib.auth.views import LoginView, LogoutView
-from django.views.generic import TemplateView
+from django.views.generic import RedirectView
 from .forms import CustomUserLoginForm
 from .views import *
 
 
 urlpatterns = [
+    path('', RedirectView.as_view(permanent=True, url='home')),
     path('add_questions_init', addQuestionsInitView, name='add_questions_init_url'),
     path('add_questions', addQuestionsView, name='add_questions_url'),
     path('add_variant', createVariantView, name='add_variant_url'),
@@ -20,7 +21,7 @@ urlpatterns = [
     path('get_questions_by_subject', GetQuestionsBySubjectApiView.as_view(), name='question_by_subject_url'),
     path('get_school_by_area', GetSchoolByArea.as_view(), name='get_school_by_area_url'),
     path('get_stats', getStatsView, name='get_stats_url'),
-    path('home', homeView, name='home_url'),
+    path('home/', homeView, name='home_url'),
     path('login', LoginView.as_view(template_name='login_page.html', redirect_authenticated_user=True,
                                     authentication_form=CustomUserLoginForm), name='login_url'),
     path('logout', LogoutView.as_view(), name='logout_url'),
