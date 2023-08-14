@@ -81,21 +81,30 @@
                     var newButton = document.createElement('button');
                     newButton.id = 'confirm';
                     newButton.innerHTML = 'Confirm';
+                    newButton.classList.add("btn");
                     newButton.disabled = true;
-                    newButton.onclick = sendAnswer;
+                    newButton.onclick = function() {
+                        sendAnswer();
+                        if (button.dataset.next !== 'null'){
+                            document.getElementById(button.dataset.next).click();
+                        }
+                    };
 
                     var response = JSON.parse(Request.responseText);
                     var content = document.getElementById('content');
+
                     content.innerHTML = '';
                     var header = document.createElement('h1');
                     header.id = 'question';
                     header.key = response['question'].id;
                     header.innerHTML = response['question'].number + '. ';
                     header.style.color = '#0ABAB5';
+
                     if (response['question'].text !== null) {
                         header.innerHTML += response['question'].text;
                         content.appendChild(header);
                     }
+
                     if (response['question'].image !== null) {
                         var img = document.createElement('img');
                         img.src = response['question'].image;
@@ -128,7 +137,15 @@
                         radio.name = 'exam_answers';
                         radio.value = answer.id;
                         radio.addEventListener('change', function() {
-                            document.getElementById('confirm').disabled = false;
+                            for (var elem of document.getElementsByName('exam_answers')) {
+                                if (elem.checked){
+                                    document.getElementById('confirm').disabled = false;
+                                    break;
+                                }
+                                else {
+                                    document.getElementById('confirm').disabled = true;
+                                }
+                            }
                         })
 
                         content.appendChild(radio);
@@ -138,6 +155,29 @@
 
                     content.appendChild(document.createElement('br'));
                     content.appendChild(newButton);
+                    content.appendChild(document.createElement('hr'));
+
+                    if (button.dataset.prev !== 'null'){
+                        prevButton = document.createElement('button');
+                        prevButton.innerHTML = 'Prev';
+                        prevButton.style.margin = '4px';
+                        prevButton.classList.add("btn");
+                        prevButton.onclick = function(){
+                            document.getElementById(button.dataset.prev).click();
+                        };
+                        content.appendChild(prevButton);
+                    }
+
+                    if (button.dataset.next !== 'null'){
+                        nextButton = document.createElement('button');
+                        nextButton.innerHTML = 'Next';
+                        nextButton.style.margin = '4px';
+                        nextButton.classList.add("btn");
+                        nextButton.onclick = function(){
+                            document.getElementById(button.dataset.next).click();
+                        };
+                        content.appendChild(nextButton);
+                    }
                 }
             }
 
@@ -169,6 +209,19 @@
                         newButton.value = response['questions'][i].id;
                         newButton.innerHTML = response['questions'][i].number;
                         newButton.onclick = getQuestion;
+
+                        if(i == 0) {
+                            newButton.dataset.prev = null;
+                            newButton.dataset.next = 'question_' + response['questions'][i + 1].id;
+                        }
+                        else if(i == response['questions'].length - 1){
+                            newButton.dataset.prev = 'question_' + response['questions'][i - 1].id;
+                            newButton.dataset.next = null;
+                        }
+                        else {
+                            newButton.dataset.prev = 'question_' + response['questions'][i - 1].id;
+                            newButton.dataset.next = 'question_' + response['questions'][i + 1].id;
+                        }
 
                         if (response['is_solved'][i] == true) {
                             newButton.style.background = "#DCDCDC";
