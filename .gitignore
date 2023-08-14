@@ -1,5 +1,4 @@
 db.sqlite3
-core/settings.py
 .DS_Store
 __pycache__
 .idea
