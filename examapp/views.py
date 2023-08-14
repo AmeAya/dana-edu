@@ -26,7 +26,7 @@ def addQuestionsView(request):
             }
 
             if 'question_number' in request.session.keys():
-                context.update({'question_number': request.session['question_number']})
+                context.update({'question_number': int(request.session['question_number'])})
             else:
                 context.update({'question_number': 1})
 
@@ -71,7 +71,7 @@ def addQuestionsView(request):
         if 'question_number' in request.session.keys():
             request.session['question_number'] += 1
         else:
-            request.session['question_number'] = int(request.POST.get('question_number'))
+            request.session['question_number'] = int(request.POST.get('question_number')) + 1
         request.session['selected_subject'] = request.POST.get('subject')
 
         return redirect('add_questions_url')
