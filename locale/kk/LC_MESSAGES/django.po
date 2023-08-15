@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 15:03+0600\n"
+"POT-Creation-Date: 2023-08-16 00:35+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,56 +78,164 @@ msgstr "Шығу"
 msgid "Log In"
 msgstr "Кіру"
 
-#: templates/about_us_page.html:5
-msgid ""
-"Educational portal Dana-Edu.kz is an electronic set of tests to prepare "
-"students for the successful completion of the Unified National Testing (UNT) "
-"and MODO. The main goal of this project is to identify gaps in the "
-"knowledge, skills and abilities of students in schools by passing trial "
-"tests. Dana-Edu.kz consists of test tasks for each subject with answers. We "
-"have formed trial tests in accordance with the state mandatory standard of "
-"secondary education, curricula in general subjects approved by the order of "
-"the Ministry of Education and Science of the Republic of Kazakhstan. Each "
-"test option is selected randomly from the database of questions, thereby "
-"making it possible to solve a new unique option. We hope that Dana-Edu.kz "
-"will help you quickly identify and eliminate gaps in knowledge, which "
-"contributes to improving the quality of knowledge!"
-msgstr ""
-"Білім беру порталы Dana-Edu.kz оқушыларды Ұлттық бірыңғай тестілеуді (ҰБТ) "
-"және МОДО-ны сәтті тапсыруға дайындау бойынша электронды тест кешені болып "
-"табылады. Бұл жобаның негізгі мақсаты-сынақ тесттерін тапсыру арқылы "
-"оқушылардың мектепте алған білімі мен жіберілген олқылықтарын анықтау. Dana-"
-"Edu.kz әр пән бойынша жауаптары бар тест тапсырмаларынан тұрады. Біз сынақ "
-"тесттерін Қазақстан Республикасы Білім және ғылым министрлігінің бекіткен "
-"Орта білім берудің мемлекеттік жалпыға міндетті стандартына, жалпы білім "
-"беретін пәндер бойынша оқу бағдарламаларына сәйкес құрастырдық. Тестілеудің "
-"әр нұсқасы сұрақтар базасынан кездейсоқ таңдау әдісі жаңа бірегей нұсқаны "
-"шешуге мүмкіндік береді. Dana-Edu.kz білімдегі олқылықтарды тез анықтау және "
-"оны жою арқылы білім сапасын жақсартуға септігін тигізеді деп үміттенеміз!"
+#: examapp/views.py:166
+msgid "Your exam already ends at "
+msgstr "Сіздің емтиханыңыз аяқталды "
+
+#: examapp/views.py:172
+msgid "You already done your exam!"
+msgstr "Сіз емтихан тапсырып болдыңыз!"
+
+#: examapp/views.py:178
+msgid "You don`t have Exams!"
+msgstr "Сізде жоспарланған емтихан жоқ!"
+
+#: examapp/views.py:185 examapp/views.py:194
+msgid "Your variant is "
+msgstr "Сіздің нұсқаңыз "
+
+#: examapp/views.py:232
+msgid "1 point"
+msgstr "1 ұпай"
+
+#: examapp/views.py:234
+msgid " points"
+msgstr " ұпай"
 
 #: templates/about_us_page.html:6
+msgid ""
+"Educational portal \"Dana-Edu.kz\" is an electronic set of tests to prepare "
+"students for the successful completion of the Unified National Testing (UNT) "
+"and MODO."
+msgstr ""
+"Білім беру порталы \"Dana-Edu.kz\" оқушыларды Ұлттық бірыңғай тестілеуді "
+"(ҰБТ) және МОДО-ны сәтті тапсыруға дайындау бойынша электронды тест кешені "
+"болып табылады."
+
+#: templates/about_us_page.html:9
+msgid ""
+"The main goal of this project is to identify gaps in the knowledge, skills "
+"and abilities of students in schools by passing trial tests."
+msgstr ""
+"Бұл жобаның негізгі мақсаты-сынақ тесттерін тапсыру арқылы оқушылардың "
+"мектепте алған білімі мен жіберілген олқылықтарын анықтау."
+
+#: templates/about_us_page.html:12
+msgid ""
+"Dana-Edu.kz consists of test tasks for each subject with answers. We have "
+"formed trial tests in accordance with the state mandatory standard of "
+"secondary education, curricula in general subjects approved by the order of "
+"the Ministry of Education and Science of the Republic of Kazakhstan."
+msgstr ""
+"Dana-Edu.kz әр пән бойынша жауаптары бар тест тапсырмаларынан тұрады. Біз "
+"сынақ тесттерін Қазақстан Республикасы Білім және ғылым министрлігінің "
+"бекіткен Орта білім берудің мемлекеттік жалпыға міндетті стандартына, жалпы "
+"білім беретін пәндер бойынша оқу бағдарламаларына сәйкес құрастырдық."
+
+#: templates/about_us_page.html:15
+msgid ""
+"Each test option is selected randomly from the database of questions, "
+"thereby making it possible to solve a new unique option."
+msgstr ""
+"Тестілеудің әр нұсқасы сұрақтар базасынан кездейсоқ таңдау әдісі жаңа "
+"бірегей нұсқаны шешуге мүмкіндік береді."
+
+#: templates/about_us_page.html:18
+msgid ""
+"We hope that Dana-Edu.kz  will help you quickly identify and eliminate gaps "
+"in knowledge, which contributes to improving the quality of knowledge!"
+msgstr ""
+"Dana-Edu.kz білімдегі олқылықтарды тез анықтау және  оны жою арқылы білім "
+"сапасын жақсартуға септігін тигізеді деп үміттенеміз!"
+
+#: templates/about_us_page.html:21
 msgid "Контактные данные"
 msgstr "Байланыс деректері"
 
-#: templates/about_us_page.html:7
+#: templates/about_us_page.html:22
 msgid "ТОО \"Dana Group LLP\""
 msgstr "ЖШС \"Dana Group LLP\""
 
-#: templates/about_us_page.html:8
+#: templates/about_us_page.html:23
 msgid "Адрес: 050050, Казахстан, г. Алматы,"
 msgstr "Мекен-жайы: 050050, Қазақстан, Алматы қ.,"
 
-#: templates/about_us_page.html:9
+#: templates/about_us_page.html:24
 msgid "Проспект Сейфуллина 404/67, 217 офис, вход В3"
 msgstr "Сейфуллин даңғылы 404/67, 217 кеңсе, В3 кірy"
 
-#: templates/about_us_page.html:10
+#: templates/about_us_page.html:25
 msgid "Номер телефона: +7 747 125 02 99"
 msgstr "Телефон нөмірі: +7 747 125 02 99"
 
-#: templates/about_us_page.html:11
+#: templates/about_us_page.html:26
 msgid "Email: danaedu.kz@gmail.com"
 msgstr "Email: danaedu.kz@gmail.com"
+
+#: templates/add_questions_init_page.html:6
+msgid "Select Existing Variant:"
+msgstr "Бар Нұсқаны Таңдау:"
+
+#: templates/add_questions_init_page.html:12
+msgid "Select Variant"
+msgstr "Нұсқаны Таңдау"
+
+#: templates/add_questions_init_page.html:15
+msgid "Create New"
+msgstr "Жаңа Жасау"
+
+#: templates/add_questions_page.html:5
+msgid "Variant:"
+msgstr "Нұсқа:"
+
+#: templates/add_questions_page.html:13 templates/question_update_page.html:10
+msgid "Input Number:"
+msgstr "Саны:"
+
+#: templates/add_questions_page.html:17 templates/question_update_page.html:14
+msgid "Input Points:"
+msgstr "Ұпай:"
+
+#: templates/add_questions_page.html:25 templates/question_update_page.html:26
+msgid "Select Subjects:"
+msgstr "Пәндері:"
+
+#: templates/add_questions_page.html:37 templates/question_update_page.html:38
+msgid "Question Text:"
+msgstr "Сұрақ Мәтіні"
+
+#: templates/add_questions_page.html:42 templates/question_update_page.html:43
+msgid "Question Image:"
+msgstr "Сұрақ Суреті:"
+
+#: templates/add_questions_page.html:50 templates/question_update_page.html:70
+msgid "Add New Answer"
+msgstr "Жаңа Жауап Қосу"
+
+#: templates/add_questions_page.html:53
+msgid "Create Question"
+msgstr "Сұрақ Жасау"
+
+#: templates/add_questions_page.html:72 templates/add_questions_page.html:132
+#: templates/question_update_page.html:51
+msgid "Answer Text"
+msgstr "Жауап Мәтіні"
+
+#: templates/add_questions_page.html:87 templates/add_questions_page.html:147
+#: templates/question_update_page.html:56
+#: templates/question_update_page.html:110
+msgid "Answer Image"
+msgstr "Жауап Суреті"
+
+#: templates/add_questions_page.html:100 templates/add_questions_page.html:160
+#: templates/question_update_page.html:59
+#: templates/question_update_page.html:123
+msgid "is_correct:"
+msgstr "Жауап Дұрыс:"
+
+#: templates/add_variant_page.html:6
+msgid "Create New Variant"
+msgstr "Жаңа Нұсқа Жасау"
 
 #: templates/cabinet_page.html:8
 msgid "Photo:"
@@ -141,6 +249,10 @@ msgstr "Аты-Жөні:"
 msgid "Average:"
 msgstr "Орташа Ұпай"
 
+#: templates/cabinet_page.html:27
+msgid "Points"
+msgstr "Ұпай"
+
 #: templates/cabinet_page.html:30
 msgid "School:"
 msgstr "Мектеп:"
@@ -149,6 +261,127 @@ msgstr "Мектеп:"
 msgid "Class:"
 msgstr "Сынып:"
 
+#: templates/exam_init_page.html:14
+msgid "Start Test"
+msgstr "Емтиханды Бастау"
+
+#: templates/exam_page.html:23 templates/question_update_page.html:77
+msgid "Are you sure?"
+msgstr "Сіз Сенімдісіз Бе?"
+
+#: templates/exam_page.html:23
+msgid "End Exam"
+msgstr "Емтиханды Аяқтау"
+
+#: templates/exam_page.html:84
+msgid "Confirm"
+msgstr "Растау"
+
+#: templates/exam_page.html:163
+msgid "Prev"
+msgstr "Алдыңғы"
+
+#: templates/exam_page.html:174
+msgid "Next"
+msgstr "Келесі"
+
+#: templates/exam_result_page.html:7 templates/exam_results_page.html:6
+#: templates/get_stats_page.html:16
+msgid "points"
+msgstr "ұпай"
+
+#: templates/exam_result_page.html:19
+msgid "Correct Answers:"
+msgstr "Дұрыс Жауаптар:"
+
+#: templates/exam_result_page.html:30
+msgid "Pupil Answers:"
+msgstr "Оқушы Жауаптары:"
+
+#: templates/exam_result_page.html:44
+msgid "None"
+msgstr "Жоқ"
+
+#: templates/exam_results_page.html:7 templates/get_stats_page.html:17
+msgid "Check"
+msgstr "Қарау"
+
+#: templates/get_stats_init_page.html:9
+msgid "Select Region:"
+msgstr "Облысы Таңдау:"
+
+#: templates/get_stats_init_page.html:19
+msgid "Select Area:"
+msgstr "Аудандары Таңдау:"
+
+#: templates/get_stats_init_page.html:26
+msgid "Select School:"
+msgstr "Мектеп Таңдау::"
+
+#: templates/get_stats_init_page.html:33
+msgid "Show Stats"
+msgstr "Статистика Көрсету"
+
+#: templates/home_page.html:4
+msgid "This is Home Page"
+msgstr "Бұл Басты Бет"
+
 #: templates/login_page.html:9
 msgid "Sign In"
 msgstr "Кіру"
+
+#: templates/question_update_page.html:77
+msgid "Delete Question"
+msgstr "Сұрақ Жою"
+
+#: templates/question_update_page.html:96
+msgid "answer_text"
+msgstr "Жауап Мәтін"
+
+#: templates/questions_update_init_page.html:7
+msgid "Select Variant:"
+msgstr "Нұсқа Таңдау:"
+
+#: templates/questions_update_init_page.html:15
+msgid "Select Subject:"
+msgstr "Мектеп Таңдау:"
+
+#: templates/questions_update_init_page.html:23
+msgid "Search Questions"
+msgstr "Сұрақ Іздеу"
+
+#: templates/set_exam_for_groups_page.html:9
+msgid "Select Group:"
+msgstr "Сынып Таңдау:"
+
+#: templates/set_exam_for_groups_page.html:18
+msgid "Start Time:"
+msgstr "Бастау Уақыты:"
+
+#: templates/set_exam_for_groups_page.html:23
+msgid "Duration (minutes):"
+msgstr "Ұзақтығы (минут):"
+
+#: templates/set_exam_for_groups_page.html:34
+msgid "Select Variants:"
+msgstr "Нұсқаларды Таңдау:"
+
+#: templates/set_exam_for_groups_page.html:41
+msgid "Set Exam"
+msgstr "Емтихан Орнату"
+
+#: templates/set_exam_for_groups_page.html:46
+msgid "Group"
+msgstr "Сынып"
+
+#: templates/set_exam_for_groups_page.html:47
+msgid "Starts at"
+msgstr "Басталады"
+
+#: templates/set_exam_for_groups_page.html:48
+msgid "Duration"
+msgstr "Ұзақтығы"
+
+#: templates/set_exam_for_groups_page.html:49
+msgid "Ends at"
+msgstr "Аяқталады"

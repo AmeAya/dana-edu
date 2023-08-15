@@ -2,6 +2,7 @@ from datetime import datetime
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils import timezone, dateformat
+from django.utils.translation import gettext_lazy as _
 # from openpyxl import Workbook  # Для excel!
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
@@ -157,30 +158,31 @@ def examView(request):
 def examInitView(request):
     if request.user.type != 'PU':
         return redirect('home_url')
-    group_exam = ExamForGroup.objects.filter(group=request.user.group).latest('pk')
+    group_exam = ExamForGroup.objects.filter(group=request.user.group)
     if group_exam:
+        group_exam = group_exam.latest('pk')
         if group_exam.ends_at < timezone.now():
             context = {
-                'message': 'Your exam already ends at ' + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
+                'message': _('Your exam already ends at ') + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
                 'urls': getUserUrls(request.user)
             }
             return render(request, 'exam_init_page.html', context)
         if request.user in group_exam.ended_users.all():
             context = {
-                'message': 'You already done your exam!',
+                'message': _('You already done your exam!'),
                 'urls': getUserUrls(request.user)
             }
             return render(request, 'exam_init_page.html', context)
     else:
         context = {
-            'message': 'You don`t have Exams!',
+            'message': _('You don`t have Exams!'),
             'urls': getUserUrls(request.user)
         }
         return render(request, 'exam_init_page.html', context)
     current_exam = CurrentExam.objects.filter(user=request.user)
     if current_exam:
         context = {
-            'message': 'Your variant is ',
+            'message': _('Your variant is '),
             'variant': current_exam.latest('pk').variant,
             'subjects': SubjectCombination.objects.all(),
             'urls': getUserUrls(request.user)
@@ -189,7 +191,7 @@ def examInitView(request):
     current_variant = getRandomVariant(group_exam.variants.all(), request.user)
     CurrentExam(user=request.user, variant=current_variant).save()
     context = {
-        'message': 'Your variant is ',
+        'message': _('Your variant is '),
         'variant': current_variant,
         'subjects': SubjectCombination.objects.all(),
         'urls': getUserUrls(request.user)
@@ -227,9 +229,9 @@ def examResultView(request, pk):
                 this_question['points'] = pupil_answer.points
                 break
         if this_question['points'] == 1:
-            this_question['points'] = '1 point'
+            this_question['points'] = _('1 point')
         else:
-            this_question['points'] = str(this_question['points']) + ' points'
+            this_question['points'] = str(this_question['points']) + _(' points')
         for subject in results:
             if subject['subject'] == question.subject:
                 subject['questions'].append(this_question)
@@ -484,6 +486,5 @@ def subjectSelectView(request):
 def userCabinetView(request):
     context = {'urls': getUserUrls(request.user)}
     avg = getUserAvg(request.user)
-    if avg:
-        context['avg'] = avg
+    context['avg'] = avg
     return render(request, 'cabinet_page.html', context)

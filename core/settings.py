@@ -18,9 +18,9 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 LANGUAGES = (
-    ('en', _('English')),
+    ('kk', _('Kazakh')),
     ('ru', _('Russian')),
-    ('kk', _('Kazakh'))
+    ('en', _('English')),
 )
 
 LOCALE_PATHS = [
@@ -34,8 +34,11 @@ LOCALE_PATHS = [
 SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = ['*']
+DEBUG = False
+ALLOWED_HOSTS = ['dana-edu.kz']
+
+# DEBUG = True
+# ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 

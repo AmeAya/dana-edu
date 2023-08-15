@@ -248,3 +248,14 @@ h1{
     border-radius: 10px;
     text-align: left;
 }
+
+.language_link{
+    text-decoration: none;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.languages{
+    position: absolute;
+    bottom: 0;
+}

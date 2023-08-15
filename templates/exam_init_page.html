@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div align="center">
         <h1>{{ message }}{{ variant.name }}</h1>
@@ -10,7 +11,7 @@
                         <option value="{{ subject.pk }}">{{ subject.first_subject.name }} - {{ subject.second_subject.name }}</option>
                     {% endfor %}
                 </select>
-                <input class="btn" type="submit" onclick="clicked()" value="Start Test">
+                <input class="btn" type="submit" onclick="clicked()" value="{% trans 'Start Test' %}">
             </form>
         {% endif %}
     </div>

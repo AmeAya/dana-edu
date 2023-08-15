@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <form id="form" class="form" action="{% url 'questions_update_url' %}" method="post">
         {% csrf_token %}
         <p>
-            <label style="font-size: 20px;" for="variant">Select Variant:</label>
+            <label style="font-size: 20px;" for="variant">{% trans 'Select Variant:' %}</label>
             <select id="variant" name="variant">
                 {% for variant in variants %}
                     <option style="font-size: 20px;" value="{{ variant.pk }}">{{ variant.name }}</option>
@@ -11,7 +12,7 @@
             </select>
         </p>
         <p>
-            <label style="font-size: 20px;" for="subject">Select Variant:</label>
+            <label style="font-size: 20px;" for="subject">{% trans 'Select Subject:' %}</label>
             <select id="subject" name="subject">
                 {% for subject in subjects %}
                     <option style="font-size: 20px;" value="{{ subject.pk }}">{{ subject.name }}</option>
@@ -19,5 +20,5 @@
             </select>
         </p>
     </form>
-    <input form="form" class="btn" type="submit" value="Search Questions">
+    <input form="form" class="btn" type="submit" value="{% trans 'Search Questions' %}">
 {% endblock content %}

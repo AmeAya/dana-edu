@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 15:03+0600\n"
+"POT-Creation-Date: 2023-08-16 00:49+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -78,57 +78,164 @@ msgstr "Log Out"
 msgid "Log In"
 msgstr "Log In"
 
-#: templates/about_us_page.html:5
-msgid ""
-"Educational portal Dana-Edu.kz is an electronic set of tests to prepare "
-"students for the successful completion of the Unified National Testing (UNT) "
-"and MODO. The main goal of this project is to identify gaps in the "
-"knowledge, skills and abilities of students in schools by passing trial "
-"tests. Dana-Edu.kz consists of test tasks for each subject with answers. We "
-"have formed trial tests in accordance with the state mandatory standard of "
-"secondary education, curricula in general subjects approved by the order of "
-"the Ministry of Education and Science of the Republic of Kazakhstan. Each "
-"test option is selected randomly from the database of questions, thereby "
-"making it possible to solve a new unique option. We hope that Dana-Edu.kz "
-"will help you quickly identify and eliminate gaps in knowledge, which "
-"contributes to improving the quality of knowledge!"
-msgstr ""
-"Educational portal Dana-Edu.kz is an electronic set of tests to prepare "
-"students for the successful completion of the Unified National Testing (UNT) "
-"and MODO. The main goal of this project is to identify gaps in the "
-"knowledge, skills and abilities of students in schools by passing trial "
-"tests. Dana-Edu.kz consists of test tasks for each subject with answers. We "
-"have formed trial tests in accordance with the state mandatory standard of "
-"secondary education, curricula in general subjects approved by the order of "
-"the Ministry of Education and Science of the Republic of Kazakhstan. Each "
-"test option is selected randomly from the database of questions, thereby "
-"making it possible to solve a new unique option. We hope that Dana-Edu.kz "
-"will help you quickly identify and eliminate gaps in knowledge, which "
-"contributes to improving the quality of knowledge!"
+#: examapp/views.py:166
+msgid "Your exam already ends at "
+msgstr "Your exam already ends at "
+
+#: examapp/views.py:172
+msgid "You already done your exam!"
+msgstr "You already done your exam!"
+
+#: examapp/views.py:178
+msgid "You don`t have Exams!"
+msgstr "You don`t have Exams!"
+
+#: examapp/views.py:185 examapp/views.py:194
+msgid "Your variant is "
+msgstr "Your variant "
+
+#: examapp/views.py:232
+msgid "1 point"
+msgstr "1 point"
+
+#: examapp/views.py:234
+msgid " points"
+msgstr " points"
 
 #: templates/about_us_page.html:6
+msgid ""
+"Educational portal \"Dana-Edu.kz\" is an electronic set of tests to prepare "
+"students for the successful completion of the Unified National Testing (UNT) "
+"and MODO."
+msgstr ""
+"Educational portal \"Dana-Edu.kz\" is an electronic set of tests to prepare "
+"students for the successful completion of the Unified National Testing (UNT) "
+"and MODO."
+
+#: templates/about_us_page.html:9
+msgid ""
+"The main goal of this project is to identify gaps in the knowledge, skills "
+"and abilities of students in schools by passing trial tests."
+msgstr ""
+"The main goal of this project is to identify gaps in the knowledge, skills "
+"and abilities of students in schools by passing trial tests."
+
+#: templates/about_us_page.html:12
+msgid ""
+"Dana-Edu.kz consists of test tasks for each subject with answers. We have "
+"formed trial tests in accordance with the state mandatory standard of "
+"secondary education, curricula in general subjects approved by the order of "
+"the Ministry of Education and Science of the Republic of Kazakhstan."
+msgstr ""
+"Dana-Edu.kz consists of test tasks for each subject with answers. We have "
+"formed trial tests in accordance with the state mandatory standard of "
+"secondary education, curricula in general subjects approved by the order of "
+"the Ministry of Education and Science of the Republic of Kazakhstan."
+
+#: templates/about_us_page.html:15
+msgid ""
+"Each test option is selected randomly from the database of questions, "
+"thereby making it possible to solve a new unique option."
+msgstr ""
+"Each test option is selected randomly from the database of questions, "
+"thereby making it possible to solve a new unique option."
+
+#: templates/about_us_page.html:18
+msgid ""
+"We hope that Dana-Edu.kz  will help you quickly identify and eliminate gaps "
+"in knowledge, which contributes to improving the quality of knowledge!"
+msgstr ""
+"We hope that Dana-Edu.kz  will help you quickly identify and eliminate gaps "
+"in knowledge, which contributes to improving the quality of knowledge!"
+
+#: templates/about_us_page.html:21
 msgid "Контактные данные"
 msgstr "Contact details"
 
-#: templates/about_us_page.html:7
+#: templates/about_us_page.html:22
 msgid "ТОО \"Dana Group LLP\""
 msgstr "LLP \"Dana Group LLP\""
 
-#: templates/about_us_page.html:8
+#: templates/about_us_page.html:23
 msgid "Адрес: 050050, Казахстан, г. Алматы,"
 msgstr "Address: 050050, Kazakhstan, Almaty city,"
 
-#: templates/about_us_page.html:9
+#: templates/about_us_page.html:24
 msgid "Проспект Сейфуллина 404/67, 217 офис, вход В3"
 msgstr "Seifullin Avenue 404/67, 217 office, entrance B3"
 
-#: templates/about_us_page.html:10
+#: templates/about_us_page.html:25
 msgid "Номер телефона: +7 747 125 02 99"
 msgstr "Phone number: +7 747 125 02 99"
 
-#: templates/about_us_page.html:11
+#: templates/about_us_page.html:26
 msgid "Email: danaedu.kz@gmail.com"
 msgstr "Email: danaedu.kz@gmail.com"
+
+#: templates/add_questions_init_page.html:6
+msgid "Select Existing Variant:"
+msgstr "Select Existing Variant:"
+
+#: templates/add_questions_init_page.html:12
+msgid "Select Variant"
+msgstr "Select Variant"
+
+#: templates/add_questions_init_page.html:15
+msgid "Create New"
+msgstr "Create New"
+
+#: templates/add_questions_page.html:5
+msgid "Variant:"
+msgstr "Variant:"
+
+#: templates/add_questions_page.html:13 templates/question_update_page.html:10
+msgid "Input Number:"
+msgstr "Input Number:"
+
+#: templates/add_questions_page.html:17 templates/question_update_page.html:14
+msgid "Input Points:"
+msgstr "Input Points:"
+
+#: templates/add_questions_page.html:25 templates/question_update_page.html:26
+msgid "Select Subjects:"
+msgstr "Select Subjects:"
+
+#: templates/add_questions_page.html:37 templates/question_update_page.html:38
+msgid "Question Text:"
+msgstr "Questions Text:"
+
+#: templates/add_questions_page.html:42 templates/question_update_page.html:43
+msgid "Question Image:"
+msgstr "Question Image:"
+
+#: templates/add_questions_page.html:50 templates/question_update_page.html:70
+msgid "Add New Answer"
+msgstr "Add New Answer"
+
+#: templates/add_questions_page.html:53
+msgid "Create Question"
+msgstr "Create Question"
+
+#: templates/add_questions_page.html:72 templates/add_questions_page.html:132
+#: templates/question_update_page.html:51
+msgid "Answer Text"
+msgstr "Answer Text"
+
+#: templates/add_questions_page.html:87 templates/add_questions_page.html:147
+#: templates/question_update_page.html:56
+#: templates/question_update_page.html:110
+msgid "Answer Image"
+msgstr "Answer Image"
+
+#: templates/add_questions_page.html:100 templates/add_questions_page.html:160
+#: templates/question_update_page.html:59
+#: templates/question_update_page.html:123
+msgid "is_correct:"
+msgstr "is_correct"
+
+#: templates/add_variant_page.html:6
+msgid "Create New Variant"
+msgstr "Create New Variant"
 
 #: templates/cabinet_page.html:8
 msgid "Photo:"
@@ -142,6 +249,10 @@ msgstr "Full Name:"
 msgid "Average:"
 msgstr "Average Result:"
 
+#: templates/cabinet_page.html:27
+msgid "Points"
+msgstr "Points"
+
 #: templates/cabinet_page.html:30
 msgid "School:"
 msgstr "School:"
@@ -150,6 +261,127 @@ msgstr "School:"
 msgid "Class:"
 msgstr "Class:"
 
+#: templates/exam_init_page.html:14
+msgid "Start Test"
+msgstr "Start Exam"
+
+#: templates/exam_page.html:23 templates/question_update_page.html:77
+msgid "Are you sure?"
+msgstr "Are you sure?"
+
+#: templates/exam_page.html:23
+msgid "End Exam"
+msgstr "End Exam"
+
+#: templates/exam_page.html:84
+msgid "Confirm"
+msgstr "Confirm"
+
+#: templates/exam_page.html:163
+msgid "Prev"
+msgstr "Prev"
+
+#: templates/exam_page.html:174
+msgid "Next"
+msgstr "Next"
+
+#: templates/exam_result_page.html:7 templates/exam_results_page.html:6
+#: templates/get_stats_page.html:16
+msgid "points"
+msgstr "points"
+
+#: templates/exam_result_page.html:19
+msgid "Correct Answers:"
+msgstr "Correct Answers:"
+
+#: templates/exam_result_page.html:30
+msgid "Pupil Answers:"
+msgstr "Pupil Answers:"
+
+#: templates/exam_result_page.html:44
+msgid "None"
+msgstr "None"
+
+#: templates/exam_results_page.html:7 templates/get_stats_page.html:17
+msgid "Check"
+msgstr "Details"
+
+#: templates/get_stats_init_page.html:9
+msgid "Select Region:"
+msgstr "Select Region:"
+
+#: templates/get_stats_init_page.html:19
+msgid "Select Area:"
+msgstr "Select Area:"
+
+#: templates/get_stats_init_page.html:26
+msgid "Select School:"
+msgstr "Select School:"
+
+#: templates/get_stats_init_page.html:33
+msgid "Show Stats"
+msgstr "Show Stats"
+
+#: templates/home_page.html:4
+msgid "This is Home Page"
+msgstr "This is Home Page"
+
 #: templates/login_page.html:9
 msgid "Sign In"
 msgstr "Sign In"
+
+#: templates/question_update_page.html:77
+msgid "Delete Question"
+msgstr "Delete Question"
+
+#: templates/question_update_page.html:96
+msgid "answer_text"
+msgstr "Answer Text"
+
+#: templates/questions_update_init_page.html:7
+msgid "Select Variant:"
+msgstr "Select Variant:"
+
+#: templates/questions_update_init_page.html:15
+msgid "Select Subject:"
+msgstr "Select Subject:"
+
+#: templates/questions_update_init_page.html:23
+msgid "Search Questions"
+msgstr "Search Questions"
+
+#: templates/set_exam_for_groups_page.html:9
+msgid "Select Group:"
+msgstr "Select Group:"
+
+#: templates/set_exam_for_groups_page.html:18
+msgid "Start Time:"
+msgstr "Start Time:"
+
+#: templates/set_exam_for_groups_page.html:23
+msgid "Duration (minutes):"
+msgstr "Duration (minutes):"
+
+#: templates/set_exam_for_groups_page.html:34
+msgid "Select Variants:"
+msgstr "Select Variants:"
+
+#: templates/set_exam_for_groups_page.html:41
+msgid "Set Exam"
+msgstr "Set Exam"
+
+#: templates/set_exam_for_groups_page.html:46
+msgid "Group"
+msgstr "Group"
+
+#: templates/set_exam_for_groups_page.html:47
+msgid "Starts at"
+msgstr "Starts at"
+
+#: templates/set_exam_for_groups_page.html:48
+msgid "Duration"
+msgstr "Duration"
+
+#: templates/set_exam_for_groups_page.html:49
+msgid "Ends at"
+msgstr "Ends at"

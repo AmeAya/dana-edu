@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div align="center">
-        <h1>Variant: {{ variant.name }}</h1>
+        <h1>{% trans 'Variant:' %} {{ variant.name }}</h1>
         <form action="{% url 'add_questions_url' %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {% csrf_token %}
 
@@ -9,11 +10,11 @@
 
             <input type="hidden" id="answers_count" name="answers_count">
 
-            <label for="question_number">Input Number:</label>
+            <label for="question_number">{% trans 'Input Number:' %}</label>
             <input type="number" id="question_number" name="question_number" min="1" max="50" style="width: 2.5%" required>
             <br>
 
-            <label for="question_points">Input Points:</label>
+            <label for="question_points">{% trans 'Input Points:' %}</label>
             <select id="question_points" name="question_points">
                 {% for point in points %}
                     <option style="width: auto;" value="{{ point }}">{{ point }}</option>
@@ -21,7 +22,7 @@
             </select>
             <br>
 
-            <label for="subject">Select Subjects:</label>
+            <label for="subject">{% trans 'Select Subjects:' %}</label>
             <select id="subject" name="subject">
                 {% for subject in subjects %}
                     {% if subject.id == selected_subject %}
@@ -33,12 +34,12 @@
             </select>
             <br>
 
-            <label for="question_text">Question Text:</label>
+            <label for="question_text">{% trans 'Question Text:' %}</label>
             <br>
             <textarea rows="4" id="question_text" name="question_text" style="width: 50%"></textarea>
             <br>
 
-            <label for="question_image">Question Image:</label>
+            <label for="question_image">{% trans 'Question Image:' %}</label>
             <input type="file" id="question_image" name="question_image">
             <br>
             <hr>
@@ -46,10 +47,10 @@
 
             </div>
             <br>
-            <button class="btn" type="button" onclick="addNewAnswer()">Add New Answer</button>
+            <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" type="submit" value="Create Question" style="font-size: 200%">
+            <input class="btn" type="submit" value="{% trans 'Create Question' %}" style="font-size: 200%">
         </form>
     </div>
     <script>
@@ -68,7 +69,7 @@
                 div.style.fontSize = '18px';
 
                 var label = document.createElement('label');
-                label.innerHTML = 'Answer Text ' + i + ': ';
+                label.innerHTML = "{% trans 'Answer Text' %} " + i + ': ';
                 label.htmlFor = 'answer_text_' + i;
                 div.appendChild(label);
 
@@ -83,7 +84,7 @@
                 div.appendChild(document.createElement('br'));
 
                 var label = document.createElement('label');
-                label.innerHTML = 'Answer Image ' + i + ': ';
+                label.innerHTML = "{% trans 'Answer Image' %} " + i + ': ';
                 label.htmlFor = 'answer_image_' + i;
                 div.appendChild(label);
 
@@ -96,7 +97,7 @@
                 div.appendChild(document.createElement('br'));
 
                 var label = document.createElement('label');
-                label.innerHTML = 'is_correct: ';
+                label.innerHTML = "{% trans 'is_correct:' %} ";
                 label.htmlFor = 'is_correct_answer_' + i;
                 div.appendChild(label);
 
@@ -128,7 +129,7 @@
             div.style.background = '#DCDCDC';
 
             var label = document.createElement('label');
-            label.innerHTML = 'Answer Text ' + i + ': ';
+            label.innerHTML = "{% trans 'Answer Text' %} " + i + ': ';
             label.htmlFor = 'answer_text' + i;
             div.appendChild(label);
 
@@ -143,7 +144,7 @@
             div.appendChild(document.createElement('br'));
 
             var label = document.createElement('label');
-            label.innerHTML = 'Answer Image ' + i + ': ';
+            label.innerHTML = "{% trans 'Answer Image' %} " + i + ': ';
             label.htmlFor = 'answer_image_' + i;
             div.appendChild(label);
 
@@ -156,7 +157,7 @@
             div.appendChild(document.createElement('br'));
 
             var label = document.createElement('label');
-            label.innerHTML = 'is_correct: ';
+            label.innerHTML = "{% trans 'is_correct:' %} ";
             label.htmlFor = 'is_correct_answer_' + i;
             div.appendChild(label);
 

@@ -1,12 +1,27 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <h1>{% trans 'About Us' %}</h1>
-    <h3 align="justify" style="margin-left: 5%; margin-right: 5%;">{% trans 'Educational portal Dana-Edu.kz is an electronic set of tests to prepare students for the successful completion of the Unified National Testing (UNT) and MODO. The main goal of this project is to identify gaps in the knowledge, skills and abilities of students in schools by passing trial tests. Dana-Edu.kz consists of test tasks for each subject with answers. We have formed trial tests in accordance with the state mandatory standard of secondary education, curricula in general subjects approved by the order of the Ministry of Education and Science of the Republic of Kazakhstan. Each test option is selected randomly from the database of questions, thereby making it possible to solve a new unique option. We hope that Dana-Edu.kz will help you quickly identify and eliminate gaps in knowledge, which contributes to improving the quality of knowledge!' %}</h3>
-    <h1>{% trans 'Контактные данные' %}</h1>
-    <h3>{% trans 'ТОО "Dana Group LLP"' %}</h3>
-    <h3>{% trans 'Адрес: 050050, Казахстан, г. Алматы,' %}</h3>
-    <h3>{% trans 'Проспект Сейфуллина 404/67, 217 офис, вход В3' %}</h3>
-    <h3>{% trans 'Номер телефона: +7 747 125 02 99' %}</h3>
-    <h3>{% trans 'Email: danaedu.kz@gmail.com' %}</h3>
+    <h1 style="margin-top: -5px;">{% trans 'About Us' %}</h1>
+    <h3 align="justify" style="margin-left: 5%; margin-right: 5%; text-indent: 2em; margin-bottom: -5px;">
+        {% trans 'Educational portal "Dana-Edu.kz" is an electronic set of tests to prepare students for the successful completion of the Unified National Testing (UNT) and MODO.' %}
+    </h3>
+    <h3 align="justify" style="margin-left: 5%; margin-right: 5%; text-indent: 2em; margin-bottom: -5px;">
+        {% trans 'The main goal of this project is to identify gaps in the knowledge, skills and abilities of students in schools by passing trial tests.' %}
+    </h3>
+    <h3 align="justify" style="margin-left: 5%; margin-right: 5%; text-indent: 2em; margin-bottom: -5px;">
+        {% trans 'Dana-Edu.kz consists of test tasks for each subject with answers. We have formed trial tests in accordance with the state mandatory standard of secondary education, curricula in general subjects approved by the order of the Ministry of Education and Science of the Republic of Kazakhstan.' %}
+    </h3>
+    <h3 align="justify" style="margin-left: 5%; margin-right: 5%; text-indent: 2em; margin-bottom: -5px;">
+        {% trans 'Each test option is selected randomly from the database of questions, thereby making it possible to solve a new unique option.' %}
+    </h3>
+    <h3 align="justify" style="margin-left: 5%; margin-right: 5%; text-indent: 2em; margin-bottom: -5px;">
+        {% trans 'We hope that Dana-Edu.kz  will help you quickly identify and eliminate gaps in knowledge, which contributes to improving the quality of knowledge!' %}
+    </h3>
+
+    <h1 align="left" style="margin-left: 5%;">{% trans 'Контактные данные' %}</h1>
+    <h3 align="left" style="margin-left: 5%; margin-bottom: -5px;">{% trans 'ТОО "Dana Group LLP"' %}</h3>
+    <h3 align="left" style="margin-left: 5%; margin-bottom: -5px;">{% trans 'Адрес: 050050, Казахстан, г. Алматы,' %}</h3>
+    <h3 align="left" style="margin-left: 5%; margin-bottom: -5px;">{% trans 'Проспект Сейфуллина 404/67, 217 офис, вход В3' %}</h3>
+    <h3 align="left" style="margin-left: 5%; margin-bottom: -5px;">{% trans 'Номер телефона: +7 747 125 02 99' %}</h3>
+    <h3 align="left" style="margin-left: 5%; margin-bottom: -5px;">{% trans 'Email: danaedu.kz@gmail.com' %}</h3>
 {% endblock content %}

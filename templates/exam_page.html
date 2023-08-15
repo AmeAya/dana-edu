@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load i18n %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +20,7 @@
             </ul>
             <ul style="position: absolute; bottom: 0;">
                 <li>
-                    <a class="nav-link" href="{% url 'end_exam_url' %}" onclick="return confirm('Are you sure?')">End Exam</a>
+                    <a class="nav-link" href="{% url 'end_exam_url' %}" onclick="return confirm('{% trans 'Are you sure?' %}')">{% trans 'End Exam' %}</a>
                 </li>
             </ul>
         </div>
@@ -80,7 +81,7 @@
                 if (Request.readyState == 4) {
                     var newButton = document.createElement('button');
                     newButton.id = 'confirm';
-                    newButton.innerHTML = 'Confirm';
+                    newButton.innerHTML = "{% trans 'Confirm' %}";
                     newButton.classList.add("btn");
                     newButton.disabled = true;
                     newButton.onclick = function() {
@@ -159,7 +160,7 @@
 
                     if (button.dataset.prev !== 'null'){
                         prevButton = document.createElement('button');
-                        prevButton.innerHTML = 'Prev';
+                        prevButton.innerHTML = "{% trans 'Prev' %}";
                         prevButton.style.margin = '4px';
                         prevButton.classList.add("btn");
                         prevButton.onclick = function(){
@@ -170,7 +171,7 @@
 
                     if (button.dataset.next !== 'null'){
                         nextButton = document.createElement('button');
-                        nextButton.innerHTML = 'Next';
+                        nextButton.innerHTML = "{% trans 'Next' %}";
                         nextButton.style.margin = '4px';
                         nextButton.classList.add("btn");
                         nextButton.onclick = function(){
@@ -238,7 +239,8 @@
         };
 
         window.onload = (event) => {
-            var countDownDate = new Date('{{ ends_at|date:'M j, o H:i:s' }}').getTime();
+            var countDownDate = new Date('{{ ends_at|date:'m j, o H:i:s' }}').getTime();
+
 
             var x = setInterval(function() {
                 var now = new Date().getTime();

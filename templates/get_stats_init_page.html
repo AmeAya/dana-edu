@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% block content %}
     <div style="font-size: 18px;">
         <form id="form" class="form" action="{% url 'get_stats_url' %}" method="post">
             {% csrf_token %}
 
             <p>
-                <label for="region">Select Region:</label>
+                <label for="region">{% trans 'Select Region:' %}</label>
                 <select onchange="getAreas()" id="region">
                     <option disabled selected value></option>
                     {% for region in regions %}
@@ -15,21 +16,21 @@
             </p>
 
             <p>
-                <label for="area">Select Area:</label>
+                <label for="area">{% trans 'Select Area:' %}</label>
                 <select id="area" disabled="disabled">
 
                 </select>
             </p>
 
             <p>
-                <label for="school">Select School:</label>
+                <label for="school">{% trans 'Select School:' %}</label>
                 <select id="school" disabled="disabled" name="school">
 
                 </select>
             </p>
         </form>
 
-        <input form="form" class="btn" type="submit" value="Show Stats">
+        <input form="form" class="btn" type="submit" value="{% trans 'Show Stats' %}">
     </div>
     <script>
         function getSchools(){
