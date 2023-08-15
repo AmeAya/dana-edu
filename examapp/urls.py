@@ -7,6 +7,7 @@ from .views import *
 
 urlpatterns = [
     path('', RedirectView.as_view(permanent=True, url='home')),
+    path('about_us', aboutUsView, name='about_us_url'),
     path('add_questions_init', addQuestionsInitView, name='add_questions_init_url'),
     path('add_questions', addQuestionsView, name='add_questions_url'),
     path('add_variant', createVariantView, name='add_variant_url'),

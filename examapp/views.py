@@ -12,6 +12,11 @@ from .models import *
 from .serializers import *
 
 
+def aboutUsView(request):
+    context = {'urls': getUserUrls(request.user)}
+    return render(request, 'about_us_page.html', context)
+
+
 @login_required(login_url='login_url')
 def addQuestionsView(request):
     if request.user.type != 'MO':

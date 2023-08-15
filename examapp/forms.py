@@ -1,14 +1,15 @@
 from django.contrib.auth.forms import AuthenticationForm, ReadOnlyPasswordHashField
 from django import forms
 from .models import CustomUser
+from django.utils.translation import gettext_lazy as _
 
 
 class CustomUserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(CustomUserLoginForm, self).__init__(*args, **kwargs)
 
-    username = forms.CharField(widget=forms.TextInput(), label='IIN:')
-    password = forms.CharField(widget=forms.PasswordInput())
+    username = forms.CharField(widget=forms.TextInput(), label=_('IIN:'))
+    password = forms.CharField(widget=forms.PasswordInput(), label=_('Password:'))
 
 
 class CustomUserCreationForm(forms.ModelForm):

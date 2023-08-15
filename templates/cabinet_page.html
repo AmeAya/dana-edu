@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <div align="left">
         <table style="border: none;">
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">Photo: </h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'Photo:' %} </h3></td>
                 <td>
                     {% if user.photo %}
                         <img class="user_photo" src="{{ user.photo.url }}">
@@ -14,23 +15,23 @@
                 </td>
             </tr>
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">IIN: </h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'IIN:' %} </h3></td>
                 <td><h3 style="margin-left: 20px;">{{ user.iin }}</h3></td>
             </tr>
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">FIO:</h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'FIO:' %}</h3></td>
                 <td><h3 style="margin-left: 20px;">{{ user.surname }} {{ user.name }} {{ user.patronymic }}</h3></td>
             </tr>
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">Average:</h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'Average:' %}</h3></td>
                 <td><h3 style="margin-left: 20px;">{{ avg }} Points</h3></td>
             </tr>
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">School:</h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'School:' %}</h3></td>
                 <td><h3 style="margin-left: 20px;">{{ user.group.school }}</h3></td>
             </tr>
             <tr>
-                <td align="left"><h3 style="color: #0ABAB5;">Class:</h3></td>
+                <td align="left"><h3 style="color: #0ABAB5;">{% trans 'Class:' %}</h3></td>
                 <td><h3 style="margin-left: 20px;">{{ user.group }}</h3></td>
             </tr>
         </table>

@@ -1,0 +1,155 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-15 15:03+0600\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: core/settings.py:21
+msgid "English"
+msgstr "English"
+
+#: core/settings.py:22
+msgid "Russian"
+msgstr "Russian"
+
+#: core/settings.py:23
+msgid "Kazakh"
+msgstr "Kazakh"
+
+#: examapp/forms.py:11 templates/cabinet_page.html:18
+msgid "IIN:"
+msgstr "ID:"
+
+#: examapp/forms.py:12
+msgid "Password:"
+msgstr "Password:"
+
+#: examapp/functions.py:89
+msgid "My Cabinet"
+msgstr "My Cabinet"
+
+#: examapp/functions.py:90 templates/about_us_page.html:4
+msgid "About Us"
+msgstr "About Us"
+
+#: examapp/functions.py:93
+msgid "Init Exam"
+msgstr "Init Exam"
+
+#: examapp/functions.py:94
+msgid "Exam Results"
+msgstr "Exam Results"
+
+#: examapp/functions.py:96
+msgid "Get Stats"
+msgstr "Get Stats"
+
+#: examapp/functions.py:97
+msgid "Add Question"
+msgstr "Add Question"
+
+#: examapp/functions.py:98
+msgid "Questions Update"
+msgstr "Questions Update"
+
+#: examapp/functions.py:99
+msgid "Set Exam For Groups"
+msgstr "Set Exam For Groups"
+
+#: examapp/functions.py:100
+msgid "Log Out"
+msgstr "Log Out"
+
+#: examapp/functions.py:105
+msgid "Log In"
+msgstr "Log In"
+
+#: templates/about_us_page.html:5
+msgid ""
+"Educational portal Dana-Edu.kz is an electronic set of tests to prepare "
+"students for the successful completion of the Unified National Testing (UNT) "
+"and MODO. The main goal of this project is to identify gaps in the "
+"knowledge, skills and abilities of students in schools by passing trial "
+"tests. Dana-Edu.kz consists of test tasks for each subject with answers. We "
+"have formed trial tests in accordance with the state mandatory standard of "
+"secondary education, curricula in general subjects approved by the order of "
+"the Ministry of Education and Science of the Republic of Kazakhstan. Each "
+"test option is selected randomly from the database of questions, thereby "
+"making it possible to solve a new unique option. We hope that Dana-Edu.kz "
+"will help you quickly identify and eliminate gaps in knowledge, which "
+"contributes to improving the quality of knowledge!"
+msgstr ""
+"Educational portal Dana-Edu.kz is an electronic set of tests to prepare "
+"students for the successful completion of the Unified National Testing (UNT) "
+"and MODO. The main goal of this project is to identify gaps in the "
+"knowledge, skills and abilities of students in schools by passing trial "
+"tests. Dana-Edu.kz consists of test tasks for each subject with answers. We "
+"have formed trial tests in accordance with the state mandatory standard of "
+"secondary education, curricula in general subjects approved by the order of "
+"the Ministry of Education and Science of the Republic of Kazakhstan. Each "
+"test option is selected randomly from the database of questions, thereby "
+"making it possible to solve a new unique option. We hope that Dana-Edu.kz "
+"will help you quickly identify and eliminate gaps in knowledge, which "
+"contributes to improving the quality of knowledge!"
+
+#: templates/about_us_page.html:6
+msgid "Контактные данные"
+msgstr "Contact details"
+
+#: templates/about_us_page.html:7
+msgid "ТОО \"Dana Group LLP\""
+msgstr "LLP \"Dana Group LLP\""
+
+#: templates/about_us_page.html:8
+msgid "Адрес: 050050, Казахстан, г. Алматы,"
+msgstr "Address: 050050, Kazakhstan, Almaty city,"
+
+#: templates/about_us_page.html:9
+msgid "Проспект Сейфуллина 404/67, 217 офис, вход В3"
+msgstr "Seifullin Avenue 404/67, 217 office, entrance B3"
+
+#: templates/about_us_page.html:10
+msgid "Номер телефона: +7 747 125 02 99"
+msgstr "Phone number: +7 747 125 02 99"
+
+#: templates/about_us_page.html:11
+msgid "Email: danaedu.kz@gmail.com"
+msgstr "Email: danaedu.kz@gmail.com"
+
+#: templates/cabinet_page.html:8
+msgid "Photo:"
+msgstr "Photo:"
+
+#: templates/cabinet_page.html:22
+msgid "FIO:"
+msgstr "Full Name:"
+
+#: templates/cabinet_page.html:26
+msgid "Average:"
+msgstr "Average Result:"
+
+#: templates/cabinet_page.html:30
+msgid "School:"
+msgstr "School:"
+
+#: templates/cabinet_page.html:34
+msgid "Class:"
+msgstr "Class:"
+
+#: templates/login_page.html:9
+msgid "Sign In"
+msgstr "Sign In"

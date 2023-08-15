@@ -1,3 +1,6 @@
+from django.utils.translation import gettext_lazy as _
+
+
 def getExamTypesChoices() -> list:
     exam_types = ['ENT', 'MODO', 'VOUD']
     return [(exam_type, exam_type) for exam_type in exam_types]
@@ -82,21 +85,24 @@ def getQuestionPoints(question, answers) -> int:
 
 
 def getUserUrls(user) -> []:
-    urls = [{'text': 'My Cabinet', 'url': 'cabinet_url'}]
+    urls = [
+        {'text': _('My Cabinet'), 'url': 'cabinet_url'},
+        {'text': _('About Us'), 'url': 'about_us_url'}
+    ]
     if user.type == 'PU':
-        urls.append({'text': 'Init Exam', 'url': 'exam_init_url'})
-        urls.append({'text': 'Exam Results', 'url': 'exam_results_url'})
+        urls.append({'text': _('Init Exam'), 'url': 'exam_init_url'})
+        urls.append({'text': _('Exam Results'), 'url': 'exam_results_url'})
     if user.type == 'MO':
-        urls.append({'text': 'Get Stats', 'url': 'get_stats_url'})
-        urls.append({'text': 'Add Question', 'url': 'add_questions_init_url'})
-        urls.append({'text': 'Questions Update', 'url': 'questions_update_url'})
-        urls.append({'text': 'Set Exam For Groups', 'url': 'set_exam_for_groups_url'})
-    urls.append({'text': 'Log Out', 'url': 'logout_url'})
+        urls.append({'text': _('Get Stats'), 'url': 'get_stats_url'})
+        urls.append({'text': _('Add Question'), 'url': 'add_questions_init_url'})
+        urls.append({'text': _('Questions Update'), 'url': 'questions_update_url'})
+        urls.append({'text': _('Set Exam For Groups'), 'url': 'set_exam_for_groups_url'})
+    urls.append({'text': _('Log Out'), 'url': 'logout_url'})
     return urls
 
 
 def getBaseUrls() -> []:
-    urls = [{'text': 'Log In', 'url': 'login_url'}]
+    urls = [{'text': _('Log In'), 'url': 'login_url'}]
     return urls
 
 
@@ -104,6 +110,9 @@ def getUserAvg(user):
     from .models import Result
     avg = 0
     results = Result.objects.filter(user=user)
-    for result in results:
-        avg += result.points
-    return round(avg / len(results), 2)
+    if results:
+        for result in results:
+            avg += result.points
+        return round(avg / len(results), 2)
+    else:
+        return 0
