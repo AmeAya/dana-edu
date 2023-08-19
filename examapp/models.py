@@ -127,6 +127,7 @@ class Result(models.Model):
     points = models.PositiveSmallIntegerField(default=0)
     questions = models.ManyToManyField('Question', blank=True)
     answers = models.ManyToManyField('PupilAnswer', blank=True)
+    is_violated = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.surname + ' ' + self.user.name + ' ' + str(self.points)

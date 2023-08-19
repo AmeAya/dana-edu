@@ -2,10 +2,17 @@
 {% load i18n %}
 {% block content %}
     {% for result in results %}
+        {% if result.is_violated %}
         <h2>
-            {{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} {% trans 'points' %}
+            {{ result.starts_at|date:'Y-m-d H:i' }} - <span style="color: red;">{{ result.points }} {% trans 'points' %}</span>
             <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">{% trans 'Check' %}</button>
         </h2>
+        {% else %}
+        <h2>
+            {{ result.starts_at|date:'Y-m-d H:i' }} - <span>{{ result.points }} {% trans 'points' %}</span>
+            <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">{% trans 'Check' %}</button>
+        </h2>
+        {% endif %}
         <hr>
     {% endfor %}
 {% endblock content %}

@@ -15,6 +15,7 @@ urlpatterns = [
     path('exam', examView, name='exam_url'),
     path('exam_init', examInitView, name='exam_init_url'),
     path('end_exam', endExamView, name='end_exam_url'),
+    path('end_exam_violated', endExamViolatedView, name='end_exam_violated_url'),
     path('exam_result/<int:pk>', examResultView, name='exam_result_url'),
     path('exam_results', examResultsView, name='exam_results_url'),
     path('get_area_by_region', GetAreaByRegion.as_view(), name='get_area_by_region_url'),

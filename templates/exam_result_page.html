@@ -4,50 +4,54 @@
     <div align="center" style="font-size: 18px;">
         <h1 align="center" style="margin-top: 5px;">{{ variant }}</h1>
         <h2>{{ starts_at }}</h2>
-        <h2>{{ points }} {% trans 'points' %}</h2>
-        {% for result in results %}
-            <div class="pupil_result" style="cursor: pointer;" onclick="changeHiddenDiv({{ result.subject.id }})">
-                <h2 align="left" style="padding-left: 10px;">{{ result.subject.name }}</h2>
-            </div>
-            <div id="{{ result.subject.id }}" align="left" style="display: none;">
-            {% for question in result.questions %}
-                <hr>
-                <h1>{{ question.question.number }}. {{ question.question.text }} - {{ question.points }}</h1>
-                {% if question.question.image %}
-                    <img src="{{ question.question.image.url }}" style="width: 50vw">
-                {% endif %}
-                <h4>{% trans 'Correct Answers:' %}</h4>
-                <ul class="correct_answers">
-                {% for correct_answer in question.answers %}
-                    <li>
-                        <h4>{{ correct_answer.text }}</h4>
-                        {% if correct_answer.image %}
-                            <img src="{{ correct_answer.image.url }}" style="width: 20vw">
-                        {% endif %}
-                    </li>
+        {% if is_violated %}
+            <h2 style="color: red;">{{ points }} {% trans 'points' %} - {% trans 'Exam rules was Violated!' %}</h2>
+        {% else %}
+            <h2>{{ points }} {% trans 'points' %}</h2>
+            {% for result in results %}
+                <div class="pupil_result" style="cursor: pointer;" onclick="changeHiddenDiv({{ result.subject.id }})">
+                    <h2 align="left" style="padding-left: 10px;">{{ result.subject.name }}</h2>
+                </div>
+                <div id="{{ result.subject.id }}" align="left" style="display: none;">
+                {% for question in result.questions %}
+                    <hr>
+                    <h1>{{ question.question.number }}. {{ question.question.text }} - {{ question.points }}</h1>
+                    {% if question.question.image %}
+                        <img src="{{ question.question.image.url }}" style="width: 50vw">
+                    {% endif %}
+                    <h4>{% trans 'Correct Answers:' %}</h4>
+                    <ul class="correct_answers">
+                    {% for correct_answer in question.answers %}
+                        <li>
+                            <h4>{{ correct_answer.text }}</h4>
+                            {% if correct_answer.image %}
+                                <img src="{{ correct_answer.image.url }}" style="width: 20vw">
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                    </ul>
+                    <h4>{% trans 'Pupil Answers:' %}</h4>
+                    <ul class="pupil_answers">
+                    {% for answer in question.pupil_answers %}
+                        <li>
+                            {% if answer.is_correct %}
+                                <h4 style="color: green">{{ answer.text }}</h4>
+                            {% else %}
+                                <h4 style="color: red">{{ answer.text }}</h4>
+                            {% endif %}
+                            {% if answer.image %}
+                                <img src="{{ answer.image.url }}" style="width: 20vw">
+                            {% endif %}
+                        </li>
+                    {% empty %}
+                        <li><h4>{% trans 'None' %}</h4></li>
+                    {% endfor %}
+                    </ul>
+                    <hr>
                 {% endfor %}
-                </ul>
-                <h4>{% trans 'Pupil Answers:' %}</h4>
-                <ul class="pupil_answers">
-                {% for answer in question.pupil_answers %}
-                    <li>
-                        {% if answer.is_correct %}
-                            <h4 style="color: green">{{ answer.text }}</h4>
-                        {% else %}
-                            <h4 style="color: red">{{ answer.text }}</h4>
-                        {% endif %}
-                        {% if answer.image %}
-                            <img src="{{ answer.image.url }}" style="width: 20vw">
-                        {% endif %}
-                    </li>
-                {% empty %}
-                    <li><h4>{% trans 'None' %}</h4></li>
-                {% endfor %}
-                </ul>
-                <hr>
+                </div>
             {% endfor %}
-            </div>
-        {% endfor %}
+        {% endif %}
     </div>
     <script>
         function changeHiddenDiv(div_id){

@@ -144,6 +144,24 @@ def endExamView(request):
 
 
 @login_required(login_url='login_url')
+def endExamViolatedView(request):
+    current_exam = CurrentExam.objects.get(user=request.user)
+    starts_at = ExamForGroup.objects.filter(group=request.user.group).latest('pk').starts_at
+    result = Result(user=request.user, variant=current_exam.variant, starts_at=starts_at, ends_at=timezone.now())
+    result.points = 0
+    result.is_violated = True
+    result.save()
+
+    current_exam.delete()
+
+    exam_group = ExamForGroup.objects.filter(group=request.user.group).latest('pk')
+    exam_group.ended_users.add(request.user)
+    exam_group.save()
+
+    return redirect('exam_results_url')
+
+
+@login_required(login_url='login_url')
 def examView(request):
     subjects = CurrentExam.objects.filter(user=request.user).latest('pk').subjects
     ends_at = ExamForGroup.objects.filter(group=request.user.group).latest('pk').ends_at
@@ -236,6 +254,7 @@ def examResultView(request, pk):
             if subject['subject'] == question.subject:
                 subject['questions'].append(this_question)
     context = {
+        'is_violated': result.is_violated,
         'results': results,
         'variant': result.variant,
         'points': result.points,

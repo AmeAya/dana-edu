@@ -258,6 +258,13 @@
                 }
             }, 1000);
         }
+
+        window.onblur = function() {
+            var flag = confirm("{% trans 'If you leave browser, you gonna take 0 points!' %}");
+            if (flag) {
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        }
     </script>
 </body>
 </html>

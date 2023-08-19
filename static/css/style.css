@@ -1,5 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+html {
+    user-select: none;
+}
+
+@media print {
+    html, body {
+       display: none;  /* hide whole page */
+    }
+}
+
 .wrapper{
     display: flex;
 }
@@ -252,10 +262,17 @@ h1{
 .language_link{
     text-decoration: none;
     border-radius: 5px;
-    padding: 2px;
+    padding: 5px;
 }
 
 .languages{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    bottom: 0;
+}
+
+.bottom{
     position: absolute;
     bottom: 0;
 }
