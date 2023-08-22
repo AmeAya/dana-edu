@@ -34,11 +34,11 @@ LOCALE_PATHS = [
 SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['dana-edu.kz']
+# DEBUG = False
+# ALLOWED_HOSTS = ['dana-edu.kz']
 
-# DEBUG = True
-# ALLOWED_HOSTS = ['*']
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 

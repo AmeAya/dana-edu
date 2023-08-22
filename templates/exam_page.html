@@ -20,7 +20,9 @@
             </ul>
             <ul style="position: absolute; bottom: 0;">
                 <li>
-                    <a class="nav-link" href="{% url 'end_exam_url' %}" onclick="return confirm('{% trans 'Are you sure?' %}')">{% trans 'End Exam' %}</a>
+                    <div id="end_exam_button">
+                        <a class="nav-link" style="text-align:center;" href="{% url 'end_exam_url' %}" onclick="return confirm('{% trans 'Are you sure?' %}')">{% trans 'End Exam' %}</a>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -239,8 +241,10 @@
         };
 
         window.onload = (event) => {
-            var countDownDate = new Date('{{ ends_at|date:'m j, o H:i:s' }}').getTime();
+            var w = document.getElementById('sidebar').offsetWidth - 20;
+            document.getElementById('end_exam_button').setAttribute("style","width:"+w+"px");
 
+            var countDownDate = new Date('{{ ends_at|date:'m j, o H:i:s' }}').getTime();
 
             var x = setInterval(function() {
                 var now = new Date().getTime();
@@ -257,14 +261,21 @@
                     document.getElementById("demo").innerHTML = "EXPIRED";
                 }
             }, 1000);
-        }
+        };
+
+        document.onvisibilitychange = function() {
+            if (document.visibilityState == 'hidden') {
+                alert("{% trans 'You leave this tab. You take 0 points!' %}");
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        };
 
         window.onblur = function() {
             var flag = confirm("{% trans 'If you leave browser, you gonna take 0 points!' %}");
             if (flag) {
                 window.location.href = "{% url 'end_exam_violated_url' %}";
             }
-        }
+        };
     </script>
 </body>
 </html>
