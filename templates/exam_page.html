@@ -276,6 +276,15 @@
                 window.location.href = "{% url 'end_exam_violated_url' %}";
             }
         };
+
+        window.onbeforeunload = confirmExit;
+        function confirmExit()
+        {
+            var Request = new XMLHttpRequest();
+            var url = "{% url 'end_exam_violated_url' %}";
+            Request.open('get', url, true);
+            Request.send(null);
+        }
     </script>
 </body>
 </html>
