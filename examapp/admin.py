@@ -1,5 +1,6 @@
 from django.contrib.auth.admin import UserAdmin
 from django.contrib import admin
+from parler.admin import TranslatableAdmin
 from .models import *
 from .forms import CustomUserChangeForm, CustomUserCreationForm
 
@@ -42,6 +43,6 @@ admin.site.register(Question)
 admin.site.register(Region)
 admin.site.register(Result)
 admin.site.register(School)
-admin.site.register(Subject)
+admin.site.register(Subject, TranslatableAdmin)
 admin.site.register(SubjectCombination)
 admin.site.register(Variant)

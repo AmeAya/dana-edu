@@ -5,6 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from .managers import CustomUserManager
 from .functions import getNumberChoices, getLiteralChoices, getExamTypesChoices, getUserTypeChoices, getVariantLanguageChoices
 from datetime import timedelta
+from parler.models import TranslatableModel, TranslatedFields
 
 
 class Answer(models.Model):
@@ -144,9 +145,11 @@ class School(models.Model):
         return self.name
 
 
-class Subject(models.Model):
-    name = models.CharField(max_length=100)
-    is_required = models.BooleanField(default=False)
+class Subject(TranslatableModel):
+    translations = TranslatedFields(
+        name=models.CharField(max_length=100),
+        is_required=models.BooleanField(default=False),
+    )
 
     def __str__(self):
         return self.name

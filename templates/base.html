@@ -56,7 +56,12 @@
         window.onload = (event) => {
             var w = document.getElementById('sidebar').offsetWidth;
             document.getElementById('bottom').setAttribute("style","width:"+w+"px");
+
+            for (var a of document.querySelectorAll(".language_link")) {
+                a.href += window.location.href.slice(25);
+            }
         };
+
         document.querySelectorAll(".nav-link").forEach((link) => {
             if (link.href === window.location.href) {
                 link.classList.add("active");

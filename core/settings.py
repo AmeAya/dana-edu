@@ -23,6 +23,18 @@ LANGUAGES = (
     ('en', _('English')),
 )
 
+PARLER_LANGUAGES = {
+    None: (
+        {'code': 'kk', },
+        {'code': 'ru', },
+        {'code': 'en', },
+    ),
+    'default': {
+        'fallbacks': ['en'],
+        'hide_untranslated': False,
+    }
+}
+
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
@@ -53,6 +65,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'examapp',
+    'parler',
 ]
 
 MIDDLEWARE = [
