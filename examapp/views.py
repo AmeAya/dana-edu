@@ -96,18 +96,23 @@ def addQuestionsInitView(request):
 
 
 @login_required(login_url='login_url')
-def createVariantView(request):
+def addVariantView(request):
     if request.user.type != 'MO':
         return redirect('home_url')
     if request.method == 'GET':
         from .functions import getExamTypesChoices
-        choices = []
-        for choice in getExamTypesChoices():
-            choices.append(choice[0])
-        context = {'choices': choices, 'urls': getUserUrls(request.user)}
+        exam_types = []
+        for exam_type in getExamTypesChoices():
+            exam_types.append(exam_type[0])
+        langs = []
+        for lang in getVariantLanguageChoices():
+            langs.append(lang[0])
+        context = {'exam_types': exam_types, 'langs': langs, 'urls': getUserUrls(request.user)}
         return render(request, 'add_variant_page.html', context)
     else:
-        Variant(name=request.POST.get('variant_name'), exam_type=request.POST.get('choice')).save()
+        Variant(name=request.POST.get('variant_name'),
+                exam_type=request.POST.get('exam_type'),
+                language=request.POST.get('language')).save()
         return redirect('add_questions_init_url')
 
 

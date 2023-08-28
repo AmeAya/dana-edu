@@ -5,9 +5,14 @@
         {% csrf_token %}
         <label for="variant_name">{% trans 'Create New Variant' %}</label>
         <input type="text" id="variant_name" name="variant_name">
-        <select name="choice">
-            {% for choice in choices %}
-                <option value="{{ choice }}">{{ choice }}</option>
+        <select name="exam_type">
+            {% for exam_type in exam_types %}
+                <option value="{{ exam_type }}">{{ exam_type }}</option>
+            {% endfor %}
+        </select>
+        <select name="language">
+            {% for lang in langs %}
+                <option value="{{ lang }}">{{ lang }}</option>
             {% endfor %}
         </select>
         <input type="submit" value="Create New">

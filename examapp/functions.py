@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 def getExamTypesChoices() -> list:
-    exam_types = ['ENT', 'MODO']
+    exam_types = ['MODO', 'ENT']
     return [(exam_type, exam_type) for exam_type in exam_types]
 
 
