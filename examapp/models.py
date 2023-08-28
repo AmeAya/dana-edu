@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.core.validators import MinLengthValidator
 from phonenumber_field.modelfields import PhoneNumberField
 from .managers import CustomUserManager
-from .functions import getNumberChoices, getLiteralChoices, getExamTypesChoices, getUserTypeChoices
+from .functions import getNumberChoices, getLiteralChoices, getExamTypesChoices, getUserTypeChoices, getVariantLanguageChoices
 from datetime import timedelta
 
 
@@ -163,6 +163,7 @@ class SubjectCombination(models.Model):
 class Variant(models.Model):
     name = models.CharField(max_length=100)
     exam_type = models.CharField(max_length=10, choices=getExamTypesChoices())
+    language = models.CharField(max_length=3, choices=getVariantLanguageChoices())
 
     def __str__(self):
         return self.name

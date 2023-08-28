@@ -2,7 +2,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 def getExamTypesChoices() -> list:
-    exam_types = ['ENT', 'MODO', 'VOUD']
+    exam_types = ['ENT', 'MODO']
     return [(exam_type, exam_type) for exam_type in exam_types]
 
 
@@ -13,6 +13,11 @@ def getLiteralChoices() -> list:
 
 def getNumberChoices() -> list:
     return [(i, i) for i in range(1, 12)]
+
+
+def getVariantLanguageChoices() -> list:
+    exam_types = ['KAZ', 'RUS']
+    return [(exam_type, exam_type) for exam_type in exam_types]
 
 
 def getUserTypeChoices() -> list:
