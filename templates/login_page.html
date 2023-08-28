@@ -8,4 +8,11 @@
         </form>
         <input form="form" id="login-submit" class="btn" type="submit" value="{% trans 'Sign In' %}">
     </div>
+    <script>
+        var errorlist = document.getElementsByClassName('errorlist');
+        var error = errorlist[0].getElementsByTagName('li')[0];
+        var content = document.getElementById('content');
+        content.innerHTML = '<div id="login_error"><h2>' + error.innerHTML + '</h2></div>' + content.innerHTML;
+        errorlist[0].innerHTML = '';
+    </script>
 {% endblock content %}

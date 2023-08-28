@@ -83,7 +83,7 @@ body{
     font-family: 'Open Sans', sans-serif;
 }
 
-h1{
+h1, h2{
     color: #0ABAB5;
 }
 
@@ -275,4 +275,15 @@ h1{
 .bottom{
     position: absolute;
     bottom: 0;
+}
+
+.errorlist{
+    list-style: none;
+}
+
+#login_error{
+    position: absolute;
+    left: 40%;
+    width: 25%;
+    text-align: center;
 }

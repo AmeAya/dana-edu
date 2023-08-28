@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-16 00:35+0600\n"
+"POT-Creation-Date: 2023-08-28 22:51+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,86 +21,90 @@ msgstr ""
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #: core/settings.py:21
-msgid "English"
-msgstr "Английский"
+msgid "Kazakh"
+msgstr "Казахский"
 
 #: core/settings.py:22
 msgid "Russian"
 msgstr "Русский"
 
 #: core/settings.py:23
-msgid "Kazakh"
-msgstr "Казахский"
+msgid "English"
+msgstr "Английский"
 
-#: examapp/forms.py:11 templates/cabinet_page.html:18
+#: examapp/forms.py:12 templates/cabinet_page.html:18
 msgid "IIN:"
 msgstr "ИИН:"
 
-#: examapp/forms.py:12
+#: examapp/forms.py:13
 msgid "Password:"
 msgstr "Пароль:"
 
-#: examapp/functions.py:89
+#: examapp/forms.py:20
+msgid "Login and/or password is not correct!"
+msgstr "Логин и/или пароль не правильны!"
+
+#: examapp/functions.py:94
 msgid "My Cabinet"
 msgstr "Мой Кабинет"
 
-#: examapp/functions.py:90 templates/about_us_page.html:4
+#: examapp/functions.py:95 templates/about_us_page.html:4
 msgid "About Us"
 msgstr "О Нас"
 
-#: examapp/functions.py:93
+#: examapp/functions.py:98
 msgid "Init Exam"
 msgstr "Экзамен"
 
-#: examapp/functions.py:94
+#: examapp/functions.py:99
 msgid "Exam Results"
 msgstr "Результаты Экзаменов"
 
-#: examapp/functions.py:96
+#: examapp/functions.py:101
 msgid "Get Stats"
 msgstr "Статистика"
 
-#: examapp/functions.py:97
+#: examapp/functions.py:102
 msgid "Add Question"
 msgstr "Добавить Вопросы"
 
-#: examapp/functions.py:98
+#: examapp/functions.py:103
 msgid "Questions Update"
 msgstr "Обновить Вопросы"
 
-#: examapp/functions.py:99
+#: examapp/functions.py:104
 msgid "Set Exam For Groups"
 msgstr "Назначить Группе Экзамен"
 
-#: examapp/functions.py:100
+#: examapp/functions.py:105
 msgid "Log Out"
 msgstr "Выйти"
 
-#: examapp/functions.py:105
+#: examapp/functions.py:110
 msgid "Log In"
 msgstr "Войти"
 
-#: examapp/views.py:166
+#: examapp/views.py:189
 msgid "Your exam already ends at "
 msgstr "Ваш экзамен окончился в "
 
-#: examapp/views.py:172
+#: examapp/views.py:195
 msgid "You already done your exam!"
 msgstr "Вы уже завершили экзамен!"
 
-#: examapp/views.py:178
+#: examapp/views.py:201
 msgid "You don`t have Exams!"
 msgstr "У вас нет активных экзаменов!"
 
-#: examapp/views.py:185 examapp/views.py:194
+#: examapp/views.py:208 examapp/views.py:217
 msgid "Your variant is "
 msgstr "Ваш вариант "
 
-#: examapp/views.py:232
+#: examapp/views.py:255
 msgid "1 point"
 msgstr "1 балл"
 
-#: examapp/views.py:234
+#: examapp/views.py:257
 msgid " points"
 msgstr " балла"
 
@@ -268,46 +272,60 @@ msgstr "Класс:"
 msgid "Start Test"
 msgstr "Начать Экзамен"
 
-#: templates/exam_page.html:23 templates/question_update_page.html:77
+#: templates/exam_page.html:24 templates/question_update_page.html:77
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
-#: templates/exam_page.html:23
+#: templates/exam_page.html:24
 msgid "End Exam"
 msgstr "Завершить Экзамен"
 
-#: templates/exam_page.html:84
+#: templates/exam_page.html:86
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: templates/exam_page.html:163
+#: templates/exam_page.html:165
 msgid "Prev"
 msgstr "Предыдущий"
 
-#: templates/exam_page.html:174
+#: templates/exam_page.html:176
 msgid "Next"
 msgstr "Следующий"
 
-#: templates/exam_result_page.html:7 templates/exam_results_page.html:6
+#: templates/exam_page.html:268
+msgid "You leave this tab. You take 0 points!"
+msgstr "Вы покинули эту вкладку. Вы получаете 0 баллов!"
+
+#: templates/exam_page.html:274
+msgid "If you leave browser, you gonna take 0 points!"
+msgstr "Если вы покинете браузер, вы получите 0 баллов!"
+
+#: templates/exam_result_page.html:8 templates/exam_result_page.html:10
+#: templates/exam_results_page.html:7 templates/exam_results_page.html:12
 #: templates/get_stats_page.html:16
 #, fuzzy
 #| msgid " points"
 msgid "points"
 msgstr " баллов"
 
-#: templates/exam_result_page.html:19
+#: templates/exam_result_page.html:8
+msgid "Exam rules was Violated!"
+msgstr "Правила сдачи экзамена были нарушены!"
+
+#: templates/exam_result_page.html:22
 msgid "Correct Answers:"
 msgstr "Правильные Ответы:"
 
-#: templates/exam_result_page.html:30
+#: templates/exam_result_page.html:33
 msgid "Pupil Answers:"
 msgstr "Ответы Ученика:"
 
-#: templates/exam_result_page.html:44
+#: templates/exam_result_page.html:47
 msgid "None"
 msgstr "Пусто"
 
-#: templates/exam_results_page.html:7 templates/get_stats_page.html:17
+#: templates/exam_results_page.html:8 templates/exam_results_page.html:13
+#: templates/get_stats_page.html:17
 msgid "Check"
 msgstr "Подробней"
 
