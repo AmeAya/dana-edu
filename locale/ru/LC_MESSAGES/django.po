@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-28 22:51+0600\n"
+"POT-Creation-Date: 2023-08-30 00:07+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -40,9 +40,13 @@ msgstr "ИИН:"
 msgid "Password:"
 msgstr "Пароль:"
 
-#: examapp/forms.py:20
+#: examapp/forms.py:17
 msgid "Login and/or password is not correct!"
 msgstr "Логин и/или пароль не правильны!"
+
+#: examapp/forms.py:19
+msgid "This account is inactive."
+msgstr "Аккаунт заблокирован."
 
 #: examapp/functions.py:94
 msgid "My Cabinet"
@@ -373,38 +377,38 @@ msgstr "Выбрать Предмет:"
 msgid "Search Questions"
 msgstr "Поиск Вопросов"
 
-#: templates/set_exam_for_groups_page.html:9
+#: templates/set_exam_for_groups_page.html:8
 msgid "Select Group:"
 msgstr "Выбрать Группу:"
 
-#: templates/set_exam_for_groups_page.html:18
+#: templates/set_exam_for_groups_page.html:17
 msgid "Start Time:"
 msgstr "Время Начала:"
 
-#: templates/set_exam_for_groups_page.html:23
+#: templates/set_exam_for_groups_page.html:22
 msgid "Duration (minutes):"
 msgstr "Длительность (минуты):"
 
-#: templates/set_exam_for_groups_page.html:34
+#: templates/set_exam_for_groups_page.html:35
 msgid "Select Variants:"
 msgstr "Выбрать Варианты:"
 
-#: templates/set_exam_for_groups_page.html:41
+#: templates/set_exam_for_groups_page.html:47
 msgid "Set Exam"
 msgstr "Назначить Экзамен"
 
-#: templates/set_exam_for_groups_page.html:46
+#: templates/set_exam_for_groups_page.html:52
 msgid "Group"
 msgstr "Группа"
 
-#: templates/set_exam_for_groups_page.html:47
+#: templates/set_exam_for_groups_page.html:53
 msgid "Starts at"
 msgstr "Начало в"
 
-#: templates/set_exam_for_groups_page.html:48
+#: templates/set_exam_for_groups_page.html:54
 msgid "Duration"
 msgstr "Длительность"
 
-#: templates/set_exam_for_groups_page.html:49
+#: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Окончание в"

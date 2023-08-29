@@ -12,13 +12,12 @@ class CustomUserLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(), label=_('IIN:'))
     password = forms.CharField(widget=forms.PasswordInput(), label=_('Password:'))
 
-    def clean(self):
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-        user = authenticate(username=username, password=password)
-        if not user or not user.is_active:
-            raise forms.ValidationError(_("Login and/or password is not correct!"))
-        return self.cleaned_data
+    error_messages = {
+        "invalid_login": _(
+            'Login and/or password is not correct!'
+        ),
+        "inactive": _("This account is inactive."),
+    }
 
 
 class CustomUserCreationForm(forms.ModelForm):
