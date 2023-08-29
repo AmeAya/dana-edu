@@ -40,7 +40,7 @@ msgstr "Құпиясөз:"
 
 #: examapp/forms.py:20
 msgid "Login and/or password is not correct!"
-msgstr ""
+msgstr "Логин және/немесе құпиясөз дұрыс емес!"
 
 #: examapp/functions.py:94
 msgid "My Cabinet"
@@ -291,11 +291,11 @@ msgstr "Келесі"
 
 #: templates/exam_page.html:268
 msgid "You leave this tab. You take 0 points!"
-msgstr ""
+msgstr "Сіз осы беттен шықтыңыз. Сіз 0 ұпай алдыңыз!"
 
 #: templates/exam_page.html:274
 msgid "If you leave browser, you gonna take 0 points!"
-msgstr ""
+msgstr "Егер сіз браузерден шықсаңыз, 0 ұпай аласыз!"
 
 #: templates/exam_result_page.html:8 templates/exam_result_page.html:10
 #: templates/exam_results_page.html:7 templates/exam_results_page.html:12
@@ -305,7 +305,7 @@ msgstr "ұпай"
 
 #: templates/exam_result_page.html:8
 msgid "Exam rules was Violated!"
-msgstr ""
+msgstr "Емтихан ережесі бұзылды!"
 
 #: templates/exam_result_page.html:22
 msgid "Correct Answers:"
