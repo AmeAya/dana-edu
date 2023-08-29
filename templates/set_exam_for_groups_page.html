@@ -4,7 +4,6 @@
     <div align="center" style="font-size: 18px;">
         <form id="group-form" class="form" action="{% url 'set_exam_for_groups_url' %}" method="post">
             {% csrf_token %}
-
             <p>
                 <label for="group">{% trans 'Select Group:' %} </label>
                 <select id="group" name="group">
@@ -23,9 +22,11 @@
                 <label for="duration">{% trans 'Duration (minutes):' %} </label>
                 <input type="number" id="duration" name="duration" style="width:30%" required>
             </p>
-
             <div id="hidden-variants" hidden="hidden">
-                {% for variant in variants %}
+                {% for variant in vars_kz %}
+                    <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
+                {% endfor %}
+                {% for variant in vars_ru %}
                     <input type="checkbox" id="{{ variant.id }}" value="{{ variant.id }}" name="variants">
                 {% endfor %}
             </div>
@@ -33,7 +34,12 @@
 
         <h2 style="margin-bottom: 0px;">{% trans 'Select Variants:' %}</h2>
         <div id="variants" align="center">
-            {% for variant in variants %}
+            <h3 style="margin-top: 1px; margin-bottom: 1px;">Kaz:</h3>
+            {% for variant in vars_kz %}
+                <button class="question_button" onclick="selectVariant({{ variant.id }})" style="width: auto; border: 1px solid #0ABAB5; border-radius: 8px;">{{ variant.name }}</button>
+            {% endfor %}
+            <h3 style="margin-top: 1px; margin-bottom: 1px;">Rus:</h3>
+            {% for variant in vars_ru %}
                 <button class="question_button" onclick="selectVariant({{ variant.id }})" style="width: auto; border: 1px solid #0ABAB5; border-radius: 8px;">{{ variant.name }}</button>
             {% endfor %}
         </div>

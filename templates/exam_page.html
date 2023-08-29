@@ -284,7 +284,14 @@
             var url = "{% url 'end_exam_violated_url' %}";
             Request.open('get', url, true);
             Request.send(null);
-        }
+        };
+
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                navigator.clipboard.writeText('');
+                alert('Screenshots disabled!');
+            }
+        });
     </script>
 </body>
 </html>

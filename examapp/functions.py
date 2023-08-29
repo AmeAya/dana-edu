@@ -54,7 +54,7 @@ def getExamSubjects(chosen_subjects_id):
     chosen_subjects = SubjectCombination.objects.get(pk=chosen_subjects_id)
     first_subject = Subject.objects.filter(pk=chosen_subjects.first_subject.pk)
     second_subject = Subject.objects.filter(pk=chosen_subjects.second_subject.pk)
-    return Subject.objects.filter(is_required=True) | first_subject | second_subject
+    return Subject.objects.filter(translations__is_required=True) | first_subject | second_subject
 
 
 def changeUserCurrentExamSubjects(user, chosen_subjects_id):

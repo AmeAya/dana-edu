@@ -461,7 +461,8 @@ def setExamForGroup(request):
         return redirect('home_url')
     if request.method == 'GET':
         context = {'groups': Group.objects.all(),
-                   'variants': Variant.objects.all(),
+                   'vars_ru': Variant.objects.filter(language='RUS'),
+                   'vars_kz': Variant.objects.filter(language='KAZ'),
                    'exam_for_groups': ExamForGroup.objects.all().order_by('-pk'),
                    'urls': getUserUrls(request.user)}
         return render(request, 'set_exam_for_groups_page.html', context)
