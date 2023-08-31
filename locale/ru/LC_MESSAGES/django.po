@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 21:53+0600\n"
+"POT-Creation-Date: 2023-08-31 23:08+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,15 +100,16 @@ msgstr "Вы уже завершили экзамен!"
 msgid "You don`t have Exams!"
 msgstr "У вас нет активных экзаменов!"
 
-#: examapp/views.py:210 examapp/views.py:219
+#: examapp/views.py:211 examapp/views.py:218 examapp/views.py:225
+#: examapp/views.py:234
 msgid "Your variant is "
 msgstr "Ваш вариант "
 
-#: examapp/views.py:257
+#: examapp/views.py:272
 msgid "1 point"
 msgstr "1 балл"
 
-#: examapp/views.py:259
+#: examapp/views.py:274
 msgid " points"
 msgstr " балла"
 
@@ -272,9 +273,52 @@ msgstr "Школа:"
 msgid "Class:"
 msgstr "Класс:"
 
-#: templates/exam_init_page.html:14
+#: templates/exam_init_page.html:16 templates/exam_init_page.html:23
+#: templates/exam_init_page.html:30
 msgid "Start Test"
 msgstr "Начать Экзамен"
+
+#: templates/exam_init_page.html:18
+msgid ""
+"The test will be conducted in three compulsory subjects. The number of test "
+"tasks is 75, of which reading literacy (Kazakh, Russian, English) for each "
+"language is 10, a total of 30 tasks; in mathematical literacy - 13, in "
+"science literacy (physics, chemistry, biology, geography) in each subject - "
+"8, a total of 32 tasks with the choice of one correct answer. The maximum "
+"score is 75. The duration of the test is 150 minutes."
+msgstr "Тест будет проводиться по трем обязательным предметам. Количество тестовых заданий 75, из них по грамотности чтения (казахский язык, русский язык, английский язык) по каждому языку – 10, всего 30 заданий; по математической грамотности – 13, по естественнонаучной грамотности (физика, химия, биология, география) по каждому предмету - 8, всего 32 заданий с выбором одного правильного ответа. Максимальный балл - 75. Время выполнения теста - 150 минут."
+
+#: templates/exam_init_page.html:19 templates/exam_init_page.html:26
+msgid ""
+"The countdown timer starts automatically. After answering all questions, you "
+"should click on the \"finish exam\" button before the end of the allotted "
+"time to save your answers, otherwise, the test will be canceled. Also, you "
+"can not close the tab, switch between tabs, minimize the browser."
+msgstr "Таймер обратного отсчета включается автоматически. Ответив на все вопросы, Вам следует нажать на кнопку 'закончить экзамен' до окончания отведенного времени, чтобы сохранить ваши ответы, в противном случае, тест аннулируется. Также нельзя закрывать вкладку, переключаться между вкладками, сворачивать браузер."
+
+#: templates/exam_init_page.html:20 templates/exam_init_page.html:27
+msgid ""
+"During the exam, it is forbidden to: leave the office, talk, change seats, "
+"change the test version, use mobile phones, calculators and other means."
+msgstr "Во время экзамена запрещается: выходить из кабинета, разговаривать, пересаживаться, изменять вариант теста, пользоваться мобильными телефонами, калькуляторами и иными средствами. "
+
+#: templates/exam_init_page.html:21 templates/exam_init_page.html:28
+msgid "In case of violation of these rules, the test is cancelled."
+msgstr "В случае нарушения этих правил, тест аннулируется."
+
+#: templates/exam_init_page.html:22 templates/exam_init_page.html:29
+msgid ""
+"You need to have a blue pen, a pencil, an eraser, a ruler, a white sheet of "
+"paper with you."
+msgstr "При себе нужно иметь ручку синего цвета, карандаш, стиральную резинку, линейку, белый лист бумаги."
+
+#: templates/exam_init_page.html:25
+msgid ""
+"The test will be conducted in three compulsory subjects. The number of test "
+"tasks is 30, of which 10 for reading literacy, 12 for mathematical literacy, "
+"8 for science literacy with the choice of one correct answer. The maximum "
+"score is 30. The duration of the test is 75 minutes."
+msgstr "Тест будет проводиться по трем обязательным предметам. Количество тестовых заданий 30, из них по грамотности чтения – 10, по математической грамотности – 12, по естественнонаучной грамотности - 8 с выбором одного правильного ответа. Максимальный балл - 30. Время выполнения теста - 75 минут."
 
 #: templates/exam_page.html:24 templates/question_update_page.html:77
 msgid "Are you sure?"
@@ -296,11 +340,11 @@ msgstr "Предыдущий"
 msgid "Next"
 msgstr "Следующий"
 
-#: templates/exam_page.html:268
+#: templates/exam_page.html:272
 msgid "You leave this tab. You take 0 points!"
 msgstr "Вы покинули эту вкладку. Вы получаете 0 баллов!"
 
-#: templates/exam_page.html:274
+#: templates/exam_page.html:278
 msgid "If you leave browser, you gonna take 0 points!"
 msgstr "Если вы покинете браузер, вы получите 0 баллов!"
 
