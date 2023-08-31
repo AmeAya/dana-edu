@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 00:07+0600\n"
+"POT-Creation-Date: 2023-08-31 21:53+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,27 +86,27 @@ msgstr "Шығу"
 msgid "Log In"
 msgstr "Кіру"
 
-#: examapp/views.py:189
+#: examapp/views.py:191
 msgid "Your exam already ends at "
 msgstr "Сіздің емтиханыңыз аяқталды "
 
-#: examapp/views.py:195
+#: examapp/views.py:197
 msgid "You already done your exam!"
 msgstr "Сіз емтихан тапсырып болдыңыз!"
 
-#: examapp/views.py:201
+#: examapp/views.py:203
 msgid "You don`t have Exams!"
 msgstr "Сізде жоспарланған емтихан жоқ!"
 
-#: examapp/views.py:208 examapp/views.py:217
+#: examapp/views.py:210 examapp/views.py:219
 msgid "Your variant is "
 msgstr "Сіздің нұсқаңыз "
 
-#: examapp/views.py:255
+#: examapp/views.py:257
 msgid "1 point"
 msgstr "1 ұпай"
 
-#: examapp/views.py:257
+#: examapp/views.py:259
 msgid " points"
 msgstr " ұпай"
 

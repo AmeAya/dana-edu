@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-30 00:07+0600\n"
+"POT-Creation-Date: 2023-08-31 21:53+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -88,27 +88,27 @@ msgstr "Выйти"
 msgid "Log In"
 msgstr "Войти"
 
-#: examapp/views.py:189
+#: examapp/views.py:191
 msgid "Your exam already ends at "
 msgstr "Ваш экзамен окончился в "
 
-#: examapp/views.py:195
+#: examapp/views.py:197
 msgid "You already done your exam!"
 msgstr "Вы уже завершили экзамен!"
 
-#: examapp/views.py:201
+#: examapp/views.py:203
 msgid "You don`t have Exams!"
 msgstr "У вас нет активных экзаменов!"
 
-#: examapp/views.py:208 examapp/views.py:217
+#: examapp/views.py:210 examapp/views.py:219
 msgid "Your variant is "
 msgstr "Ваш вариант "
 
-#: examapp/views.py:255
+#: examapp/views.py:257
 msgid "1 point"
 msgstr "1 балл"
 
-#: examapp/views.py:257
+#: examapp/views.py:259
 msgid " points"
 msgstr " балла"
 
@@ -307,8 +307,6 @@ msgstr "Если вы покинете браузер, вы получите 0 �
 #: templates/exam_result_page.html:8 templates/exam_result_page.html:10
 #: templates/exam_results_page.html:7 templates/exam_results_page.html:12
 #: templates/get_stats_page.html:16
-#, fuzzy
-#| msgid " points"
 msgid "points"
 msgstr " баллов"
 

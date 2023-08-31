@@ -213,7 +213,11 @@
                         newButton.innerHTML = response['questions'][i].number;
                         newButton.onclick = getQuestion;
 
-                        if(i == 0) {
+                        if (response['questions'].length == 1){
+                            newButton.dataset.prev = null;
+                            newButton.dataset.next = null;
+                        }
+                        else if(i == 0) {
                             newButton.dataset.prev = null;
                             newButton.dataset.next = 'question_' + response['questions'][i + 1].id;
                         }

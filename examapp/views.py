@@ -150,6 +150,8 @@ def endExamView(request):
 
 @login_required(login_url='login_url')
 def endExamViolatedView(request):
+    if len(CurrentExam.objects.filter(user=request.user)) == 0:
+        return redirect('exam_results_url')
     current_exam = CurrentExam.objects.get(user=request.user)
     starts_at = ExamForGroup.objects.filter(group=request.user.group).latest('pk').starts_at
     result = Result(user=request.user, variant=current_exam.variant, starts_at=starts_at, ends_at=timezone.now())
@@ -204,13 +206,28 @@ def examInitView(request):
         return render(request, 'exam_init_page.html', context)
     current_exam = CurrentExam.objects.filter(user=request.user)
     if current_exam:
-        context = {
-            'message': _('Your variant is '),
-            'variant': current_exam.latest('pk').variant,
-            'subjects': SubjectCombination.objects.all(),
-            'urls': getUserUrls(request.user)
-        }
-        return render(request, 'exam_init_page.html', context)
+        if request.user.group.number == 4:
+            context = {
+                'message': _('Your variant is '),
+                'variant': current_exam.latest('pk').variant,
+                'urls': getUserUrls(request.user),
+            }
+            return render(request, 'exam_init_page.html', context)
+        elif request.user.group.number == 9:
+            context = {
+                'message': _('Your variant is '),
+                'variant': current_exam.latest('pk').variant,
+                'urls': getUserUrls(request.user),
+            }
+            return render(request, 'exam_init_page.html', context)
+        else:
+            context = {
+                'message': _('Your variant is '),
+                'variant': current_exam.latest('pk').variant,
+                'subjects': SubjectCombination.objects.all(),
+                'urls': getUserUrls(request.user),
+            }
+            return render(request, 'exam_init_page.html', context)
     current_variant = getRandomVariant(group_exam.variants.all(), request.user)
     CurrentExam(user=request.user, variant=current_variant).save()
     context = {
@@ -501,7 +518,13 @@ class SetPupilAnswers(APIView):
 @login_required(login_url='login_url')
 def subjectSelectView(request):
     if request.method == 'POST':
-        changeUserCurrentExamSubjects(request.user, request.POST.get('subjects'))
+        current_exam = CurrentExam.objects.filter(user=request.user).latest('pk')
+        variant = current_exam.variant
+        subjects = set()
+        for question in Question.objects.filter(variant=variant):
+            subjects.add(question.subject)
+        for subject in subjects:
+            current_exam.subjects.add(subject)
         return redirect('exam_url')
     else:
         return redirect('home_url')
