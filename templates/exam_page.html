@@ -27,7 +27,7 @@
             </ul>
         </div>
 
-        <div id="content" class="content" align="center">
+        <div id="content" class="content" align="left">
 
         </div>
 
@@ -107,6 +107,10 @@
                         header.innerHTML += response['question'].text;
                         content.appendChild(header);
                     }
+                    else {
+                        header.innerHTML += ' ';
+                        content.appendChild(header);
+                    }
 
                     if (response['question'].image !== null) {
                         var img = document.createElement('img');
@@ -126,7 +130,7 @@
                             label.innerHTML += '<br>';
                         }
                         if (answer.image !== null) {
-                            var img = '<img style="width: 10vw" src="' + answer.image + '">';
+                            var img = '<img style="max-height: 10px;" src="' + answer.image + '">';
                             label.innerHTML += img;
                         }
 
@@ -267,33 +271,33 @@
             }, 1000);
         };
 
-<!--        document.onvisibilitychange = function() {-->
-<!--            if (document.visibilityState == 'hidden') {-->
-<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--            }-->
-<!--        };-->
+        document.onvisibilitychange = function() {
+            if (document.visibilityState == 'hidden') {
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        };
 
-<!--        window.onblur = function() {-->
-<!--            window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--        };-->
+        window.onblur = function() {
+            window.location.href = "{% url 'end_exam_violated_url' %}";
+        };
 
-<!--        window.onbeforeunload = confirmExit;-->
-<!--        function confirmExit()-->
-<!--        {-->
-<!--            var Request = new XMLHttpRequest();-->
-<!--            var url = "{% url 'end_exam_violated_url' %}";-->
-<!--            Request.open('get', url, true);-->
-<!--            Request.send(null);-->
-<!--        };-->
+        window.onbeforeunload = confirmExit;
+        function confirmExit()
+        {
+            var Request = new XMLHttpRequest();
+            var url = "{% url 'end_exam_violated_url' %}";
+            Request.open('get', url, true);
+            Request.send(null);
+        };
 
-<!--        document.addEventListener('keyup', (e) => {-->
-<!--            if (e.key == 'PrintScreen') {-->
-<!--                var Request = new XMLHttpRequest();-->
-<!--                var url = "{% url 'end_exam_violated_url' %}";-->
-<!--                Request.open('get', url, true);-->
-<!--                Request.send(null);-->
-<!--            }-->
-<!--        });-->
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                var Request = new XMLHttpRequest();
+                var url = "{% url 'end_exam_violated_url' %}";
+                Request.open('get', url, true);
+                Request.send(null);
+            }
+        });
     </script>
 </body>
 </html>
