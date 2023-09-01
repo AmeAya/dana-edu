@@ -1,11 +1,11 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Answer, Area, Question, School
+from .models import *
 
 
 class AnswerSerializer(ModelSerializer):
     class Meta:
         model = Answer
-        fields = '__all__'
+        fields = ('id', 'text', 'image')
 
 
 class AreaSerializer(ModelSerializer):
@@ -24,3 +24,9 @@ class SchoolSerializer(ModelSerializer):
     class Meta:
         model = School
         fields = '__all__'
+
+
+class PupilAnswerSerializer(ModelSerializer):
+    class Meta:
+        model = PupilAnswer
+        fields = ('answers', 'question')

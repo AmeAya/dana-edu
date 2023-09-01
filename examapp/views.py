@@ -253,8 +253,9 @@ def examResultsView(request):
 def examResultView(request, pk):
     result = Result.objects.get(pk=pk)
     pupil_answers = result.answers.all()
-    if result.user != request.user:
-        return redirect('exam_results_url')
+    if request.user.type != 'MO':
+        if result.user != request.user:
+            return redirect('exam_results_url')
     results = []
     for subject in result.subjects.all():
         results.append({'subject': subject, 'questions': []})
@@ -302,9 +303,12 @@ class GetExamQuestionApiView(APIView):
 
     def get(self, request):
         question = Question.objects.get(pk=request.GET.get('pk'))
+        pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True)
         answers = question.answers.all()
         data = {'question': QuestionSerializer(question).data,
                 'answers': AnswerSerializer(answers, many=True).data}
+        if pupil_answer:
+            data.update({'pupil_answer': PupilAnswerSerializer(pupil_answer[0]).data})
         return Response(data, status=status.HTTP_200_OK)
 
 

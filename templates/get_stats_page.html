@@ -4,22 +4,27 @@
     <div style="font-size: 18px;">
         {% for result_by_group in results_by_groups %}
             {% for group, user_results in result_by_group.items %}
-                <h1 style="margin-top: 5px;">{{ group }}</h1>
-                {% for user_result in user_results %}
-                    {% with user_result|first as first_result %}
-                    <div class="pupil_result">
-                        <h2 align="left" onclick="changeHiddenDiv({{ first_result.user.id }})" style="padding-left: 10px; cursor: pointer; color: white;">{{ first_result.user }}</h2>
-                    </div>
-                    <div id="{{ first_result.user.id }}" style="display: none;">
-                        {% for result in user_result %}
-                            <h3>
-                                {{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} {% trans 'points' %}
-                                <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">{% trans 'Check' %}</button>
-                            </h3>
+                <h1 style="margin-top: 5px; margin-bottom: 0px;">{{ group }}</h1>
+                <button class="btn" onclick="changeHiddenDiv('{{ group }}')">{% trans 'Show/Hide Results' %}</button>
+                    <div id="{{ group }}" style="display: none;">
+                        {% for user_result in user_results %}
+                            {% with user_result|first as first_result %}
+                            <div class="pupil_result">
+                                <h2 align="left" onclick="changeHiddenDiv({{ first_result.user.id }})" style="padding-left: 10px; cursor: pointer; color: white;">{{ first_result.user }}</h2>
+                            </div>
+                            <div id="{{ first_result.user.id }}" style="display: none;">
+                                {% for result in user_result %}
+                                    <h3>
+                                        {{ result.starts_at|date:'Y-m-d H:i' }} - {{ result.points }} {% trans 'points' %}
+                                        <button class="btn" onclick="location.href='{% url 'exam_result_url' result.id %}'">{% trans 'Check' %}</button>
+                                    </h3>
+                                {% endfor %}
+                            </div>
+                            {% endwith %}
+                        {% empty %}
+                            <h3>{% trans 'None' %}</h3>
                         {% endfor %}
                     </div>
-                    {% endwith %}
-                {% endfor %}
                 <hr>
             {% endfor %}
         {% endfor %}
@@ -36,7 +41,7 @@
                 div.style.display = 'block';
             }
             else {
-                div.style.display = 'none'
+                div.style.display = 'none';
             }
         }
     </script>

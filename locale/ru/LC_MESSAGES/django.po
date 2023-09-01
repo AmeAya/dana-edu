@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 11:58+0600\n"
+"POT-Creation-Date: 2023-09-02 01:11+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -105,11 +105,11 @@ msgstr "У вас нет активных экзаменов!"
 msgid "Your variant is "
 msgstr "Ваш вариант "
 
-#: examapp/views.py:273
+#: examapp/views.py:274
 msgid "1 point"
 msgstr "1 балл"
 
-#: examapp/views.py:275
+#: examapp/views.py:276
 msgid " points"
 msgstr " балла"
 
@@ -341,37 +341,29 @@ msgstr ""
 "– 12, по естественнонаучной грамотности - 8 с выбором одного правильного "
 "ответа. Максимальный балл - 30. Время выполнения теста - 75 минут."
 
-#: templates/exam_page.html:24 templates/question_update_page.html:77
-msgid "Are you sure?"
-msgstr "Вы уверены?"
-
-#: templates/exam_page.html:24
+#: templates/exam_page.html:24 templates/exam_page.html:64
 msgid "End Exam"
 msgstr "Завершить Экзамен"
 
-#: templates/exam_page.html:86
+#: templates/exam_page.html:52 templates/question_update_page.html:77
+msgid "Are you sure?"
+msgstr "Вы уверены?"
+
+#: templates/exam_page.html:111
 msgid "Confirm"
 msgstr "Подтвердить"
 
-#: templates/exam_page.html:165
+#: templates/exam_page.html:219
 msgid "Prev"
 msgstr "Предыдущий"
 
-#: templates/exam_page.html:176
+#: templates/exam_page.html:230
 msgid "Next"
 msgstr "Следующий"
 
-#: templates/exam_page.html:272
-msgid "You leave this tab. You take 0 points!"
-msgstr "Вы покинули эту вкладку. Вы получаете 0 баллов!"
-
-#: templates/exam_page.html:278
-msgid "If you leave browser, you gonna take 0 points!"
-msgstr "Если вы покинете браузер, вы получите 0 баллов!"
-
 #: templates/exam_result_page.html:8 templates/exam_result_page.html:10
 #: templates/exam_results_page.html:7 templates/exam_results_page.html:12
-#: templates/get_stats_page.html:16
+#: templates/get_stats_page.html:18
 msgid "points"
 msgstr " баллов"
 
@@ -387,12 +379,12 @@ msgstr "Правильные Ответы:"
 msgid "Pupil Answers:"
 msgstr "Ответы Ученика:"
 
-#: templates/exam_result_page.html:47
+#: templates/exam_result_page.html:47 templates/get_stats_page.html:25
 msgid "None"
 msgstr "Пусто"
 
 #: templates/exam_results_page.html:8 templates/exam_results_page.html:13
-#: templates/get_stats_page.html:17
+#: templates/get_stats_page.html:19
 msgid "Check"
 msgstr "Подробней"
 
@@ -412,7 +404,11 @@ msgstr "Выбрать Школу:"
 msgid "Show Stats"
 msgstr "Показать Статистику"
 
-#: templates/get_stats_page.html:29
+#: templates/get_stats_page.html:8
+msgid "Show/Hide Results"
+msgstr "Показать/Скрыть Результаты"
+
+#: templates/get_stats_page.html:34
 msgid "Download Excel"
 msgstr "Скачать Excel"
 
@@ -479,3 +475,9 @@ msgstr "Длительность"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Окончание в"
+
+#~ msgid "You leave this tab. You take 0 points!"
+#~ msgstr "Вы покинули эту вкладку. Вы получаете 0 баллов!"
+
+#~ msgid "If you leave browser, you gonna take 0 points!"
+#~ msgstr "Если вы покинете браузер, вы получите 0 баллов!"

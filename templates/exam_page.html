@@ -10,7 +10,7 @@
 <body>
     <div class="wrapper">
         <div id="sidebar">
-            <ul>
+            <ul id="subjects">
                 {% for subject in subjects %}
                     <li>
                         <a class="nav-link" id="{{ subject.pk }}" onclick="getQuestions(this.id)">{{ subject.name }}</a>
@@ -21,7 +21,7 @@
             <ul style="position: absolute; bottom: 0;">
                 <li>
                     <div id="end_exam_button">
-                        <a class="nav-link" style="text-align:center;" href="{% url 'end_exam_url' %}" onclick="return confirm('{% trans 'Are you sure?' %}')">{% trans 'End Exam' %}</a>
+                        <a class="nav-link" style="text-align:center;" onclick="endExam()">{% trans 'End Exam' %}</a>
                     </div>
                 </li>
             </ul>
@@ -41,6 +41,31 @@
         </div>
     </div>
     <script>
+        function endExam(){
+            document.getElementById('right_questions_bar').innerHTML = '';
+            var content = document.getElementById('content');
+            content.innerHTML = '';
+
+            var header = document.createElement('h1');
+            header.style.color = 'black';
+            header.align = 'center';
+            header.innerHTML = '{% trans 'Are you sure?' %}';
+            content.appendChild(header);
+
+            var newDiv = document.createElement('div');
+            newDiv.align = 'center';
+
+            var endButton = document.createElement('button');
+            endButton.classList.add('btn');
+            endButton.align = 'center';
+            endButton.onclick = function () {
+                location.href = "{% url 'end_exam_url' %}";
+            };
+            endButton.innerHTML = "{% trans 'End Exam' %}";
+            newDiv.appendChild(endButton);
+            content.appendChild(newDiv);
+        };
+
         function sendAnswer(){
             var radios = document.getElementsByName('exam_answers');
             var selected_answers = [];
@@ -90,18 +115,39 @@
                         sendAnswer();
                         if (button.dataset.next !== 'null'){
                             document.getElementById(button.dataset.next).click();
+                        } else {
+                            var subjects = document.getElementById('subjects').children;
+                            for(var i=0; i<subjects.length; i++) {
+                                if (subjects[i].innerHTML.includes('active') && i != subjects.length - 1){
+                                    var lis = document.getElementsByTagName("li");
+                                    for (var j = 0; j < lis.length; j++) {
+                                        if (lis[j].innerHTML == subjects[i + 1].innerHTML) {
+                                            getQuestions(lis[j].children[0].id);
+                                            break;
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
                         }
                     };
 
                     var response = JSON.parse(Request.responseText);
                     var content = document.getElementById('content');
-
                     content.innerHTML = '';
-                    var header = document.createElement('h1');
+
+                    var number = document.createElement('h2');
+                    number.style.fontFamily = 'Calibri';
+                    number.innerHTML = '№ ' + response['question'].number;
+                    number.align = 'center';
+                    content.appendChild(number);
+
+                    var header = document.createElement('p');
+                    header.style.fontSize = '20px';
                     header.id = 'question';
                     header.key = response['question'].id;
-                    header.innerHTML = response['question'].number + '. ';
-                    header.style.color = '#0ABAB5';
+                    header.style.fontFamily = 'calibri';
+                    header.style.color = 'black';
 
                     if (response['question'].text !== null) {
                         header.innerHTML += response['question'].text;
@@ -123,14 +169,15 @@
                     for (var answer of response['answers']) {
                         var label = document.createElement('label');
                         label.setAttribute('for', answer.id);
+                        label.style.fontFamily = 'Calibri';
+                        label.style.fontSize = '18px';
                         label.innerHTML = '';
                         if (answer.text !== null) {
                             label.classList.add('answers');
                             label.innerHTML += answer.text;
-                            label.innerHTML += '<br>';
                         }
                         if (answer.image !== null) {
-                            var img = '<img style="max-height: 10px;" src="' + answer.image + '">';
+                            var img = '<img style="height: 25px;" src="' + answer.image + '">';
                             label.innerHTML += img;
                         }
 
@@ -141,6 +188,9 @@
                             radio.type = 'checkbox';
                         }
                         radio.id = answer.id;
+                        if(response['pupil_answer'].answers.includes(answer.id)){
+                            radio.checked = true;
+                        }
                         radio.name = 'exam_answers';
                         radio.value = answer.id;
                         radio.addEventListener('change', function() {
@@ -240,6 +290,7 @@
 
                         rightSideBar.appendChild(newButton);
                     }
+                    rightSideBar.firstChild.click();
                 }
             }
 
@@ -271,33 +322,33 @@
             }, 1000);
         };
 
-        document.onvisibilitychange = function() {
-            if (document.visibilityState == 'hidden') {
-                window.location.href = "{% url 'end_exam_violated_url' %}";
-            }
-        };
+<!--        document.onvisibilitychange = function() {-->
+<!--            if (document.visibilityState == 'hidden') {-->
+<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--            }-->
+<!--        };-->
 
-        window.onblur = function() {
-            window.location.href = "{% url 'end_exam_violated_url' %}";
-        };
+<!--        window.onblur = function() {-->
+<!--            window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--        };-->
 
-        window.onbeforeunload = confirmExit;
-        function confirmExit()
-        {
-            var Request = new XMLHttpRequest();
-            var url = "{% url 'end_exam_violated_url' %}";
-            Request.open('get', url, true);
-            Request.send(null);
-        };
+<!--        window.onbeforeunload = confirmExit;-->
+<!--        function confirmExit()-->
+<!--        {-->
+<!--            var Request = new XMLHttpRequest();-->
+<!--            var url = "{% url 'end_exam_violated_url' %}";-->
+<!--            Request.open('get', url, true);-->
+<!--            Request.send(null);-->
+<!--        };-->
 
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'PrintScreen') {
-                var Request = new XMLHttpRequest();
-                var url = "{% url 'end_exam_violated_url' %}";
-                Request.open('get', url, true);
-                Request.send(null);
-            }
-        });
+<!--        document.addEventListener('keyup', (e) => {-->
+<!--            if (e.key == 'PrintScreen') {-->
+<!--                var Request = new XMLHttpRequest();-->
+<!--                var url = "{% url 'end_exam_violated_url' %}";-->
+<!--                Request.open('get', url, true);-->
+<!--                Request.send(null);-->
+<!--            }-->
+<!--        });-->
     </script>
 </body>
 </html>

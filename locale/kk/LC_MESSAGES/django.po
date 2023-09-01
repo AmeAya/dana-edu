@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-01 11:58+0600\n"
+"POT-Creation-Date: 2023-09-02 01:11+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr "Емтихан"
 
 #: examapp/functions.py:99
 msgid "Exam Results"
-msgstr "Емтихан Қорытындысы"
+msgstr "Емтихан Нәтижесі"
 
 #: examapp/functions.py:101
 msgid "Get Stats"
@@ -103,11 +103,11 @@ msgstr "Сізде жоспарланған емтихан жоқ!"
 msgid "Your variant is "
 msgstr "Сіздің нұсқаңыз "
 
-#: examapp/views.py:273
+#: examapp/views.py:274
 msgid "1 point"
 msgstr "1 ұпай"
 
-#: examapp/views.py:275
+#: examapp/views.py:276
 msgid " points"
 msgstr " ұпай"
 
@@ -337,37 +337,29 @@ msgstr ""
 "сауаттылық-8 бір дұрыс жауаптан тұратын тест тапсырмалары бар. Барлық "
 "балл-30. Тестті орындау уақыты-75 минут."
 
-#: templates/exam_page.html:24 templates/question_update_page.html:77
-msgid "Are you sure?"
-msgstr "Сіз Сенімдісіз Бе?"
-
-#: templates/exam_page.html:24
+#: templates/exam_page.html:24 templates/exam_page.html:64
 msgid "End Exam"
 msgstr "Емтиханды Аяқтау"
 
-#: templates/exam_page.html:86
+#: templates/exam_page.html:52 templates/question_update_page.html:77
+msgid "Are you sure?"
+msgstr "Сіз Сенімдісіз Бе?"
+
+#: templates/exam_page.html:111
 msgid "Confirm"
 msgstr "Растау"
 
-#: templates/exam_page.html:165
+#: templates/exam_page.html:219
 msgid "Prev"
 msgstr "Алдыңғы"
 
-#: templates/exam_page.html:176
+#: templates/exam_page.html:230
 msgid "Next"
 msgstr "Келесі"
 
-#: templates/exam_page.html:272
-msgid "You leave this tab. You take 0 points!"
-msgstr "Сіз осы беттен шықтыңыз. Сіз 0 ұпай алдыңыз!"
-
-#: templates/exam_page.html:278
-msgid "If you leave browser, you gonna take 0 points!"
-msgstr "Егер сіз браузерден шықсаңыз, 0 ұпай аласыз!"
-
 #: templates/exam_result_page.html:8 templates/exam_result_page.html:10
 #: templates/exam_results_page.html:7 templates/exam_results_page.html:12
-#: templates/get_stats_page.html:16
+#: templates/get_stats_page.html:18
 msgid "points"
 msgstr "ұпай"
 
@@ -383,12 +375,12 @@ msgstr "Дұрыс Жауаптар:"
 msgid "Pupil Answers:"
 msgstr "Оқушы Жауаптары:"
 
-#: templates/exam_result_page.html:47
+#: templates/exam_result_page.html:47 templates/get_stats_page.html:25
 msgid "None"
 msgstr "Жоқ"
 
 #: templates/exam_results_page.html:8 templates/exam_results_page.html:13
-#: templates/get_stats_page.html:17
+#: templates/get_stats_page.html:19
 msgid "Check"
 msgstr "Қарау"
 
@@ -408,7 +400,11 @@ msgstr "Мектеп Таңдау::"
 msgid "Show Stats"
 msgstr "Статистика Көрсету"
 
-#: templates/get_stats_page.html:29
+#: templates/get_stats_page.html:8
+msgid "Show/Hide Results"
+msgstr "Нәтижелерді Көрсету/Жасыру"
+
+#: templates/get_stats_page.html:34
 msgid "Download Excel"
 msgstr "Excel-ді Жүктеу"
 
@@ -475,3 +471,9 @@ msgstr "Ұзақтығы"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Аяқталады"
+
+#~ msgid "You leave this tab. You take 0 points!"
+#~ msgstr "Сіз осы беттен шықтыңыз. Сіз 0 ұпай алдыңыз!"
+
+#~ msgid "If you leave browser, you gonna take 0 points!"
+#~ msgstr "Егер сіз браузерден шықсаңыз, 0 ұпай аласыз!"
