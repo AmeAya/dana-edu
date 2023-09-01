@@ -14,38 +14,37 @@
             <a href="{% url 'home_url' %}">
                 <img id="sidebar_logo" src="{% static 'images/sidebar-logo.png' %}">
             </a>
-            <ul>
+            <ul style="margin-top: -40px;">
+                <li>
+                    {% get_current_language as CURRENT_LANGUAGE %}
+                    {% get_available_languages as AVAILABLE_LANGUAGES %}
+                    {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
+                    <div id="languages">
+                        {% for language in languages %}
+                            {% if language.code == CURRENT_LANGUAGE %}
+                                <a href="/{{ language.code }}/" class="active language_link">
+                                    {% if language.code == 'kk' %}
+                                        kz
+                                    {% else %}
+                                        {{ language.code }}
+                                    {% endif %}
+                                </a>
+                            {% else %}
+                                <a href="/{{ language.code }}/" class="language_link">
+                                    {% if language.code == 'kk' %}
+                                        kz
+                                    {% else %}
+                                        {{ language.code }}
+                                    {% endif %}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </li>
             {% for url in urls %}
                 <li><a class="nav-link" href="{% url url.url %}">{{ url.text }}</a></li>
             {% endfor %}
             </ul>
-            {% get_current_language as CURRENT_LANGUAGE %}
-            {% get_available_languages as AVAILABLE_LANGUAGES %}
-            {% get_language_info_list for AVAILABLE_LANGUAGES as languages %}
-            <div class="bottom" id="bottom">
-                <div class="languages">
-                    {% for language in languages %}
-                        {% if language.code == CURRENT_LANGUAGE %}
-                            <a href="/{{ language.code }}/" class="active language_link">
-                                {% if language.code == 'kk' %}
-                                    kz
-                                {% else %}
-                                    {{ language.code }}
-                                {% endif %}
-                            </a>
-                        {% else %}
-                            <a href="/{{ language.code }}/" class="language_link">
-                                {% if language.code == 'kk' %}
-                                    kz
-                                {% else %}
-                                    {{ language.code }}
-                                {% endif %}
-                            </a>
-                        {% endif %}
-                        <br>
-                    {% endfor %}
-                </div>
-            </div>
         </div>
         <div id="content" class="content" align="center">
             {% block content %}
@@ -54,9 +53,6 @@
     </div>
     <script>
         window.onload = (event) => {
-            var w = document.getElementById('sidebar').offsetWidth;
-            document.getElementById('bottom').setAttribute("style","width:"+w+"px");
-
             for (var a of document.querySelectorAll(".language_link")) {
                 a.href += window.location.href.slice(22);
             }
