@@ -23,6 +23,11 @@
                 <hr>
             {% endfor %}
         {% endfor %}
+        <form action="{% url 'excel_stats_url' %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="school" value="{{ school.id }}">
+            <input type="submit" class="btn" value="Get Excel">
+        </form>
     </div>
     <script>
         function changeHiddenDiv(div_id){

@@ -3,7 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.utils import timezone, dateformat
 from django.utils.translation import gettext_lazy as _
-# from openpyxl import Workbook  # Для excel!
+from django.http import HttpResponse
+from openpyxl import Workbook
 from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -356,7 +357,8 @@ def getStatsView(request):
             results_by_groups.append({group: results})
         context = {
             'results_by_groups': results_by_groups,
-            'urls': getUserUrls(request.user)
+            'urls': getUserUrls(request.user),
+            'school': school
         }
         return render(request, 'get_stats_page.html', context)
 
@@ -367,6 +369,36 @@ def homeView(request):
     else:
         context = {'urls': getBaseUrls()}
     return render(request, 'home_page.html', context)
+
+
+class ExcelStatsAPIVIew(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        school = School.objects.get(id=request.POST.get('school'))
+        groups = Group.objects.filter(school=school)
+        wb = Workbook()
+        filename = school.name + '_stats.xlsx'
+        for group in groups:
+            ws = wb.create_sheet('new_sheet')
+            ws.title = str(group.number) + group.literal
+            pupils = CustomUser.objects.filter(group=group)
+            for i in range(len(pupils)):
+                student = ' '.join([pupils[i].surname, pupils[i].name, pupils[i].iin])
+                ws.cell(row=i+2, column=1, value=student)
+                results = Result.objects.filter(user=pupils[i])
+                for j in range(len(results)):
+                    temp = ' '.join([results[i].user.surname, results[i].user.name, results[i].user.iin])
+                    ws.cell(row=i+2, column=1, value=temp)
+                    ws.cell(row=1, column=j+2, value=results[i].starts_at)
+                    ws.cell(row=i+2, column=j+2, value=results[i].points)
+        if 'Sheet' in wb.sheetnames:
+            wb.remove(wb['Sheet'])
+        wb.save('excel_stats/' + filename)
+        with open('excel_stats/' + filename, 'rb') as file:
+            response = HttpResponse(file, content_type='text/xlsx')
+            response['Content-Disposition'] = 'attachment; filename=' + filename
+            return response
 
 
 @login_required(login_url='login_url')

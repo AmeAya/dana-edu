@@ -18,6 +18,7 @@ urlpatterns = [
     path('end_exam_violated', endExamViolatedView, name='end_exam_violated_url'),
     path('exam_result/<int:pk>', examResultView, name='exam_result_url'),
     path('exam_results', examResultsView, name='exam_results_url'),
+    path('excel_api', ExcelStatsAPIVIew.as_view(), name='excel_stats_url'),
     path('get_area_by_region', GetAreaByRegion.as_view(), name='get_area_by_region_url'),
     path('get_exam_question', GetExamQuestionApiView.as_view(), name='get_exam_question_url'),
     path('get_questions_by_subject', GetQuestionsBySubjectApiView.as_view(), name='question_by_subject_url'),
