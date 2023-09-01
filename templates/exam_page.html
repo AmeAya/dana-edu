@@ -267,35 +267,33 @@
             }, 1000);
         };
 
-        document.onvisibilitychange = function() {
-            if (document.visibilityState == 'hidden') {
-                alert("{% trans 'You leave this tab. You take 0 points!' %}");
-                window.location.href = "{% url 'end_exam_violated_url' %}";
-            }
-        };
+<!--        document.onvisibilitychange = function() {-->
+<!--            if (document.visibilityState == 'hidden') {-->
+<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--            }-->
+<!--        };-->
 
-        window.onblur = function() {
-            var flag = confirm("{% trans 'If you leave browser, you gonna take 0 points!' %}");
-            if (flag) {
-                window.location.href = "{% url 'end_exam_violated_url' %}";
-            }
-        };
+<!--        window.onblur = function() {-->
+<!--            window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--        };-->
 
-        window.onbeforeunload = confirmExit;
-        function confirmExit()
-        {
-            var Request = new XMLHttpRequest();
-            var url = "{% url 'end_exam_violated_url' %}";
-            Request.open('get', url, true);
-            Request.send(null);
-        };
+<!--        window.onbeforeunload = confirmExit;-->
+<!--        function confirmExit()-->
+<!--        {-->
+<!--            var Request = new XMLHttpRequest();-->
+<!--            var url = "{% url 'end_exam_violated_url' %}";-->
+<!--            Request.open('get', url, true);-->
+<!--            Request.send(null);-->
+<!--        };-->
 
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'PrintScreen') {
-                navigator.clipboard.writeText('');
-                alert('Screenshots disabled!');
-            }
-        });
+<!--        document.addEventListener('keyup', (e) => {-->
+<!--            if (e.key == 'PrintScreen') {-->
+<!--                var Request = new XMLHttpRequest();-->
+<!--                var url = "{% url 'end_exam_violated_url' %}";-->
+<!--                Request.open('get', url, true);-->
+<!--                Request.send(null);-->
+<!--            }-->
+<!--        });-->
     </script>
 </body>
 </html>
