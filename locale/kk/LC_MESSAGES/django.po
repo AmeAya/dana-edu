@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 23:08+0600\n"
+"POT-Creation-Date: 2023-09-01 11:58+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,28 +86,28 @@ msgstr "Шығу"
 msgid "Log In"
 msgstr "Кіру"
 
-#: examapp/views.py:191
+#: examapp/views.py:192
 msgid "Your exam already ends at "
 msgstr "Сіздің емтиханыңыз аяқталды "
 
-#: examapp/views.py:197
+#: examapp/views.py:198
 msgid "You already done your exam!"
 msgstr "Сіз емтихан тапсырып болдыңыз!"
 
-#: examapp/views.py:203
+#: examapp/views.py:204
 msgid "You don`t have Exams!"
 msgstr "Сізде жоспарланған емтихан жоқ!"
 
-#: examapp/views.py:211 examapp/views.py:218 examapp/views.py:225
-#: examapp/views.py:234
+#: examapp/views.py:212 examapp/views.py:219 examapp/views.py:226
+#: examapp/views.py:235
 msgid "Your variant is "
 msgstr "Сіздің нұсқаңыз "
 
-#: examapp/views.py:272
+#: examapp/views.py:273
 msgid "1 point"
 msgstr "1 ұпай"
 
-#: examapp/views.py:274
+#: examapp/views.py:275
 msgid " points"
 msgstr " ұпай"
 
@@ -283,7 +283,13 @@ msgid ""
 "science literacy (physics, chemistry, biology, geography) in each subject - "
 "8, a total of 32 tasks with the choice of one correct answer. The maximum "
 "score is 75. The duration of the test is 150 minutes."
-msgstr "Тест үш негізгі пән бойынша өткізіледі. Тест тапсырмаларының саны 75, оның ішінде оқу сауаттылығы (қазақ тілі, орыс тілі, ағылшын тілі) әр тіл бойынша-10, барлығы 30 тапсырма; математикалық сауаттылық-13, жаратылыстану-ғылыми сауаттылық (физика, химия, биология, география) әр пән бойынша-8, барлығы 32 бір жауапты таңдайтын тапсырмалар. Жоғары балл-75. Тест тапсыру уақыты-150 минут."
+msgstr ""
+"Тест үш негізгі пән бойынша өткізіледі. Тест тапсырмаларының саны 75, оның "
+"ішінде оқу сауаттылығы (қазақ тілі, орыс тілі, ағылшын тілі) әр тіл "
+"бойынша-10, барлығы 30 тапсырма; математикалық сауаттылық-13, жаратылыстану-"
+"ғылыми сауаттылық (физика, химия, биология, география) әр пән бойынша-8, "
+"барлығы 32 бір жауапты таңдайтын тапсырмалар. Жоғары балл-75. Тест тапсыру "
+"уақыты-150 минут."
 
 #: templates/exam_init_page.html:19 templates/exam_init_page.html:26
 msgid ""
@@ -291,13 +297,21 @@ msgid ""
 "should click on the \"finish exam\" button before the end of the allotted "
 "time to save your answers, otherwise, the test will be canceled. Also, you "
 "can not close the tab, switch between tabs, minimize the browser."
-msgstr "Орындау уақытын кері есептеу таймері автоматтандырылған. Берілген уақыт аяқталғанға дейін барлық сұраққа жауап бергеннен кейін жауаптарды сақтау үшін “емтиханды аяқтау” батырмасын басу қажет, баспаған жағдайда тест тапсырмалары жойылады. Сонымен қатар бетті жабуға, беттер арасында ауысуға, браузерді кішірейтуге тыйым салынады. "
+msgstr ""
+"Орындау уақытын кері есептеу таймері автоматтандырылған. Берілген уақыт "
+"аяқталғанға дейін барлық сұраққа жауап бергеннен кейін жауаптарды сақтау "
+"үшін “емтиханды аяқтау” батырмасын басу қажет, баспаған жағдайда тест "
+"тапсырмалары жойылады. Сонымен қатар бетті жабуға, беттер арасында ауысуға, "
+"браузерді кішірейтуге тыйым салынады. "
 
 #: templates/exam_init_page.html:20 templates/exam_init_page.html:27
 msgid ""
 "During the exam, it is forbidden to: leave the office, talk, change seats, "
 "change the test version, use mobile phones, calculators and other means."
-msgstr "Емтихан кезінде тыйым салынады: Емтихан бөлмесінен шығуға, Әңгімелесуге, Орын ауыстыруға, Тест нұсқасын өзгертуге, Ұялы телефон қолдануға, Калькулятор және басқа құрылғыларды қолдануға."
+msgstr ""
+"Емтихан кезінде тыйым салынады: Емтихан бөлмесінен шығуға, Әңгімелесуге, "
+"Орын ауыстыруға, Тест нұсқасын өзгертуге, Ұялы телефон қолдануға, "
+"Калькулятор және басқа құрылғыларды қолдануға."
 
 #: templates/exam_init_page.html:21 templates/exam_init_page.html:28
 msgid "In case of violation of these rules, the test is cancelled."
@@ -307,7 +321,9 @@ msgstr "Осы ережелер бұзылған жағдайда, тест жо
 msgid ""
 "You need to have a blue pen, a pencil, an eraser, a ruler, a white sheet of "
 "paper with you."
-msgstr "Өзіңізбен бірге сия көк қалам, қарындаш, өшіргіш, сызғыш, ақ қағаз болуы қажет."
+msgstr ""
+"Өзіңізбен бірге сия көк қалам, қарындаш, өшіргіш, сызғыш, ақ қағаз болуы "
+"қажет."
 
 #: templates/exam_init_page.html:25
 msgid ""
@@ -315,7 +331,11 @@ msgid ""
 "tasks is 30, of which 10 for reading literacy, 12 for mathematical literacy, "
 "8 for science literacy with the choice of one correct answer. The maximum "
 "score is 30. The duration of the test is 75 minutes."
-msgstr "Тест үш негізгі пән бойынша өткізіледі. Тест тапсырмаларының саны 30,  оның ішінде оқу сауаттылығы-10, математикалық сауаттылық-12, жаратылыстану-ғылыми сауаттылық-8 бір дұрыс жауаптан тұратын тест тапсырмалары бар. Барлық балл-30. Тестті орындау уақыты-75 минут."
+msgstr ""
+"Тест үш негізгі пән бойынша өткізіледі. Тест тапсырмаларының саны 30,  оның "
+"ішінде оқу сауаттылығы-10, математикалық сауаттылық-12, жаратылыстану-ғылыми "
+"сауаттылық-8 бір дұрыс жауаптан тұратын тест тапсырмалары бар. Барлық "
+"балл-30. Тестті орындау уақыты-75 минут."
 
 #: templates/exam_page.html:24 templates/question_update_page.html:77
 msgid "Are you sure?"
@@ -387,6 +407,10 @@ msgstr "Мектеп Таңдау::"
 #: templates/get_stats_init_page.html:33
 msgid "Show Stats"
 msgstr "Статистика Көрсету"
+
+#: templates/get_stats_page.html:29
+msgid "Download Excel"
+msgstr "Excel-ді Жүктеу"
 
 #: templates/home_page.html:4
 msgid "This is Home Page"

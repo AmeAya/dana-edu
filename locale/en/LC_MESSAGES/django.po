@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-31 23:08+0600\n"
+"POT-Creation-Date: 2023-09-01 11:58+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -86,28 +86,28 @@ msgstr "Log Out"
 msgid "Log In"
 msgstr "Log In"
 
-#: examapp/views.py:191
+#: examapp/views.py:192
 msgid "Your exam already ends at "
 msgstr "Your exam already ends at "
 
-#: examapp/views.py:197
+#: examapp/views.py:198
 msgid "You already done your exam!"
 msgstr "You already done your exam!"
 
-#: examapp/views.py:203
+#: examapp/views.py:204
 msgid "You don`t have Exams!"
 msgstr "You don`t have Exams!"
 
-#: examapp/views.py:211 examapp/views.py:218 examapp/views.py:225
-#: examapp/views.py:234
+#: examapp/views.py:212 examapp/views.py:219 examapp/views.py:226
+#: examapp/views.py:235
 msgid "Your variant is "
 msgstr "Your variant "
 
-#: examapp/views.py:272
+#: examapp/views.py:273
 msgid "1 point"
 msgstr "1 point"
 
-#: examapp/views.py:274
+#: examapp/views.py:275
 msgid " points"
 msgstr " points"
 
@@ -387,6 +387,10 @@ msgstr "Select School:"
 #: templates/get_stats_init_page.html:33
 msgid "Show Stats"
 msgstr "Show Stats"
+
+#: templates/get_stats_page.html:29
+msgid "Download Excel"
+msgstr ""
 
 #: templates/home_page.html:4
 msgid "This is Home Page"
