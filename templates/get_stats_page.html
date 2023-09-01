@@ -26,7 +26,7 @@
         <form action="{% url 'excel_stats_url' %}" method="post">
             {% csrf_token %}
             <input type="hidden" name="school" value="{{ school.id }}">
-            <input type="submit" class="btn" value="Get Excel">
+            <input type="submit" class="btn" value="{% trans 'Download Excel' %}">
         </form>
     </div>
     <script>
