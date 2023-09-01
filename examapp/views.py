@@ -388,10 +388,10 @@ class ExcelStatsAPIVIew(APIView):
                 ws.cell(row=i+2, column=1, value=student)
                 results = Result.objects.filter(user=pupils[i])
                 for j in range(len(results)):
-                    temp = ' '.join([results[i].user.surname, results[i].user.name, results[i].user.iin])
+                    temp = ' '.join([results[j].user.surname, results[j].user.name, results[j].user.iin])
                     ws.cell(row=i+2, column=1, value=temp)
-                    ws.cell(row=1, column=j+2, value=results[i].starts_at)
-                    ws.cell(row=i+2, column=j+2, value=results[i].points)
+                    ws.cell(row=1, column=j+2, value=results[j].starts_at)
+                    ws.cell(row=i+2, column=j+2, value=results[j].points)
         if 'Sheet' in wb.sheetnames:
             wb.remove(wb['Sheet'])
         wb.save('excel_stats/' + filename)
