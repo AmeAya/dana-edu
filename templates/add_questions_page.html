@@ -11,7 +11,7 @@
             <input type="hidden" id="answers_count" name="answers_count">
 
             <label for="question_number">{% trans 'Input Number:' %}</label>
-            <input type="number" id="question_number" name="question_number" min="1" max="50" style="width: 2.5%" required>
+            <input type="number" id="question_number" name="question_number" value="{{ question_number }}" min="1" max="50" style="width: 2.5%" required>
             <br>
 
             <label for="question_points">{% trans 'Input Points:' %}</label>
@@ -50,7 +50,7 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" type="submit" value="{% trans 'Create Question' %}" style="font-size: 200%">
+            <input class="btn" id="submit" type="submit" value="{% trans 'Create Question' %}" style="font-size: 200%" disabled>
         </form>
     </div>
     <script>
@@ -119,6 +119,8 @@
 
         function addNewAnswer() {
             var main_div = document.getElementById('answers_div');
+
+            document.getElementById('submit').disabled = false;
 
             var div = document.createElement('div');
             div.style.borderRadius = "10px";

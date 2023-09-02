@@ -188,9 +188,11 @@
                             radio.type = 'checkbox';
                         }
                         radio.id = answer.id;
-                        if(response['pupil_answer'].answers.includes(answer.id)){
-                            radio.checked = true;
-                        }
+                        if (response['pupil_answer'] != null) {
+                            if(response['pupil_answer'].answers.includes(answer.id)){
+                                radio.checked = true;
+                            };
+                        };
                         radio.name = 'exam_answers';
                         radio.value = answer.id;
                         radio.addEventListener('change', function() {
@@ -322,33 +324,33 @@
             }, 1000);
         };
 
-<!--        document.onvisibilitychange = function() {-->
-<!--            if (document.visibilityState == 'hidden') {-->
-<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--            }-->
-<!--        };-->
+        document.onvisibilitychange = function() {
+            if (document.visibilityState == 'hidden') {
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        };
 
-<!--        window.onblur = function() {-->
-<!--            window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--        };-->
+        window.onblur = function() {
+            window.location.href = "{% url 'end_exam_violated_url' %}";
+        };
 
-<!--        window.onbeforeunload = confirmExit;-->
-<!--        function confirmExit()-->
-<!--        {-->
-<!--            var Request = new XMLHttpRequest();-->
-<!--            var url = "{% url 'end_exam_violated_url' %}";-->
-<!--            Request.open('get', url, true);-->
-<!--            Request.send(null);-->
-<!--        };-->
+        window.onbeforeunload = confirmExit;
+        function confirmExit()
+        {
+            var Request = new XMLHttpRequest();
+            var url = "{% url 'end_exam_violated_url' %}";
+            Request.open('get', url, true);
+            Request.send(null);
+        };
 
-<!--        document.addEventListener('keyup', (e) => {-->
-<!--            if (e.key == 'PrintScreen') {-->
-<!--                var Request = new XMLHttpRequest();-->
-<!--                var url = "{% url 'end_exam_violated_url' %}";-->
-<!--                Request.open('get', url, true);-->
-<!--                Request.send(null);-->
-<!--            }-->
-<!--        });-->
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                var Request = new XMLHttpRequest();
+                var url = "{% url 'end_exam_violated_url' %}";
+                Request.open('get', url, true);
+                Request.send(null);
+            }
+        });
     </script>
 </body>
 </html>

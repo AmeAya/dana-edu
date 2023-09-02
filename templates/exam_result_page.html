@@ -10,20 +10,23 @@
             <h2>{{ points }} {% trans 'points' %}</h2>
             {% for result in results %}
                 <div class="pupil_result" style="cursor: pointer;" onclick="changeHiddenDiv({{ result.subject.id }})">
-                    <h2 align="left" style="padding-left: 10px;">{{ result.subject.name }}</h2>
+                    <h2 align="left" style="padding-left: 10px; color: white;">{{ result.subject.name }}</h2>
                 </div>
                 <div id="{{ result.subject.id }}" align="left" style="display: none;">
                 {% for question in result.questions %}
                     <hr>
-                    <h1>{{ question.question.number }}. {{ question.question.text }} - {{ question.points }}</h1>
+                    <h2 style="color: black; display: inline;">{{ question.question.number }}. {{ question.question.text }}</h2>
                     {% if question.question.image %}
                         <img src="{{ question.question.image.url }}" style="width: 50vw">
                     {% endif %}
+                    <h2 style="color: black; display: inline;"> - {{ question.points }}</h2>
                     <h4>{% trans 'Correct Answers:' %}</h4>
                     <ul class="correct_answers">
                     {% for correct_answer in question.answers %}
                         <li>
-                            <h4>{{ correct_answer.text }}</h4>
+                            {% if correct_answer.text %}
+                                <h4>{{ correct_answer.text }}</h4>
+                            {% endif %}
                             {% if correct_answer.image %}
                                 <img src="{{ correct_answer.image.url }}" style="width: 20vw">
                             {% endif %}
@@ -34,10 +37,12 @@
                     <ul class="pupil_answers">
                     {% for answer in question.pupil_answers %}
                         <li>
-                            {% if answer.is_correct %}
-                                <h4 style="color: green">{{ answer.text }}</h4>
-                            {% else %}
-                                <h4 style="color: red">{{ answer.text }}</h4>
+                            {% if answer.text %}
+                                {% if answer.is_correct %}
+                                    <h4 style="color: green">{{ answer.text }}</h4>
+                                {% else %}
+                                    <h4 style="color: red">{{ answer.text }}</h4>
+                                {% endif %}
                             {% endif %}
                             {% if answer.image %}
                                 <img src="{{ answer.image.url }}" style="width: 20vw">
