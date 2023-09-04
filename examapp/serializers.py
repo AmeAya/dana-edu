@@ -19,6 +19,13 @@ class QuestionSerializer(ModelSerializer):
         model = Question
         fields = '__all__'
 
+    def to_representation(self, instance):
+        obj = super().to_representation(instance)
+        print(obj)
+        obj['text'] = obj['text'].replace('\n', '<br>')
+        obj['text'] = obj['text'].replace('\r\x85', '<br>')
+        return obj
+
 
 class SchoolSerializer(ModelSerializer):
     class Meta:

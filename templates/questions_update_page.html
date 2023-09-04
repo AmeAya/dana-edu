@@ -2,8 +2,15 @@
 {% load i18n %}
 {% block content %}
     {% for question in questions %}
+        <style>
+            p{
+                display: inline;
+            }
+        </style>
         <div class="question_update">
-            <h2 style="padding-left: 10px; cursor: pointer;" onclick="location.href='{% url 'question_update_url' question.pk %}'">{{ question.number }}.{{ question.text }}</h2>
+            <h2 style="padding-left: 10px; cursor: pointer; color: white;" onclick="location.href='{% url 'question_update_url' question.pk %}'">
+                {{ question.number }}.{{ question.text|linebreaks }}
+            </h2>
         </div>
     {% endfor %}
 {% endblock content %}

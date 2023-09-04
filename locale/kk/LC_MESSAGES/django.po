@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-02 01:11+0600\n"
+"POT-Creation-Date: 2023-09-05 00:38+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,18 +225,18 @@ msgstr "Жаңа Жауап Қосу"
 msgid "Create Question"
 msgstr "Сұрақ Жасау"
 
-#: templates/add_questions_page.html:72 templates/add_questions_page.html:132
+#: templates/add_questions_page.html:72 templates/add_questions_page.html:134
 #: templates/question_update_page.html:51
 msgid "Answer Text"
 msgstr "Жауап Мәтіні"
 
-#: templates/add_questions_page.html:87 templates/add_questions_page.html:147
+#: templates/add_questions_page.html:87 templates/add_questions_page.html:149
 #: templates/question_update_page.html:56
 #: templates/question_update_page.html:110
 msgid "Answer Image"
 msgstr "Жауап Суреті"
 
-#: templates/add_questions_page.html:100 templates/add_questions_page.html:160
+#: templates/add_questions_page.html:100 templates/add_questions_page.html:162
 #: templates/question_update_page.html:59
 #: templates/question_update_page.html:123
 msgid "is_correct:"
@@ -307,11 +307,12 @@ msgstr ""
 #: templates/exam_init_page.html:20 templates/exam_init_page.html:27
 msgid ""
 "During the exam, it is forbidden to: leave the office, talk, change seats, "
-"change the test version, use mobile phones, calculators and other means."
+"change the test version, use mobile phones, calculators and other means, "
+"take a screenshot."
 msgstr ""
 "Емтихан кезінде тыйым салынады: Емтихан бөлмесінен шығуға, Әңгімелесуге, "
 "Орын ауыстыруға, Тест нұсқасын өзгертуге, Ұялы телефон қолдануға, "
-"Калькулятор және басқа құрылғыларды қолдануға."
+"Калькулятор және басқа құрылғыларды қолдануға, экраны скриншот жасауға."
 
 #: templates/exam_init_page.html:21 templates/exam_init_page.html:28
 msgid "In case of violation of these rules, the test is cancelled."
@@ -337,25 +338,37 @@ msgstr ""
 "сауаттылық-8 бір дұрыс жауаптан тұратын тест тапсырмалары бар. Барлық "
 "балл-30. Тестті орындау уақыты-75 минут."
 
-#: templates/exam_page.html:24 templates/exam_page.html:64
+#: templates/exam_page.html:24 templates/exam_page.html:67
 msgid "End Exam"
 msgstr "Емтиханды Аяқтау"
 
-#: templates/exam_page.html:52 templates/question_update_page.html:77
+#: templates/exam_page.html:54 templates/question_update_page.html:77
 msgid "Are you sure?"
 msgstr "Сіз Сенімдісіз Бе?"
 
-#: templates/exam_page.html:111
+#: templates/exam_page.html:114
 msgid "Confirm"
 msgstr "Растау"
 
-#: templates/exam_page.html:219
+#: templates/exam_page.html:224
 msgid "Prev"
 msgstr "Алдыңғы"
 
-#: templates/exam_page.html:230
+#: templates/exam_page.html:235
 msgid "Next"
 msgstr "Келесі"
+
+#: templates/exam_page.html:321
+msgid "h"
+msgstr "с"
+
+#: templates/exam_page.html:321
+msgid "m"
+msgstr "м"
+
+#: templates/exam_page.html:321
+msgid "s"
+msgstr "с"
 
 #: templates/exam_result_page.html:8 templates/exam_result_page.html:10
 #: templates/exam_results_page.html:7 templates/exam_results_page.html:12
@@ -367,15 +380,15 @@ msgstr "ұпай"
 msgid "Exam rules was Violated!"
 msgstr "Емтихан ережесі бұзылды!"
 
-#: templates/exam_result_page.html:22
+#: templates/exam_result_page.html:23
 msgid "Correct Answers:"
 msgstr "Дұрыс Жауаптар:"
 
-#: templates/exam_result_page.html:33
+#: templates/exam_result_page.html:36
 msgid "Pupil Answers:"
 msgstr "Оқушы Жауаптары:"
 
-#: templates/exam_result_page.html:47 templates/get_stats_page.html:25
+#: templates/exam_result_page.html:52 templates/get_stats_page.html:25
 msgid "None"
 msgstr "Жоқ"
 
@@ -415,6 +428,10 @@ msgstr "Бұл Басты Бет"
 #: templates/login_page.html:9
 msgid "Sign In"
 msgstr "Кіру"
+
+#: templates/question_update_page.html:73
+msgid "Update Question"
+msgstr "Сұрақ Жаңарту"
 
 #: templates/question_update_page.html:77
 msgid "Delete Question"
@@ -471,9 +488,3 @@ msgstr "Ұзақтығы"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Аяқталады"
-
-#~ msgid "You leave this tab. You take 0 points!"
-#~ msgstr "Сіз осы беттен шықтыңыз. Сіз 0 ұпай алдыңыз!"
-
-#~ msgid "If you leave browser, you gonna take 0 points!"
-#~ msgstr "Егер сіз браузерден шықсаңыз, 0 ұпай аласыз!"

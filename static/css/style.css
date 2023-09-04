@@ -284,3 +284,7 @@ h1, h2{
     width: 25%;
     text-align: center;
 }
+
+textarea{
+    white-space: pre;
+}

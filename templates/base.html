@@ -52,6 +52,18 @@
         </div>
     </div>
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            window.addEventListener("keydown", (event) => {
+                if(event.target.tagName == 'TEXTAREA') {
+                    if(event.keyCode == 13) {
+                        event.preventDefault();
+                        event.target.value = event.target.value + "\n";
+                        return false;
+                    }
+                }
+            });
+        });
+
         window.onload = (event) => {
             for (var a of document.querySelectorAll(".language_link")) {
                 a.href += window.location.href.slice(22);

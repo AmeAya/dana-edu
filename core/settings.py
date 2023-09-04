@@ -54,7 +54,6 @@ ALLOWED_HOSTS = ['dana-edu.kz']
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
 
-
 # Application definition
 
 INSTALLED_APPS = [

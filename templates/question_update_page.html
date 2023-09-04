@@ -49,7 +49,7 @@
                     <div style="border-radius: 10px; display: inline-block; min-width: 100%; margin-bottom: 10px; font-size: 18px; background: rgb(220, 220, 220);">
                         <input type="hidden" value="{{ answer.answer.id }}" id="answer_id_{{ answer.number }}" name="answer_id_{{ answer.number }}">
                         <label for="answer_text_{{ answer.number }}">{% trans 'Answer Text' %} {{ answer.number }}: </label>
-                        <textarea rows="1" id="answer_text_{{ answer.number }}" name="answer_text_{{ answer.number }}" style="margin-top: 15px; width: 75%;">
+                        <textarea rows="4" id="answer_text_{{ answer.number }}" name="answer_text_{{ answer.number }}" style="margin-top: 15px; width: 75%;">
                             {{ answer.answer.text }}
                         </textarea>
                         <br>
@@ -70,7 +70,7 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" type="submit" value="Create Question" style="font-size: 200%">
+            <input class="btn" type="submit" value="{% trans 'Update Question' %}" style="font-size: 200%">
         </form>
         <form action="{% url 'question_delete_url' question.pk %}" method="post">
             {% csrf_token %}
@@ -97,7 +97,7 @@
             div.appendChild(label);
 
             var input = document.createElement('textarea');
-            input.rows = 1;
+            input.rows = 4;
             input.style.marginTop = '15px';
             input.id = 'answer_text_' + i;
             input.name = 'answer_text_' + i;

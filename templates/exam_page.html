@@ -41,6 +41,8 @@
         </div>
     </div>
     <script>
+        var isInProcess = true;
+
         function endExam(){
             document.getElementById('right_questions_bar').innerHTML = '';
             var content = document.getElementById('content');
@@ -59,6 +61,7 @@
             endButton.classList.add('btn');
             endButton.align = 'center';
             endButton.onclick = function () {
+                isInProcess = false;
                 location.href = "{% url 'end_exam_url' %}";
             };
             endButton.innerHTML = "{% trans 'End Exam' %}";
@@ -315,7 +318,7 @@
                 var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                document.getElementById("timer").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+                document.getElementById("timer").innerHTML = hours + "{% trans 'h' %} " + minutes + "{% trans 'm' %} " + seconds + "{% trans 's' %} ";
 
                 if (distance < 0) {
                     clearInterval(x);
@@ -324,33 +327,41 @@
             }, 1000);
         };
 
-        document.onvisibilitychange = function() {
-            if (document.visibilityState == 'hidden') {
-                window.location.href = "{% url 'end_exam_violated_url' %}";
-            }
-        };
+<!--        document.onvisibilitychange = function() {-->
+<!--            if (document.visibilityState == 'hidden' && isInProcess == true) {-->
+<!--                isInProcess = false;-->
+<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--            }-->
+<!--        };-->
 
-        window.onblur = function() {
-            window.location.href = "{% url 'end_exam_violated_url' %}";
-        };
+<!--        window.onblur = function() {-->
+<!--            if (isInProcess == true) {-->
+<!--                isInProcess = false;-->
+<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
+<!--            }-->
+<!--        };-->
 
-        window.onbeforeunload = confirmExit;
-        function confirmExit()
-        {
-            var Request = new XMLHttpRequest();
-            var url = "{% url 'end_exam_violated_url' %}";
-            Request.open('get', url, true);
-            Request.send(null);
-        };
+<!--        window.onbeforeunload = confirmExit;-->
+<!--        function confirmExit()-->
+<!--        {-->
+<!--            if (isInProcess == true) {-->
+<!--                isInProcess = false;-->
+<!--                var Request = new XMLHttpRequest();-->
+<!--                var url = "{% url 'end_exam_violated_url' %}";-->
+<!--                Request.open('get', url, true);-->
+<!--                Request.send(null);-->
+<!--            }-->
+<!--        };-->
 
-        document.addEventListener('keyup', (e) => {
-            if (e.key == 'PrintScreen') {
-                var Request = new XMLHttpRequest();
-                var url = "{% url 'end_exam_violated_url' %}";
-                Request.open('get', url, true);
-                Request.send(null);
-            }
-        });
+<!--        document.addEventListener('keyup', (e) => {-->
+<!--            if (e.key == 'PrintScreen') {-->
+<!--                isInProcess = false;-->
+<!--                var Request = new XMLHttpRequest();-->
+<!--                var url = "{% url 'end_exam_violated_url' %}";-->
+<!--                Request.open('get', url, true);-->
+<!--                Request.send(null);-->
+<!--            }-->
+<!--        });-->
     </script>
 </body>
 </html>
