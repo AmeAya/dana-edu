@@ -327,41 +327,41 @@
             }, 1000);
         };
 
-<!--        document.onvisibilitychange = function() {-->
-<!--            if (document.visibilityState == 'hidden' && isInProcess == true) {-->
-<!--                isInProcess = false;-->
-<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--            }-->
-<!--        };-->
+        document.onvisibilitychange = function() {
+            if (document.visibilityState == 'hidden' && isInProcess == true) {
+                isInProcess = false;
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        };
 
-<!--        window.onblur = function() {-->
-<!--            if (isInProcess == true) {-->
-<!--                isInProcess = false;-->
-<!--                window.location.href = "{% url 'end_exam_violated_url' %}";-->
-<!--            }-->
-<!--        };-->
+        window.onblur = function() {
+            if (isInProcess == true) {
+                isInProcess = false;
+                window.location.href = "{% url 'end_exam_violated_url' %}";
+            }
+        };
 
-<!--        window.onbeforeunload = confirmExit;-->
-<!--        function confirmExit()-->
-<!--        {-->
-<!--            if (isInProcess == true) {-->
-<!--                isInProcess = false;-->
-<!--                var Request = new XMLHttpRequest();-->
-<!--                var url = "{% url 'end_exam_violated_url' %}";-->
-<!--                Request.open('get', url, true);-->
-<!--                Request.send(null);-->
-<!--            }-->
-<!--        };-->
+        window.onbeforeunload = confirmExit;
+        function confirmExit()
+        {
+            if (isInProcess == true) {
+                isInProcess = false;
+                var Request = new XMLHttpRequest();
+                var url = "{% url 'end_exam_violated_url' %}";
+                Request.open('get', url, true);
+                Request.send(null);
+            }
+        };
 
-<!--        document.addEventListener('keyup', (e) => {-->
-<!--            if (e.key == 'PrintScreen') {-->
-<!--                isInProcess = false;-->
-<!--                var Request = new XMLHttpRequest();-->
-<!--                var url = "{% url 'end_exam_violated_url' %}";-->
-<!--                Request.open('get', url, true);-->
-<!--                Request.send(null);-->
-<!--            }-->
-<!--        });-->
+        document.addEventListener('keyup', (e) => {
+            if (e.key == 'PrintScreen') {
+                isInProcess = false;
+                var Request = new XMLHttpRequest();
+                var url = "{% url 'end_exam_violated_url' %}";
+                Request.open('get', url, true);
+                Request.send(null);
+            }
+        });
     </script>
 </body>
 </html>
