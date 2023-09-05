@@ -55,9 +55,14 @@
         document.addEventListener("DOMContentLoaded", () => {
             window.addEventListener("keydown", (event) => {
                 if(event.target.tagName == 'TEXTAREA') {
-                    if(event.keyCode == 13) {
+                    if (event.keyCode == 13) {
                         event.preventDefault();
                         event.target.value = event.target.value + "\n";
+                        return false;
+                    }
+                    else if (event.keyCode == 9) {
+                        event.preventDefault();
+                        event.target.value = event.target.value + "\t";
                         return false;
                     }
                 }
@@ -68,6 +73,7 @@
             for (var a of document.querySelectorAll(".language_link")) {
                 a.href += window.location.href.slice(22);
             }
+
         };
 
         document.querySelectorAll(".nav-link").forEach((link) => {

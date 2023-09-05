@@ -21,9 +21,9 @@ class QuestionSerializer(ModelSerializer):
 
     def to_representation(self, instance):
         obj = super().to_representation(instance)
-        print(obj)
         obj['text'] = obj['text'].replace('\n', '<br>')
         obj['text'] = obj['text'].replace('\r\x85', '<br>')
+        obj['text'] = obj['text'].replace('\t', '&nbsp&nbsp&nbsp&nbsp')
         return obj
 
 
