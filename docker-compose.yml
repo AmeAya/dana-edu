@@ -15,8 +15,8 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - /etc/letsencrypt/live/dana-edu.kz/fullchain.pem:/etc/nginx/certs/fullchain.pem
-      - /etc/letsencrypt/live/dana-edu.kz/privkey.pem:/etc/nginx/certs/privkey.pem
+      - .certbot/conf:/etc/letsencrypt
+      - .certbot/www:/var/www/certbot
       - static_volume:/code/staticfiles
       - media_volume:/code/media
     depends_on:
@@ -39,8 +39,8 @@ services:
     image: certbot/certbot
     restart: unless-stopped
     volumes:
-      - /etc/letsencrypt/live/dana-edu.kz/fullchain.pem:/etc/nginx/certs/fullchain.pem
-      - /etc/letsencrypt/live/dana-edu.kz/privkey.pem:/etc/nginx/certs/privkey.pem
+      - ./certbot/conf:/etc/letsencrypt
+      - ./certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 volumes:
   static_volume:
