@@ -27,7 +27,7 @@ services:
     restart: always
     build:
       context: .
-    command: "celery -A core worker -l info; /bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+    command: "celery -A core worker -l info;"
     volumes:
       - .:/code
       - static_volume:/code/staticfiles
