@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-05 00:38+0600\n"
+"POT-Creation-Date: 2023-09-12 22:24+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "Exam Results"
 msgid "Get Stats"
 msgstr "Get Stats"
 
-#: examapp/functions.py:102
+#: examapp/functions.py:102 templates/question_preview_page.html:114
 msgid "Add Question"
 msgstr "Add Question"
 
@@ -86,28 +86,28 @@ msgstr "Log Out"
 msgid "Log In"
 msgstr "Log In"
 
-#: examapp/views.py:192
+#: examapp/views.py:193
 msgid "Your exam already ends at "
 msgstr "Your exam already ends at "
 
-#: examapp/views.py:198
+#: examapp/views.py:199
 msgid "You already done your exam!"
 msgstr "You already done your exam!"
 
-#: examapp/views.py:204
+#: examapp/views.py:205
 msgid "You don`t have Exams!"
 msgstr "You don`t have Exams!"
 
-#: examapp/views.py:212 examapp/views.py:219 examapp/views.py:226
-#: examapp/views.py:235
+#: examapp/views.py:213 examapp/views.py:220 examapp/views.py:227
+#: examapp/views.py:236
 msgid "Your variant is "
 msgstr "Your variant "
 
-#: examapp/views.py:274
+#: examapp/views.py:275
 msgid "1 point"
 msgstr "1 point"
 
-#: examapp/views.py:276
+#: examapp/views.py:277
 msgid " points"
 msgstr " points"
 
@@ -118,8 +118,7 @@ msgid ""
 "and MODO."
 msgstr ""
 "Educational portal \"Dana-Edu.kz\" is an electronic set of tests to prepare "
-"students for the successful completion of the Unified National Testing (UNT) "
-"and MODO."
+"students for the successful completion of the MODO."
 
 #: templates/about_us_page.html:9
 msgid ""
@@ -222,8 +221,10 @@ msgid "Add New Answer"
 msgstr "Add New Answer"
 
 #: templates/add_questions_page.html:53
-msgid "Create Question"
-msgstr "Create Question"
+#, fuzzy
+#| msgid "Prev"
+msgid "Preview"
+msgstr "Prev"
 
 #: templates/add_questions_page.html:72 templates/add_questions_page.html:134
 #: templates/question_update_page.html:51
@@ -326,7 +327,7 @@ msgstr "End Exam"
 msgid "Are you sure?"
 msgstr "Are you sure?"
 
-#: templates/exam_page.html:114
+#: templates/exam_page.html:114 templates/question_preview_page.html:17
 msgid "Confirm"
 msgstr "Confirm"
 
@@ -409,6 +410,7 @@ msgstr "This is Home Page"
 msgid "Sign In"
 msgstr "Sign In"
 
+#: templates/question_preview_page.html:106
 #: templates/question_update_page.html:73
 #, fuzzy
 #| msgid "Create Question"
@@ -470,6 +472,9 @@ msgstr "Duration"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Ends at"
+
+#~ msgid "Create Question"
+#~ msgstr "Create Question"
 
 #~ msgid "You leave this tab. You take 0 points!"
 #~ msgstr "You leave this tab. You take 0 points!"

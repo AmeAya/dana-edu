@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% block content %}
-    <div align="center">
+    <div align="center" id="add_container">
         <h1>{% trans 'Variant:' %} {{ variant.name }}</h1>
         <form action="{% url 'add_questions_url' %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {% csrf_token %}
@@ -50,7 +50,7 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" id="submit" type="submit" value="{% trans 'Create Question' %}" style="font-size: 200%" disabled>
+            <input class="btn" id="submit" type="submit" value="{% trans 'Preview' %}" style="font-size: 200%">
         </form>
     </div>
     <script>

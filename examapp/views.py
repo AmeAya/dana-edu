@@ -74,6 +74,7 @@ def addQuestionsView(request):
             if not is_empty:
                 answer.save()
                 question.answers.add(answer)
+        question.save()
 
         if 'question_number' in request.session.keys():
             request.session['question_number'] += 1
@@ -81,7 +82,7 @@ def addQuestionsView(request):
             request.session['question_number'] = int(request.POST.get('question_number')) + 1
         request.session['selected_subject'] = request.POST.get('subject')
 
-        return redirect('add_questions_url')
+        return redirect('question_preview_url', question_id=question.pk)
 
 
 @login_required(login_url='login_url')
@@ -406,6 +407,17 @@ class ExcelStatsAPIVIew(APIView):
 
 
 @login_required(login_url='login_url')
+def questionPreviewView(request, question_id):
+    if request.user.type != 'MO':
+        return redirect('home_url')
+    context = {
+        'question_id': question_id,
+        'urls': getUserUrls(request.user),
+    }
+    return render(request, 'question_preview_page.html', context)
+
+
+@login_required(login_url='login_url')
 def questionDeleteView(request, question_id):
     if request.user.type != 'MO':
         return redirect('home_url')
@@ -472,7 +484,7 @@ def questionUpdateView(request, question_id):
                 answer.save()
                 question.answers.add(answer)
 
-        return redirect('question_update_url', question_id)
+        return redirect('question_preview_url', question_id)
 
 
 @login_required(login_url='login_url')

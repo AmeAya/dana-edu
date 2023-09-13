@@ -28,6 +28,7 @@ urlpatterns = [
     path('login', LoginView.as_view(template_name='login_page.html', redirect_authenticated_user=True,
                                     authentication_form=CustomUserLoginForm), name='login_url'),
     path('logout', LogoutView.as_view(), name='logout_url'),
+    path('question_preview/<int:question_id>', questionPreviewView, name='question_preview_url'),
     path('question_delete/<int:question_id>', questionDeleteView, name='question_delete_url'),
     path('question_update/<int:question_id>', questionUpdateView, name='question_update_url'),
     path('questions_update', questionsUpdateInitView, name='questions_update_url'),

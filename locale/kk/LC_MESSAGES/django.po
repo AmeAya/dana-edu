@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-05 00:38+0600\n"
+"POT-Creation-Date: 2023-09-12 22:24+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr "Емтихан Нәтижесі"
 msgid "Get Stats"
 msgstr "Статистика"
 
-#: examapp/functions.py:102
+#: examapp/functions.py:102 templates/question_preview_page.html:114
 msgid "Add Question"
 msgstr "Сұрақ Қосу"
 
@@ -86,28 +86,28 @@ msgstr "Шығу"
 msgid "Log In"
 msgstr "Кіру"
 
-#: examapp/views.py:192
+#: examapp/views.py:193
 msgid "Your exam already ends at "
 msgstr "Сіздің емтиханыңыз аяқталды "
 
-#: examapp/views.py:198
+#: examapp/views.py:199
 msgid "You already done your exam!"
 msgstr "Сіз емтихан тапсырып болдыңыз!"
 
-#: examapp/views.py:204
+#: examapp/views.py:205
 msgid "You don`t have Exams!"
 msgstr "Сізде жоспарланған емтихан жоқ!"
 
-#: examapp/views.py:212 examapp/views.py:219 examapp/views.py:226
-#: examapp/views.py:235
+#: examapp/views.py:213 examapp/views.py:220 examapp/views.py:227
+#: examapp/views.py:236
 msgid "Your variant is "
 msgstr "Сіздің нұсқаңыз "
 
-#: examapp/views.py:274
+#: examapp/views.py:275
 msgid "1 point"
 msgstr "1 ұпай"
 
-#: examapp/views.py:276
+#: examapp/views.py:277
 msgid " points"
 msgstr " ұпай"
 
@@ -117,9 +117,8 @@ msgid ""
 "students for the successful completion of the Unified National Testing (UNT) "
 "and MODO."
 msgstr ""
-"Білім беру порталы \"Dana-Edu.kz\" оқушыларды Ұлттық бірыңғай тестілеуді "
-"(ҰБТ) және МОДО-ны сәтті тапсыруға дайындау бойынша электронды тест кешені "
-"болып табылады."
+"Білім беру порталы \"Dana-Edu.kz\" оқушыларды МОДО-ны сәтті тапсыруға "
+"дайындау бойынша электронды тест кешені болып табылады."
 
 #: templates/about_us_page.html:9
 msgid ""
@@ -222,8 +221,10 @@ msgid "Add New Answer"
 msgstr "Жаңа Жауап Қосу"
 
 #: templates/add_questions_page.html:53
-msgid "Create Question"
-msgstr "Сұрақ Жасау"
+#, fuzzy
+#| msgid "Prev"
+msgid "Preview"
+msgstr "Алдыңғы"
 
 #: templates/add_questions_page.html:72 templates/add_questions_page.html:134
 #: templates/question_update_page.html:51
@@ -346,7 +347,7 @@ msgstr "Емтиханды Аяқтау"
 msgid "Are you sure?"
 msgstr "Сіз Сенімдісіз Бе?"
 
-#: templates/exam_page.html:114
+#: templates/exam_page.html:114 templates/question_preview_page.html:17
 msgid "Confirm"
 msgstr "Растау"
 
@@ -429,6 +430,7 @@ msgstr "Бұл Басты Бет"
 msgid "Sign In"
 msgstr "Кіру"
 
+#: templates/question_preview_page.html:106
 #: templates/question_update_page.html:73
 msgid "Update Question"
 msgstr "Сұрақ Жаңарту"
@@ -488,3 +490,6 @@ msgstr "Ұзақтығы"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Аяқталады"
+
+#~ msgid "Create Question"
+#~ msgstr "Сұрақ Жасау"

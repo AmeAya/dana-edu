@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block content %}
+    <div id="content" class="content" align="left">
+
+    </div>
+    <script>
+        window.onload = getQuestion();
+
+        function getQuestion(){
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    var newButton = document.createElement('button');
+                    newButton.id = 'confirm';
+                    newButton.innerHTML = "{% trans 'Confirm' %}";
+                    newButton.classList.add("btn");
+                    newButton.disabled = true;
+
+                    var response = JSON.parse(Request.responseText);
+                    var content = document.getElementById('content');
+                    content.innerHTML = '';
+
+                    var number = document.createElement('h2');
+                    number.style.fontFamily = 'Calibri';
+                    number.innerHTML = '№ ' + response['question'].number;
+                    number.align = 'center';
+                    content.appendChild(number);
+
+                    var header = document.createElement('p');
+                    header.style.fontSize = '20px';
+                    header.id = 'question';
+                    header.key = response['question'].id;
+                    header.style.fontFamily = 'calibri';
+                    header.style.color = 'black';
+
+                    if (response['question'].text !== null) {
+                        header.innerHTML += response['question'].text;
+                        content.appendChild(header);
+                    }
+                    else {
+                        header.innerHTML += ' ';
+                        content.appendChild(header);
+                    }
+
+                    if (response['question'].image !== null) {
+                        var img = document.createElement('img');
+                        img.src = response['question'].image;
+                        img.style.width = '50vw';
+                        content.appendChild(img);
+                        content.appendChild(document.createElement('br'));
+                    }
+
+                    for (var answer of response['answers']) {
+                        var label = document.createElement('label');
+                        label.setAttribute('for', answer.id);
+                        label.style.fontFamily = 'Calibri';
+                        label.style.fontSize = '18px';
+                        label.innerHTML = '';
+                        if (answer.text !== null) {
+                            label.classList.add('answers');
+                            label.innerHTML += answer.text;
+                        }
+                        if (answer.image !== null) {
+                            var img = '<img style="height: 25px;" src="' + answer.image + '">';
+                            label.innerHTML += img;
+                        }
+
+                        var radio = document.createElement('input');
+                        if (response['question'].points == 1) {
+                            radio.type = 'radio';
+                        } else {
+                            radio.type = 'checkbox';
+                        }
+                        radio.id = answer.id;
+                        if (response['pupil_answer'] != null) {
+                            if(response['pupil_answer'].answers.includes(answer.id)){
+                                radio.checked = true;
+                            };
+                        };
+                        radio.name = 'exam_answers';
+                        radio.value = answer.id;
+                        radio.addEventListener('change', function() {
+                            for (var elem of document.getElementsByName('exam_answers')) {
+                                if (elem.checked){
+                                    document.getElementById('confirm').disabled = false;
+                                    break;
+                                }
+                                else {
+                                    document.getElementById('confirm').disabled = true;
+                                }
+                            }
+                        })
+
+                        content.appendChild(radio);
+                        content.appendChild(label);
+                        content.appendChild(document.createElement('br'));
+                    }
+
+                    content.appendChild(document.createElement('br'));
+                    content.appendChild(newButton);
+                    content.appendChild(document.createElement('hr'));
+
+                    var update_button = document.createElement('button');
+                    update_button.innerHTML = "{% trans 'Update Question' %}";
+                    update_button.classList.add('btn');
+                    update_button.onclick = function() {
+                        window.location="{% url 'question_update_url' question_id %}";
+                    }
+                    content.appendChild(update_button);
+
+                    content.appendChild(document.createElement('br'));
+                    content.appendChild(document.createElement('br'));
+
+                    var add_question = document.createElement('button');
+                    add_question.innerHTML = "{% trans 'Add Question' %}";
+                    add_question.classList.add('btn');
+                    add_question.onclick = function() {
+                        window.location="{% url 'add_questions_url' %}";
+                    }
+                    content.appendChild(add_question);
+                }
+            }
+            var url = "{% url 'get_exam_question_url' %}?pk=" + '{{ question_id }}';
+            Request.open('get', url, true);
+            Request.send(null);
+        };
+    </script>
+{% endblock content %}
