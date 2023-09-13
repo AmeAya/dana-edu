@@ -48,10 +48,8 @@ def addQuestionsView(request):
         question_number = int(request.POST.get('question_number'))
         question_points = request.POST.get('question_points')
         subject = Subject.objects.get(pk=request.POST.get('subject'))
-        question = Question(number=question_number, points=question_points, subject=subject, variant=variant)
         question_text = request.POST.get('question_text')
-        if question_text:
-            question.text = question_text.replace("\n", "\x85")
+        question = Question(number=question_number, text=question_text, points=question_points, subject=subject, variant=variant)
         if 'question_image' in request.FILES:
             question_image = request.FILES['question_image']
             question.image = question_image

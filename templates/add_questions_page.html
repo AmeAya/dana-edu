@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load static %}
 {% block content %}
+    <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <div align="center" id="add_container">
         <h1>{% trans 'Variant:' %} {{ variant.name }}</h1>
-        <form action="{% url 'add_questions_url' %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
+        <form action="{% url 'add_questions_url' %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
 
             <input type="hidden" id="variant" name="variant" value="{{ variant.pk }}">
@@ -34,10 +39,14 @@
             </select>
             <br>
 
-            <label for="question_text">{% trans 'Question Text:' %}</label>
+            <label for="question_editor">{% trans 'Question Text:' %}</label>
             <br>
-            <textarea rows="4" id="question_text" name="question_text" style="width: 50%"></textarea>
+            <div data-tiny-editor id="question_editor">
+
+            </div>
             <br>
+
+            <input type="hidden" id="question_text" name="question_text">
 
             <label for="question_image">{% trans 'Question Image:' %}</label>
             <input type="file" id="question_image" name="question_image">
@@ -50,11 +59,20 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" id="submit" type="submit" value="{% trans 'Preview' %}" style="font-size: 200%">
+            <input class="btn" id="submit" type="submit" onclick="addQuestionText()" value="{% trans 'Preview' %}" style="font-size: 200%">
         </form>
     </div>
     <script>
         var i = 1;
+
+        function addText() {
+            document.getElementById('question_text').value = document.getElementById('question_editor').innerHTML;
+            var editors = document.getElementsByClassName('answer_editor');
+            var inputs = document.getElementsByClassName('answer_input');
+            for (var i = 0; i < editors.length; i++) {
+                inputs[i].value = editors[i].innerHTML;
+            }
+        }
 
         window.onload = (event) => {
             document.getElementById('question_number').value = '{{ question_number }}';
@@ -121,6 +139,7 @@
             var main_div = document.getElementById('answers_div');
 
             document.getElementById('submit').disabled = false;
+            var question_editor = document.getElementById('question_editor');
 
             var div = document.createElement('div');
             div.style.borderRadius = "10px";
@@ -129,19 +148,38 @@
             div.style.marginBottom = "10px";
             div.style.fontSize = '18px';
             div.style.background = '#DCDCDC';
+            div.classList.add('answer_div');
 
             var label = document.createElement('label');
             label.innerHTML = "{% trans 'Answer Text' %} " + i + ': ';
-            label.htmlFor = 'answer_text' + i;
+            label.htmlFor = 'answer_text_' + i;
             div.appendChild(label);
 
-            var input = document.createElement('textarea');
-            input.rows = 1;
-            input.style.marginTop = '15px';
-            input.id = 'answer_text_' + i;
+            var editor = document.createElement('div');
+            editor.setAttribute('data-tiny-editor', '');
+            editor.classList.add('answer_editor');
+            editor.id = 'answer_text_' + i;
+            editor.name = 'answer_text_' + i;
+            var input = document.createElement('input');
+            input.type = 'hidden';
             input.name = 'answer_text_' + i;
-            input.style.width = '75%';
+            input.classList.add('answer_input');
             div.appendChild(input);
+            div.appendChild(editor);
+
+            for (var toolbar of document.getElementsByClassName('__toolbar')) {
+                toolbar.remove();
+            };
+
+            for (var bundle of document.getElementsByClassName('bundle')) {
+                bundle.remove();
+            };
+
+            var body = document.getElementsByTagName('body')[0];
+            var script = document.createElement('script');
+            script.classList.add('bundle');
+            script.src = "{% static 'js/bundle.js' %}";
+            body.appendChild(script);
 
             div.appendChild(document.createElement('br'));
 
@@ -176,6 +214,12 @@
 
             i++;
             document.getElementById('answers_count').value = i;
+
+            for (var answer_div of document.getElementsByClassName('answer_div')) {
+                for (var toolbar of answer_div.getElementsByClassName('__toolbar')) {
+                    toolbar.remove();
+                }
+            }
         }
     </script>
 {% endblock content %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-12 22:24+0600\n"
+"POT-Creation-Date: 2023-09-13 19:41+0600\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,7 +68,7 @@ msgstr "Результаты Экзаменов"
 msgid "Get Stats"
 msgstr "Статистика"
 
-#: examapp/functions.py:102 templates/question_preview_page.html:114
+#: examapp/functions.py:102
 msgid "Add Question"
 msgstr "Добавить Вопросы"
 
@@ -88,28 +88,28 @@ msgstr "Выйти"
 msgid "Log In"
 msgstr "Войти"
 
-#: examapp/views.py:193
+#: examapp/views.py:191
 msgid "Your exam already ends at "
 msgstr "Ваш экзамен окончился в "
 
-#: examapp/views.py:199
+#: examapp/views.py:197
 msgid "You already done your exam!"
 msgstr "Вы уже завершили экзамен!"
 
-#: examapp/views.py:205
+#: examapp/views.py:203
 msgid "You don`t have Exams!"
 msgstr "У вас нет активных экзаменов!"
 
-#: examapp/views.py:213 examapp/views.py:220 examapp/views.py:227
-#: examapp/views.py:236
+#: examapp/views.py:211 examapp/views.py:218 examapp/views.py:225
+#: examapp/views.py:234
 msgid "Your variant is "
 msgstr "Ваш вариант "
 
-#: examapp/views.py:275
+#: examapp/views.py:273
 msgid "1 point"
 msgstr "1 балл"
 
-#: examapp/views.py:277
+#: examapp/views.py:275
 msgid " points"
 msgstr " балла"
 
@@ -195,54 +195,54 @@ msgstr "Выбрать Вариант"
 msgid "Create New"
 msgstr "Создать Новый"
 
-#: templates/add_questions_page.html:5
+#: templates/add_questions_page.html:10
 msgid "Variant:"
 msgstr "Вариант:"
 
-#: templates/add_questions_page.html:13 templates/question_update_page.html:10
+#: templates/add_questions_page.html:18 templates/question_update_page.html:16
 msgid "Input Number:"
 msgstr "Введите Номер:"
 
-#: templates/add_questions_page.html:17 templates/question_update_page.html:14
+#: templates/add_questions_page.html:22 templates/question_update_page.html:20
 msgid "Input Points:"
 msgstr "Кол-во Баллов:"
 
-#: templates/add_questions_page.html:25 templates/question_update_page.html:26
+#: templates/add_questions_page.html:30 templates/question_update_page.html:32
 msgid "Select Subjects:"
 msgstr "Выбрать Предмет:"
 
-#: templates/add_questions_page.html:37 templates/question_update_page.html:38
+#: templates/add_questions_page.html:42 templates/question_update_page.html:44
 msgid "Question Text:"
 msgstr "Текст Вопроса:"
 
-#: templates/add_questions_page.html:42 templates/question_update_page.html:43
+#: templates/add_questions_page.html:51 templates/question_update_page.html:54
 msgid "Question Image:"
 msgstr "Изображние Вопроса:"
 
-#: templates/add_questions_page.html:50 templates/question_update_page.html:70
+#: templates/add_questions_page.html:59 templates/question_update_page.html:82
 msgid "Add New Answer"
 msgstr "Добавить Новый Ответ"
 
-#: templates/add_questions_page.html:53
+#: templates/add_questions_page.html:62
 #, fuzzy
 #| msgid "Prev"
 msgid "Preview"
 msgstr "Предыдущий"
 
-#: templates/add_questions_page.html:72 templates/add_questions_page.html:134
-#: templates/question_update_page.html:51
+#: templates/add_questions_page.html:90 templates/add_questions_page.html:154
+#: templates/question_update_page.html:62
 msgid "Answer Text"
 msgstr "Текст Ответа"
 
-#: templates/add_questions_page.html:87 templates/add_questions_page.html:149
-#: templates/question_update_page.html:56
-#: templates/question_update_page.html:110
+#: templates/add_questions_page.html:105 templates/add_questions_page.html:187
+#: templates/question_update_page.html:68
+#: templates/question_update_page.html:150
 msgid "Answer Image"
 msgstr "Изображение Ответа"
 
-#: templates/add_questions_page.html:100 templates/add_questions_page.html:162
-#: templates/question_update_page.html:59
-#: templates/question_update_page.html:123
+#: templates/add_questions_page.html:118 templates/add_questions_page.html:200
+#: templates/question_update_page.html:71
+#: templates/question_update_page.html:163
 msgid "is_correct:"
 msgstr "Ответ верный:"
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "End Exam"
 msgstr "Завершить Экзамен"
 
-#: templates/exam_page.html:54 templates/question_update_page.html:77
+#: templates/exam_page.html:54 templates/question_update_page.html:89
 msgid "Are you sure?"
 msgstr "Вы уверены?"
 
@@ -435,15 +435,26 @@ msgid "Sign In"
 msgstr "Войти"
 
 #: templates/question_preview_page.html:106
-#: templates/question_update_page.html:73
+msgid "Change Question"
+msgstr "Изменить Вопрос"
+
+#: templates/question_preview_page.html:117
+msgid "Save Question"
+msgstr "Сохранить Вопрос"
+
+#: templates/question_preview_page.html:128
+msgid "Remove Question"
+msgstr "Удалить Вопрос"
+
+#: templates/question_update_page.html:85
 msgid "Update Question"
 msgstr "Обновить Вопрос"
 
-#: templates/question_update_page.html:77
+#: templates/question_update_page.html:89
 msgid "Delete Question"
 msgstr "Удалить Вопросы"
 
-#: templates/question_update_page.html:96
+#: templates/question_update_page.html:118
 msgid "answer_text"
 msgstr "Текст Ответа"
 
@@ -494,6 +505,3 @@ msgstr "Длительность"
 #: templates/set_exam_for_groups_page.html:55
 msgid "Ends at"
 msgstr "Окончание в"
-
-#~ msgid "Create Question"
-#~ msgstr "Создать Вопрос"

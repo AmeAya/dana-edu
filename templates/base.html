@@ -51,24 +51,8 @@
             {% endblock content %}
         </div>
     </div>
+    <script src="{% static 'js/bundle.js' %}" class="bundle"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            window.addEventListener("keydown", (event) => {
-                if(event.target.tagName == 'TEXTAREA') {
-                    if (event.keyCode == 13) {
-                        event.preventDefault();
-                        event.target.value = event.target.value + "\n";
-                        return false;
-                    }
-                    else if (event.keyCode == 9) {
-                        event.preventDefault();
-                        event.target.value = event.target.value + "\t";
-                        return false;
-                    }
-                }
-            });
-        });
-
         window.onload = (event) => {
             for (var a of document.querySelectorAll(".language_link")) {
                 a.href += window.location.href.slice(22);

@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 {% load i18n %}
 {% block content %}
+    {% autoescape off %}
+    <link rel="stylesheet"
+        href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU"
+        crossorigin="anonymous">
     <div align="center">
         <form action="{% url 'question_update_url' question.pk %}" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';">
             {% csrf_token %}
@@ -35,9 +41,14 @@
             </select>
             <br>
 
-            <label for="question_text">{% trans 'Question Text:' %}</label>
+            <label for="question_editor">{% trans 'Question Text:' %}</label>
             <br>
-            <textarea rows="4" id="question_text" name="question_text" style="width: 50%">{{ question.text }}</textarea>
+            <div data-tiny-editor id="question_editor">
+                <p>
+                    {{ question.text }}
+                </p>
+            </div>
+            <input type="hidden" id="question_text" name="question_text">
             <br>
 
             <label for="question_image">{% trans 'Question Image:' %}</label>
@@ -46,12 +57,13 @@
             <hr>
             <div id="answers_div">
                 {% for answer in answers %}
-                    <div style="border-radius: 10px; display: inline-block; min-width: 100%; margin-bottom: 10px; font-size: 18px; background: rgb(220, 220, 220);">
+                    <div class="answer_div" style="border-radius: 10px; display: inline-block; min-width: 100%; margin-bottom: 10px; font-size: 18px; background: rgb(220, 220, 220);">
                         <input type="hidden" value="{{ answer.answer.id }}" id="answer_id_{{ answer.number }}" name="answer_id_{{ answer.number }}">
                         <label for="answer_text_{{ answer.number }}">{% trans 'Answer Text' %} {{ answer.number }}: </label>
-                        <textarea rows="4" id="answer_text_{{ answer.number }}" name="answer_text_{{ answer.number }}" style="margin-top: 15px; width: 75%;">
+                        <div data-tiny-editor id="answer_editor_{{ answer.number }}" class="answer_editor">
                             {{ answer.answer.text }}
-                        </textarea>
+                        </div>
+                        <input type="hidden" class="answer_input" id="answer_text_{{ answer.number }}" name="answer_text_{{ answer.number }}">
                         <br>
                         <label for="answer_image_{{ answer.number }}">{% trans 'Answer Image' %} {{ answer.number }}: </label>
                         <input type="file" id="answer_image_{{ answer.number }}" name="answer_image_{{ answer.number }}">
@@ -70,7 +82,7 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" type="submit" value="{% trans 'Update Question' %}" style="font-size: 200%">
+            <input class="btn" type="submit" onclick="addText()" value="{% trans 'Update Question' %}" style="font-size: 200%">
         </form>
         <form action="{% url 'question_delete_url' question.pk %}" method="post">
             {% csrf_token %}
@@ -79,6 +91,15 @@
     </div>
     <script>
         var i = {{ answer_count }};
+
+        function addText() {
+            document.getElementById('question_text').value = document.getElementById('question_editor').innerHTML;
+            var editors = document.getElementsByClassName('answer_editor');
+            var inputs = document.getElementsByClassName('answer_input');
+            for (var i = 0; i < editors.length; i++) {
+                inputs[i].value = editors[i].innerHTML;
+            }
+        }
 
         function addNewAnswer() {
             var main_div = document.getElementById('answers_div');
@@ -90,19 +111,38 @@
             div.style.marginBottom = "10px";
             div.style.fontSize = '18px';
             div.style.background = '#DCDCDC';
+            div.classList.add('answer_div');
 
             var label = document.createElement('label');
             label.innerHTML = 'Answer Text ' + i + ': ';
             label.htmlFor = "{% trans 'answer_text' %}" + i;
             div.appendChild(label);
 
-            var input = document.createElement('textarea');
-            input.rows = 4;
-            input.style.marginTop = '15px';
-            input.id = 'answer_text_' + i;
+            var editor = document.createElement('div');
+            editor.setAttribute('data-tiny-editor', '');
+            editor.classList.add('answer_editor');
+            editor.id = 'answer_text_' + i;
+            editor.name = 'answer_text_' + i;
+            var input = document.createElement('input');
+            input.type = 'hidden';
             input.name = 'answer_text_' + i;
-            input.style.width = '75%';
+            input.classList.add('answer_input');
             div.appendChild(input);
+            div.appendChild(editor);
+
+            for (var toolbar of document.getElementsByClassName('__toolbar')) {
+                toolbar.remove();
+            };
+
+            for (var bundle of document.getElementsByClassName('bundle')) {
+                bundle.remove();
+            };
+
+            var body = document.getElementsByTagName('body')[0];
+            var script = document.createElement('script');
+            script.classList.add('bundle');
+            script.src = "{% static 'js/bundle.js' %}";
+            body.appendChild(script);
 
             div.appendChild(document.createElement('br'));
 
@@ -137,6 +177,13 @@
 
             i++;
             document.getElementById('answers_count').value = i;
+
+            for (var answer_div of document.getElementsByClassName('answer_div')) {
+                for (var toolbar of answer_div.getElementsByClassName('__toolbar')) {
+                    toolbar.remove();
+                }
+            }
         }
     </script>
+    {% endautoescape %}
 {% endblock content %}

@@ -13,4 +13,4 @@ COPY . .
 RUN python manage.py collectstatic --noinput
 
 RUN chmod +x init-letsencrypt.sh
-RUN ./init-letsencrypt.sh
+RUN ./init-letsencrypt.sh .
