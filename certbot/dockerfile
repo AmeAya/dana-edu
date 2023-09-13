@@ -1,0 +1,2 @@
+RUN chmod +x init-letsencrypt.sh
+RUN ./init-letsencrypt.sh .
