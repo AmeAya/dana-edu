@@ -13,10 +13,10 @@ services:
     build: ./nginx
     ports:
       - 80:80
-      - 443:443
+#      - 443:443
     volumes:
-      - .certbot/conf:/etc/letsencrypt
-      - .certbot/www:/var/www/certbot
+#      - .certbot/conf:/etc/letsencrypt
+#      - .certbot/www:/var/www/certbot
       - static_volume:/code/staticfiles
       - media_volume:/code/media
     depends_on:
