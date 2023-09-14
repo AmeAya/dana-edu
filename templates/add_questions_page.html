@@ -59,7 +59,7 @@
             <button class="btn" type="button" onclick="addNewAnswer()">{% trans 'Add New Answer' %}</button>
             <br>
             <hr>
-            <input class="btn" id="submit" type="submit" onclick="addQuestionText()" value="{% trans 'Preview' %}" style="font-size: 200%">
+            <input class="btn" id="submit" type="submit" onclick="addText()" value="{% trans 'Preview' %}" style="font-size: 200%">
         </form>
     </div>
     <script>
@@ -67,7 +67,7 @@
 
         function addText() {
             document.getElementById('question_text').value = document.getElementById('question_editor').innerHTML;
-            var editors = document.getElementsByClassName('answer_editor');
+            var editors = document.querySelectorAll('[id*="answer_text"]');
             var inputs = document.getElementsByClassName('answer_input');
             for (var i = 0; i < editors.length; i++) {
                 inputs[i].value = editors[i].innerHTML;

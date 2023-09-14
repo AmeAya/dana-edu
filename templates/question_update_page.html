@@ -94,7 +94,7 @@
 
         function addText() {
             document.getElementById('question_text').value = document.getElementById('question_editor').innerHTML;
-            var editors = document.getElementsByClassName('answer_editor');
+            var editors = document.querySelectorAll('[id*="answer_text"]');
             var inputs = document.getElementsByClassName('answer_input');
             for (var i = 0; i < editors.length; i++) {
                 inputs[i].value = editors[i].innerHTML;

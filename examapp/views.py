@@ -62,6 +62,7 @@ def addQuestionsView(request):
                 is_correct = True
             answer = Answer(is_correct=is_correct)
             answer_text = request.POST.get('answer_text_' + str(i))
+            print(answer_text)
             if 'answer_image_' + str(i) in request.FILES:
                 answer_image = request.FILES['answer_image_' + str(i)]
                 answer.image = answer_image
@@ -419,14 +420,13 @@ def questionPreviewView(request, question_id):
 def questionDeleteView(request, question_id):
     if request.user.type != 'MO':
         return redirect('home_url')
-    if request.method == 'POST':
-        question = Question.objects.get(id=question_id)
-        request.session['deleted'] = {
-            'variant': question.variant.pk,
-            'subject': question.subject.pk
-        }
-        question.delete()
-        return redirect('questions_update_url')
+    question = Question.objects.get(id=question_id)
+    request.session['deleted'] = {
+        'variant': question.variant.pk,
+        'subject': question.subject.pk
+    }
+    question.delete()
+    return redirect('questions_update_url')
 
 
 @login_required(login_url='login_url')
