@@ -61,8 +61,10 @@
                         if (answer.text !== null) {
                             label.classList.add('answers');
                             label.innerHTML += answer.text;
-                            var answer_text = label.getElementsByTagName('p')[0].innerHTML;
-                            label.innerHTML = answer_text;
+                            if (label.getElementsByTagName('p').length > 0) {
+                                var answer_text = label.getElementsByTagName('p')[0].innerHTML;
+                                label.innerHTML = answer_text;
+                            }
                         }
                         if (answer.image !== null) {
                             var img = '<img style="height: 25px;" src="' + answer.image + '">';

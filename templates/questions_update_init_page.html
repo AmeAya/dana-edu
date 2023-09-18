@@ -43,7 +43,7 @@
                         for (var variant of response['variants']) {
                             var option = document.createElement('option');
                             option.style.fontSize = '20px';
-                            option.value = variant.pk;
+                            option.value = variant.id;
                             option.innerHTML = variant.name;
                             select.appendChild(option);
                         }
