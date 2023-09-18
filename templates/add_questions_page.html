@@ -41,7 +41,7 @@
 
             <label for="question_editor">{% trans 'Question Text:' %}</label>
             <br>
-            <div data-tiny-editor id="question_editor">
+            <div data-tiny-editor id="question_editor" style="width:100%;">
 
             </div>
             <br>
@@ -76,62 +76,6 @@
 
         window.onload = (event) => {
             document.getElementById('question_number').value = '{{ question_number }}';
-            var main_div = document.getElementById('answers_div');
-            for (i = 1; i < 6; i++) {
-                var div = document.createElement('div');
-
-                div.style.borderRadius = "10px";
-                div.style.display = "inline-block";
-                div.style.minWidth = "100%";
-                div.style.marginBottom = "10px";
-                div.style.fontSize = '18px';
-
-                var label = document.createElement('label');
-                label.innerHTML = "{% trans 'Answer Text' %} " + i + ': ';
-                label.htmlFor = 'answer_text_' + i;
-                div.appendChild(label);
-
-                var input = document.createElement('textarea');
-                input.rows = 4;
-                input.style.marginTop = '15px';
-                input.id = 'answer_text_' + i;
-                input.name = 'answer_text_' + i;
-                input.style.width = '75%';
-                div.appendChild(input);
-
-                div.appendChild(document.createElement('br'));
-
-                var label = document.createElement('label');
-                label.innerHTML = "{% trans 'Answer Image' %} " + i + ': ';
-                label.htmlFor = 'answer_image_' + i;
-                div.appendChild(label);
-
-                var input = document.createElement('input');
-                input.type = 'file';
-                input.id = 'answer_image_' + i;
-                input.name = 'answer_image_' + i;
-                div.appendChild(input);
-
-                div.appendChild(document.createElement('br'));
-
-                var label = document.createElement('label');
-                label.innerHTML = "{% trans 'is_correct:' %} ";
-                label.htmlFor = 'is_correct_answer_' + i;
-                div.appendChild(label);
-
-                var input = document.createElement('input');
-                input.type = 'checkbox';
-                input.id = 'is_correct_answer_' + i;
-                input.name = 'is_correct_answer_' + i;
-                div.style.background = '#DCDCDC';
-                div.appendChild(input);
-
-                div.appendChild(document.createElement('br'));
-
-                main_div.appendChild(document.createElement('br'));
-                main_div.appendChild(div);
-            }
-
             document.getElementById('answers_count').value = i;
         };
 
@@ -144,7 +88,7 @@
             var div = document.createElement('div');
             div.style.borderRadius = "10px";
             div.style.display = "inline-block";
-            div.style.minWidth = "100%";
+            div.style.width = "100%";
             div.style.marginBottom = "10px";
             div.style.fontSize = '18px';
             div.style.background = '#DCDCDC';
@@ -160,6 +104,7 @@
             editor.classList.add('answer_editor');
             editor.id = 'answer_text_' + i;
             editor.name = 'answer_text_' + i;
+            editor.style.width = '100%';
             var input = document.createElement('input');
             input.type = 'hidden';
             input.name = 'answer_text_' + i;

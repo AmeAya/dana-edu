@@ -61,6 +61,8 @@
                         if (answer.text !== null) {
                             label.classList.add('answers');
                             label.innerHTML += answer.text;
+                            var answer_text = label.getElementsByTagName('p')[0].innerHTML;
+                            label.innerHTML = answer_text;
                         }
                         if (answer.image !== null) {
                             var img = '<img style="height: 25px;" src="' + answer.image + '">';
@@ -93,9 +95,13 @@
                             }
                         })
 
-                        content.appendChild(radio);
-                        content.appendChild(label);
-                        content.appendChild(document.createElement('br'));
+                        var answers_div = document.createElement('div');
+                        answers_div.align = 'left';
+
+                        answers_div.appendChild(radio);
+                        answers_div.appendChild(label);
+                        answers_div.appendChild(document.createElement('br'));
+                        content.appendChild(answers_div);
                     }
 
                     content.appendChild(document.createElement('br'));

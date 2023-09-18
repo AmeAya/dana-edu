@@ -15,7 +15,7 @@
                 <div id="{{ result.subject.id }}" align="left" style="display: none;">
                 {% for question in result.questions %}
                     <hr>
-                    <pre style="color: black; display: inline; font-size: 20px;">{{ question.question.number }}. {{ question.question.text }}</pre>
+                    <pre style="color: black; display: inline; font-size: 20px;">{{ question.question.number }}. {{ question.question.text|safe }}</pre>
                     {% if question.question.image %}
                         <img src="{{ question.question.image.url }}" style="width: 50vw">
                     {% endif %}
@@ -25,7 +25,7 @@
                     {% for correct_answer in question.answers %}
                         <li>
                             {% if correct_answer.text %}
-                                <pre style="font-size: 20px;">{{ correct_answer.text }}</pre>
+                                <pre style="font-size: 20px;">{{ correct_answer.text|safe }}</pre>
                             {% endif %}
                             {% if correct_answer.image %}
                                 <img src="{{ correct_answer.image.url }}" style="width: 20vw">
@@ -39,9 +39,9 @@
                         <li>
                             {% if answer.text %}
                                 {% if answer.is_correct %}
-                                    <pre style="font-size: 20px; color: green">{{ answer.text }}</pre>
+                                    <pre style="font-size: 20px; color: green">{{ answer.text|safe }}</pre>
                                 {% else %}
-                                    <pre style="font-size: 20px; color: red">{{ answer.text }}</pre>
+                                    <pre style="font-size: 20px; color: red">{{ answer.text|safe }}</pre>
                                 {% endif %}
                             {% endif %}
                             {% if answer.image %}
