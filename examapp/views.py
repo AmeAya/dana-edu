@@ -113,7 +113,8 @@ def addVariantView(request):
     else:
         Variant(name=request.POST.get('variant_name'),
                 exam_type=request.POST.get('exam_type'),
-                language=request.POST.get('language')).save()
+                language=request.POST.get('language'),
+                group=request.POST.get('group')).save()
         return redirect('add_questions_init_url')
 
 
