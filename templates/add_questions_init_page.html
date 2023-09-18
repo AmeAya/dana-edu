@@ -17,7 +17,7 @@
 
         </select>
 
-        <input class="btn" type="submit" value="{% trans 'Select Variant' %}">
+        <input id="select_variant" class="btn" type="submit" value="{% trans 'Select Variant' %}" disabled>
     </form>
     <br>
     <button class="btn" onclick="location.href='{% url 'add_variant_url' %}'">{% trans 'Create New' %}</button>
@@ -33,10 +33,16 @@
                         var select = document.getElementById('variant');
                         select.innerHTML = '';
                         select.disabled = '';
+                        if (response['variants'].length > 0) {
+                            document.getElementById('select_variant').disabled = '';
+                        }
+                        else {
+                            document.getElementById('select_variant').disabled = 'disabled';
+                        }
                         for (var variant of response['variants']) {
                             var option = document.createElement('option');
                             option.style.fontSize = '20px';
-                            option.value = variant.pk;
+                            option.value = variant.id;
                             option.innerHTML = variant.name;
                             select.appendChild(option);
                         }
