@@ -35,4 +35,5 @@ urlpatterns = [
     path('set_exam_for_groups', setExamForGroup, name='set_exam_for_groups_url'),
     path('set_pupil_answers', SetPupilAnswers.as_view(), name='set_pupil_answers_url'),
     path('subject_select', subjectSelectView, name='get_subjects_url'),
+    path('get_variants', GetVariantsApiView.as_view(), name='get_variants_url'),
 ]

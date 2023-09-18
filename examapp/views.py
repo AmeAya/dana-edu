@@ -89,7 +89,7 @@ def addQuestionsInitView(request):
     if request.user.type != 'MO':
         return redirect('home_url')
     if request.method == 'GET':
-        context = {'variants': Variant.objects.all(), 'urls': getUserUrls(request.user)}
+        context = {'urls': getUserUrls(request.user)}
         return render(request, 'add_questions_init_page.html', context)
     else:
         request.session['variant'] = request.POST.get('variant')
@@ -497,12 +497,11 @@ def questionsUpdateInitView(request):
             'questions': questions,
             'urls': getUserUrls(request.user)
         }
+        del request.session['deleted']
         return render(request, 'questions_update_page.html', context)
     if request.method == 'GET':
-        variants = Variant.objects.all()
         subjects = Subject.objects.all()
         context = {
-            'variants': variants,
             'subjects': subjects,
             'urls': getUserUrls(request.user)
         }
@@ -582,3 +581,13 @@ def userCabinetView(request):
     avg = getUserAvg(request.user)
     context['avg'] = avg
     return render(request, 'cabinet_page.html', context)
+
+
+class GetVariantsApiView(APIView):
+    permission_classes = [IsAuthenticated, ]
+
+    def get(self, request):
+        if request.user.type != 'MO':
+            return redirect('home_url')
+        variants = Variant.objects.filter(group=request.GET.get('group'))
+        return Response({'variants': VariantSerializer(variants, many=True).data}, status=status.HTTP_200_OK)

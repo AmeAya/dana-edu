@@ -30,3 +30,9 @@ class PupilAnswerSerializer(ModelSerializer):
     class Meta:
         model = PupilAnswer
         fields = ('answers', 'question')
+
+
+class VariantSerializer(ModelSerializer):
+    class Meta:
+        model = Variant
+        fields = '__all__'

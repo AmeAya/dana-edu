@@ -3,14 +3,50 @@
 {% block content %}
     <form action="{% url 'add_questions_init_url' %}" method="post">
         {% csrf_token %}
-        <label style="font-size: 20px;" for="variant">{% trans 'Select Existing Variant:' %}</label>
-        <select id="variant" name="variant">
-            {% for variant in variants %}
-                <option style="font-size: 20px;" value="{{ variant.pk }}">{{ variant.name }}</option>
-            {% endfor %}
+
+        <label style="font-size: 20px;" for="group">{% trans 'Select Class:' %}</label>
+        <select id="group" name="group" onchange="getVariants()">
+            <option disabled selected>----</option>
+            <option value="4">4</option>
+            <option value="9">9</option>
         </select>
+        <br>
+
+        <label style="font-size: 20px;" for="variant">{% trans 'Select Existing Variant:' %}</label>
+        <select id="variant" name="variant" disabled="disabled">
+
+        </select>
+
         <input class="btn" type="submit" value="{% trans 'Select Variant' %}">
     </form>
     <br>
     <button class="btn" onclick="location.href='{% url 'add_variant_url' %}'">{% trans 'Create New' %}</button>
+    <script>
+        function getVariants(){
+            var group = document.getElementById('group').value;
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    if (Request.status == 200) {
+                        var response = JSON.parse(Request.responseText);
+                        var select = document.getElementById('variant');
+                        select.innerHTML = '';
+                        select.disabled = '';
+                        for (var variant of response['variants']) {
+                            var option = document.createElement('option');
+                            option.style.fontSize = '20px';
+                            option.value = variant.pk;
+                            option.innerHTML = variant.name;
+                            select.appendChild(option);
+                        }
+                    }
+                }
+            }
+
+            var url = "{% url 'get_variants_url' %}?group=" + group;
+            Request.open('get', url, true);
+            Request.send(null);
+        }
+    </script>
 {% endblock content %}

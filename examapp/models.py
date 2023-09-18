@@ -167,6 +167,7 @@ class Variant(models.Model):
     name = models.CharField(max_length=100)
     exam_type = models.CharField(max_length=10, choices=getExamTypesChoices())
     language = models.CharField(max_length=3, choices=getVariantLanguageChoices())
+    group = models.CharField(max_length=2, choices=[(4, 4), (9, 9)])
 
     def __str__(self):
         return self.name

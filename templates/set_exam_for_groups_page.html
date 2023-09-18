@@ -7,6 +7,7 @@
             <p>
                 <label for="group">{% trans 'Select Group:' %} </label>
                 <select id="group" name="group" onchange="updateDuration()">
+                    <option disabled selected>----</option>
                     {% for group in groups %}
                         <option value="{{ group.id }}">{{ group.number }}{{ group.literal }}</option>
                     {% endfor %}
@@ -35,13 +36,13 @@
         <h2 style="margin-bottom: 0px;">{% trans 'Select Variants:' %}</h2>
         <div id="variants" align="center">
             <h3 style="margin-top: 1px; margin-bottom: 1px;">Kaz:</h3>
-            {% for variant in vars_kz %}
-                <button class="question_button" onclick="selectVariant({{ variant.id }})" style="width: auto; border: 1px solid #0ABAB5; border-radius: 8px;">{{ variant.name }}</button>
-            {% endfor %}
+            <div id="kaz">
+
+            </div>
             <h3 style="margin-top: 1px; margin-bottom: 1px;">Rus:</h3>
-            {% for variant in vars_ru %}
-                <button class="question_button" onclick="selectVariant({{ variant.id }})" style="width: auto; border: 1px solid #0ABAB5; border-radius: 8px;">{{ variant.name }}</button>
-            {% endfor %}
+            <div id="rus">
+
+            </div>
         </div>
 
         <input class="btn" form="group-form" type="submit" value="{% trans 'Set Exam' %}" style="font-size: 120%">
@@ -77,6 +78,7 @@
             else {
                 document.getElementById('duration').value = 240;
             }
+            getVariants();
         };
 
         function selectVariant(variant_id){
@@ -94,6 +96,42 @@
                 thisButton.style.color = '#0ABAB5';
             }
         };
+
+        function getVariants(){
+            var number = Array.from(group[group.selectedIndex].text)[0];
+            var Request = new XMLHttpRequest();
+
+            Request.onreadystatechange = function() {
+                if (Request.readyState == 4) {
+                    if (Request.status == 200) {
+                        var response = JSON.parse(Request.responseText);
+                        for (var variant of response['variants']) {
+                            if (variant.language == 'KAZ') {
+                                var div = document.getElementById('kaz');
+                            }
+                            else {
+                                var div = document.getElementById('rus');
+                            }
+                            div.innerHTML = '';
+                            var button = document.createElement('button');
+                            button.classList.add('question_button');
+                            button.style.width = 'auto';
+                            button.style.border = 'border: 1px solid #0ABAB5';
+                            button.style.borderRadius = '8px';
+                            button.innerHTML = variant.name;
+                            button.onclick = function() {
+                                selectVariant(variant.id);
+                            }
+                            div.appendChild(button);
+                        }
+                    }
+                }
+            }
+
+            var url = "{% url 'get_variants_url' %}?group=" + number;
+            Request.open('get', url, true);
+            Request.send(null);
+        }
 
         updateDuration();
     </script>
