@@ -34,7 +34,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/live/dana-edu.kz/fullchain.pem:/etc/letsencrypt/live/dana-edu.kz/fullchain.pem
+      - /etc/letsencrypt/live/dana-edu.kz/cert.pem:/etc/letsencrypt/live/dana-edu.kz/cert.pem
       - /etc/letsencrypt/live/dana-edu.kz/privkey.pem:/etc/letsencrypt/live/dana-edu.kz/privkey.pem
       - /etc/letsencrypt/live/dana-edu.kz/chain.pem:/etc/letsencrypt//etc/letsencrypt/live/dana-edu.kz/chain.pem
     depends_on:
