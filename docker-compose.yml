@@ -22,6 +22,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - postgres
 
@@ -29,9 +30,11 @@ services:
     build: ./nginx
     ports:
       - 80:80
+      - 443:443
     volumes:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - web
 
