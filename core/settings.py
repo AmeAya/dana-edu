@@ -56,7 +56,7 @@ if DEBUG:
             'NAME': 'dana_edu_db',
             'USER': 'postgres',
             'PASSWORD': '5918',
-            'HOST': '127.0.0.1',
+            'HOST': 'postgresql://postgres:postgres@postgres:5432/game_aws',
             'PORT': '5432',
         }
     }
