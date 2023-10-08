@@ -12,7 +12,10 @@ services:
     build: .
     expose:
       - 8000
-    command: gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 1 --threads 4
+    command: >
+      bash -c "python manage.py migrate --noinput &&
+               python manage.py collectstatic --noinput &&
+               python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/code
       - static_volume:/code/staticfiles
