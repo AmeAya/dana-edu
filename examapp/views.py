@@ -303,6 +303,30 @@ class GetExamQuestionApiView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        if request.user.type != 'PU':
+            return Response(data={'message': 'Not a pupil!'}, status=status.HTTP_403_FORBIDDEN)
+        group_exam = ExamForGroup.objects.filter(group=request.user.group)
+        if group_exam:
+            group_exam = group_exam.latest('pk')
+            if group_exam.ends_at < timezone.now():
+                context = {
+                    'message': _('Your exam already ends at ') + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+            if request.user in group_exam.ended_users.all():
+                context = {
+                    'message': _('You already done your exam!'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+        else:
+            context = {
+                'message': _('You don`t have Exams!'),
+                'urls': getUserUrls(request.user)
+            }
+            return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+
         question = Question.objects.get(pk=request.GET.get('pk'))
         pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True)
         answers = question.answers.all()
@@ -317,6 +341,30 @@ class GetQuestionsBySubjectApiView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
+        if request.user.type != 'PU':
+            return Response(data={'message': 'Not a pupil!'}, status=status.HTTP_403_FORBIDDEN)
+        group_exam = ExamForGroup.objects.filter(group=request.user.group)
+        if group_exam:
+            group_exam = group_exam.latest('pk')
+            if group_exam.ends_at < timezone.now():
+                context = {
+                    'message': _('Your exam already ends at ') + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+            if request.user in group_exam.ended_users.all():
+                context = {
+                    'message': _('You already done your exam!'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+        else:
+            context = {
+                'message': _('You don`t have Exams!'),
+                'urls': getUserUrls(request.user)
+            }
+            return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+
         subject = Subject.objects.get(pk=request.query_params['subject_id'])
         variant = CurrentExam.objects.filter(user=request.user).latest('pk').variant
         questions = Question.objects.filter(subject=subject).filter(variant=variant).order_by('number')
@@ -547,6 +595,30 @@ class SetPupilAnswers(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
+        if request.user.type != 'PU':
+            return Response(data={'message': 'Not a pupil!'}, status=status.HTTP_403_FORBIDDEN)
+        group_exam = ExamForGroup.objects.filter(group=request.user.group)
+        if group_exam:
+            group_exam = group_exam.latest('pk')
+            if group_exam.ends_at < timezone.now():
+                context = {
+                    'message': _('Your exam already ends at ') + dateformat.format(group_exam.ends_at, 'Y-m-d H:i:s'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+            if request.user in group_exam.ended_users.all():
+                context = {
+                    'message': _('You already done your exam!'),
+                    'urls': getUserUrls(request.user)
+                }
+                return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+        else:
+            context = {
+                'message': _('You don`t have Exams!'),
+                'urls': getUserUrls(request.user)
+            }
+            return Response(data=context, status=status.HTTP_403_FORBIDDEN)
+
         question = Question.objects.get(pk=request.POST.get('question'))
         pupil_answer = PupilAnswer.objects.filter(user=request.user).filter(question=question).filter(is_in_action=True)
         answers = Answer.objects.filter(pk__in=request.POST.get('answers').split(','))
@@ -592,3 +664,14 @@ class GetVariantsApiView(APIView):
             return redirect('home_url')
         variants = Variant.objects.filter(group=request.GET.get('group'))
         return Response({'variants': VariantSerializer(variants, many=True).data}, status=status.HTTP_200_OK)
+
+
+def changeType(request):
+    if request.user.is_superuser:
+        if request.user.type == 'MO':
+            request.user.type = 'PU'
+            request.user.save()
+        else:
+            request.user.type = 'MO'
+            request.user.save()
+    return redirect('home_url')

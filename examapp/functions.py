@@ -102,6 +102,8 @@ def getUserUrls(user) -> []:
         urls.append({'text': _('Add Question'), 'url': 'add_questions_init_url'})
         urls.append({'text': _('Questions Update'), 'url': 'questions_update_url'})
         urls.append({'text': _('Set Exam For Groups'), 'url': 'set_exam_for_groups_url'})
+    if user.is_superuser:
+        urls.append({'text': _('Change Type'), 'url': 'change_type_url'})
     urls.append({'text': _('Log Out'), 'url': 'logout_url'})
     return urls
 

@@ -46,11 +46,32 @@ LOCALE_PATHS = [
 SECRET_KEY = 'django-insecure-h$(t60bhltgdgfe6!4slti%!w%lh$#2^(i2l))c%jfdft$1(g!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = ['dana-edu.kz']
+DEBUG = True
 
-# DEBUG = True
-# ALLOWED_HOSTS = ['*']
+if DEBUG:
+    ALLOWED_HOSTS = ['*']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dana_edu_db',
+            'USER': 'postgres',
+            'PASSWORD': '5918',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
+else:
+    ALLOWED_HOSTS = ['dana-edu.kz']
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dana_edu_db',
+            'USER': 'postgres',
+            'PASSWORD': '5918',
+            'HOST': '127.0.0.1',
+            'PORT': '5432',
+        }
+    }
 
 # SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 CSRF_TRUSTED_ORIGINS = ["http://localhost:80"]
@@ -98,17 +119,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'core.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
 
 
 # Password validation
