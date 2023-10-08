@@ -13,6 +13,7 @@ services:
 
   web:
     build: .
+    restart: unless-stopped
     expose:
       - 8000
     command: >
