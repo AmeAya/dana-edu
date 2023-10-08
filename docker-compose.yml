@@ -22,6 +22,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /etc/letsencrypt/live/dana-edu.kz/:/etc/letsencrypt/live/dana-edu.kz/
     depends_on:
       - postgres
 
@@ -34,6 +35,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - web
 
@@ -49,6 +51,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /etc/letsencrypt/:/etc/letsencrypt/
     depends_on:
       - redis
       - web
@@ -57,4 +60,3 @@ volumes:
   static_volume:
   media_volume:
   postgres_data:
-  ssl:
