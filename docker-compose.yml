@@ -22,7 +22,7 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/live/dana-edu.kz/:/etc/letsencrypt/live/dana-edu.kz/
+      - ssl:/code/certbot/dana-edu.kz
     depends_on:
       - postgres
 
@@ -34,7 +34,7 @@ services:
     volumes:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/live/dana-edu.kz/:/etc/letsencrypt/live/dana-edu.kz/
+      - ssl:/code/certbot/dana-edu.kz
     depends_on:
       - web
 
@@ -58,3 +58,4 @@ volumes:
   static_volume:
   media_volume:
   postgres_data:
+  ssl:
