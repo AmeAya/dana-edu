@@ -22,7 +22,6 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - ssl:/code/certbot/dana-edu.kz
     depends_on:
       - postgres
 
@@ -32,9 +31,9 @@ services:
       - 80:80
       - 443:443
     volumes:
+      - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - ssl:/code/certbot/dana-edu.kz
     depends_on:
       - web
 
