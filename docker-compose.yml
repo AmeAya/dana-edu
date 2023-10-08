@@ -34,7 +34,7 @@ services:
     volumes:
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/:/etc/letsencrypt/
+      - /etc/letsencrypt/live/dana-edu.kz/:/etc/letsencrypt/live/dana-edu.kz/
     depends_on:
       - web
 
