@@ -68,7 +68,7 @@ else:
             'NAME': 'dana_edu_db',
             'USER': 'postgres',
             'PASSWORD': '5918',
-            'HOST': '0.0.0.0',
+            'HOST': 'postgresql://postgres:postgres@postgres:5432/dana_edu_db',
             'PORT': '5432',
         }
     }
