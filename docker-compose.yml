@@ -22,7 +22,9 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/live/dana-edu.kz/:/etc/letsencrypt/live/dana-edu.kz/
+      - /etc/letsencrypt/fullchain.pem:/etc/letsencrypt/fullchain.pem
+      - /etc/letsencrypt/privkey.pem:/etc/letsencrypt/privkey.pem
+      - /etc/letsencrypt/chain.pem:/etc/letsencrypt/chain.pem
     depends_on:
       - postgres
 
@@ -35,7 +37,9 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/:/etc/letsencrypt/
+      - /etc/letsencrypt/fullchain.pem:/etc/letsencrypt/fullchain.pem
+      - /etc/letsencrypt/privkey.pem:/etc/letsencrypt/privkey.pem
+      - /etc/letsencrypt/chain.pem:/etc/letsencrypt/chain.pem
     depends_on:
       - web
 
@@ -51,7 +55,9 @@ services:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
-      - /etc/letsencrypt/:/etc/letsencrypt/
+      - /etc/letsencrypt/fullchain.pem:/etc/letsencrypt/fullchain.pem
+      - /etc/letsencrypt/privkey.pem:/etc/letsencrypt/privkey.pem
+      - /etc/letsencrypt/chain.pem:/etc/letsencrypt/chain.pem
     depends_on:
       - redis
       - web
