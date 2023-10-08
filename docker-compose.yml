@@ -36,6 +36,7 @@ services:
       - media_volume:/code/media
       - /etc/letsencrypt/live/dana-edu.kz-0001/fullchain.pem:/etc/letsencrypt/live/dana-edu.kz-0001/fullchain.pem
       - /etc/letsencrypt/live/dana-edu.kz-0001/privkey.pem:/etc/letsencrypt/live/dana-edu.kz-0001/privkey.pem
+      - /etc/letsencrypt/live/dana-edu.kz-0001/chain.pem:/etc/letsencrypt/live/dana-edu.kz-0001/chain.pem
     depends_on:
       - web
 
