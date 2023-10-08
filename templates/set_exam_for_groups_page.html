@@ -104,6 +104,8 @@
             Request.onreadystatechange = function() {
                 if (Request.readyState == 4) {
                     if (Request.status == 200) {
+                        document.getElementById('kaz').innerHTML = '';
+                        document.getElementById('rus').innerHTML = '';
                         var response = JSON.parse(Request.responseText);
                         for (var variant of response['variants']) {
                             if (variant.language == 'KAZ') {
@@ -112,7 +114,6 @@
                             else {
                                 var div = document.getElementById('rus');
                             }
-                            div.innerHTML = '';
                             var button = document.createElement('button');
                             button.classList.add('question_button');
                             button.style.width = 'auto';
