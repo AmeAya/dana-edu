@@ -10,5 +10,4 @@ COPY ./requirements.txt .
 RUN pip install -r requirements.txt
 
 COPY . .
-ADD /etc/letsencrypt/live/dana-edu.kz/ /etc/letsencrypt/live/dana-edu.kz/
 RUN python manage.py collectstatic --noinput
