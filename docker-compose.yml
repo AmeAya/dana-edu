@@ -17,11 +17,13 @@ services:
       - 8000
     command: >
       bash -c "python manage.py migrate --noinput &&
+              python manage.py loaddata /home/ubuntu/data.json &&
               gunicorn core.wsgi:application --bind 0.0.0.0:8000 --workers 1 --threads 4"
     volumes:
       - .:/code
       - static_volume:/code/staticfiles
       - media_volume:/code/media
+      - /home/ubuntu/data.json:/home/ubuntu/data.json
     depends_on:
       - postgres
 
