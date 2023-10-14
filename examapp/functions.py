@@ -16,8 +16,8 @@ def getNumberChoices() -> list:
 
 
 def getVariantLanguageChoices() -> list:
-    exam_types = ['KAZ', 'RUS']
-    return [(exam_type, exam_type) for exam_type in exam_types]
+    lang_types = ['KAZ', 'RUS']
+    return [(exam_type, exam_type) for exam_type in lang_types]
 
 
 def getUserTypeChoices() -> list:
