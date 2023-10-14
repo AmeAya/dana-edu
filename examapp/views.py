@@ -675,20 +675,3 @@ def changeType(request):
             request.user.type = 'MO'
             request.user.save()
     return redirect('home_url')
-
-
-def copyVariants(request):
-    for subject in Subject.objects.all():
-        if subject.name == 'Reading Literacy':
-            old_variants = Variant.objects.filter(group=9, language='KAZ')
-            for var in old_variants:
-                questions = Question.objects.filter(variant=var)
-                print(questions)
-                var.pk = None
-                var.language = 'RUS'
-                var.save()
-                new_variant = Variant.objects.get(id=var.id)
-                for question in questions:
-                    question.pk = None
-                    question.variant = new_variant
-                    question.save()

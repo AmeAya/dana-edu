@@ -37,6 +37,4 @@ urlpatterns = [
     path('subject_select', subjectSelectView, name='get_subjects_url'),
     path('get_variants', GetVariantsApiView.as_view(), name='get_variants_url'),
     path('change_type', changeType, name='change_type_url'),
-
-    path('copy_var', copyVariants, name='copy_url'),
 ]
